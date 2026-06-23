@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <title>Welcome to SmartERP</title>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+    <!-- Tailwind Config -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#00504f",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#777587",
+                    "on-secondary-fixed": "#002020",
+                    "tertiary-fixed-dim": "#ffb695",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e2e7ff",
+                    "secondary-container": "#7df5f4",
+                    "primary-fixed": "#e2dfff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#CA3074",
+                    "surface-container-low": "#f2f3ff",
+                    "on-primary-fixed": "#0f0069",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "on-tertiary-container": "#ffd2be",
+                    "inverse-primary": "#c3c0ff",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#F6C667",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#dae2fd",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#007070",
+                    "background": "#faf8ff",
+                    "on-tertiary-fixed": "#351000",
+                    "surface-bright": "#faf8ff",
+                    "secondary-fixed": "#7df5f4",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#283044",
+                    "surface-container-highest": "#dae2fd",
+                    "on-surface": "#131b2e",
+                    "inverse-on-surface": "#eef0ff",
+                    "surface-tint": "#4d44e3",
+                    "secondary-fixed-dim": "#5ed9d7",
+                    "on-surface-variant": "#464555",
+                    "tertiary-container": "#a44100",
+                    "outline-variant": "#c7c4d8",
+                    "surface-container": "#eaedff",
+                    "on-primary-container": "#dad7ff",
+                    "surface-dim": "#d2d9f4",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#131b2e",
+                    "surface": "#faf8ff",
+                    "tertiary-fixed": "#ffdbcc",
+                    "primary-container": "#4f46e5",
+                    "secondary": "#006a69",
+                    "on-tertiary-fixed-variant": "#7b2f00",
+                    "on-primary-fixed-variant": "#3323cc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sidebar-width": "280px",
+                    "scale-base": "4px",
+                    "margin-desktop": "32px",
+                    "margin-mobile": "16px",
+                    "container-max": "1440px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "data-mono": ["JetBrains Mono"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-caps": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-sm": ["Plus Jakarta Sans"],
+                    "title-sm": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "data-mono": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                    "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                    "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                    "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                    "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                    "title-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }]
+            },
+            animation: {
+                'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+            },
+            keyframes: {
+                fadeInUp: {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(29, 21, 47, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Custom Premium Dark Palette Overrides (9AE1E2, 332851, CA3074, F6C667) */
+        html.dark body, html.dark .bg-background, html.dark .bg-surface-container-lowest {
+            background-color: #120c1f !important;
+        }
+        html.dark .bg-surface {
+            background-color: #1d152f !important;
+        }
+        html.dark .bg-surface-container-low {
+            background-color: #181128 !important;
+        }
+        html.dark .bg-surface-container {
+            background-color: #251c3a !important;
+        }
+        html.dark .bg-surface-container-high {
+            background-color: #2d2247 !important;
+        }
+        html.dark .bg-surface-variant {
+            background-color: #251c3a !important;
+        }
+        html.dark nav, html.dark aside {
+            background-color: #120c1f !important;
+        }
+        html.dark header {
+            background-color: rgba(18, 12, 31, 0.8) !important;
+        }
+        html.dark .border-outline-variant {
+            border-color: rgba(154, 225, 226, 0.1) !important;
+        }
+        html.dark .text-on-surface {
+            color: #F8FAFC !important;
+        }
+        html.dark .text-on-surface-variant {
+            color: #d1cbdc !important;
+        }
+        html.dark .text-outline {
+            color: rgba(154, 225, 226, 0.4) !important;
+        }
+        html.dark th {
+            color: #9AE1E2 !important;
+        }
+        html.dark .bg-\[1E293B\]\/70, html.dark .dark\:bg-\[\#1E293B\]\/70 {
+            background-color: rgba(37, 28, 58, 0.7) !important;
+        }
+        html.dark .dark\:bg-\[\#1E293B\] {
+            background-color: #251c3a !important;
+        }
+        html.dark .dark\:bg-\[\#0B0F19\]\/80 {
+            background-color: rgba(18, 12, 31, 0.8) !important;
+        }
+        html.dark .dark\:bg-\[\#0B0F19\] {
+            background-color: #120c1f !important;
+        }
+    </style>
+</head>
+<body class="bg-surface dark:bg-surface-dim text-on-surface dark:text-inverse-on-surface font-body-md transition-colors duration-300 antialiased min-h-screen flex">
+<!-- Split Screen Layout -->
+<main class="flex w-full h-screen overflow-hidden">
+    <!-- Left Panel: Brand & Animation (Hidden on Mobile) -->
+    <section class="relative hidden md:flex md:w-[55%] lg:w-[60%] flex-col justify-between bg-inverse-surface overflow-hidden">
+        <!-- Animated Shader Background -->
+        <div class="absolute inset-0 z-0 opacity-80 mix-blend-screen">
+            <div class="w-full h-full object-cover" style="display:block;">
+                <canvas id="shader-canvas-ANIMATION_7" style="display:block;width:100%;height:100%"></canvas>
+                <script>
+                (function() {
+                  const canvas = document.getElementById('shader-canvas-ANIMATION_7');
+                  function syncSize() {
+                    const w = canvas.clientWidth  || 1280;
+                    const h = canvas.clientHeight || 720;
+                    if (canvas.width !== w || canvas.height !== h) {
+                      canvas.width  = w;
+                      canvas.height = h;
+                    }
+                  }
+                  if (typeof ResizeObserver !== 'undefined') {
+                    new ResizeObserver(syncSize).observe(canvas);
+                  }
+                  syncSize();
+                
+                  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                  if (!gl) return;
+                  const vs = `attribute vec2 a_position;
+                varying vec2 v_texCoord;
+                void main() {
+                  v_texCoord = a_position * 0.5 + 0.5;
+                  gl_Position = vec4(a_position, 0.0, 1.0);
+                }`;
+                  const fs = `precision highp float;
+                uniform float u_time;
+                uniform vec2 u_resolution;
+                
+                varying vec2 v_texCoord;
+                
+                void main() {
+                    vec2 uv = v_texCoord;
+                    vec2 blob1_pos = vec2(0.3 + 0.2 * sin(u_time * 0.5), 0.4 + 0.2 * cos(u_time * 0.7));
+                    vec2 blob2_pos = vec2(0.7 + 0.2 * cos(u_time * 0.6), 0.6 + 0.1 * sin(u_time * 0.4));
+                    
+                    float dist1 = length(uv - blob1_pos);
+                    float dist2 = length(uv - blob2_pos);
+                    
+                    vec3 color1 = vec3(0.31, 0.27, 0.9); // Indigo
+                    vec3 color2 = vec3(0.1, 0.7, 0.7);  // Teal
+                    
+                    float blob1 = smoothstep(0.6, 0.0, dist1);
+                    float blob2 = smoothstep(0.5, 0.0, dist2);
+                    
+                    vec3 finalColor = mix(vec3(0.043, 0.059, 0.098), color1, blob1 * 0.5);
+                    finalColor = mix(finalColor, color2, blob2 * 0.4);
+                    
+                    float noise = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
+                    finalColor += noise * 0.01;
+                
+                    gl_FragColor = vec4(finalColor, 1.0);
+                }`;
+                  function cs(type, src) {
+                    const s = gl.createShader(type);
+                    gl.shaderSource(s, src);
+                    gl.compileShader(s);
+                    return s;
+                  }
+                  const prog = gl.createProgram();
+                  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+                  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+                  gl.linkProgram(prog);
+                  gl.useProgram(prog);
+                  const buf = gl.createBuffer();
+                  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+                  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+                  const pos = gl.getAttribLocation(prog, 'a_position');
+                  gl.enableVertexAttribArray(pos);
+                  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+                  const uTime = gl.getUniformLocation(prog, 'u_time');
+                  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+                
+                  function render(t) {
+                    if (typeof ResizeObserver === 'undefined') syncSize();
+                    gl.viewport(0, 0, canvas.width, canvas.height);
+                    if (uTime) gl.uniform1f(uTime, t * 0.001);
+                    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+                    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                    requestAnimationFrame(render);
+                  }
+                  render(0);
+                })();
+                </script>
+            </div>
+        </div>
+        <!-- Gradient Overlay for readability -->
+        <div class="absolute inset-0 z-10 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/40 to-transparent"></div>
+        <!-- Content -->
+        <div class="relative z-20 flex flex-col h-full justify-between p-12 lg:p-16">
+            <!-- Brand Anchor -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg">
+                    <span class="material-symbols-outlined text-on-primary">database</span>
+                </div>
+                <h1 class="font-display-lg text-display-lg text-on-primary tracking-tight">SmartERP</h1>
+            </div>
+            <!-- Hero Message -->
+            <div class="max-w-xl">
+                <h2 class="font-display-lg text-display-lg text-on-primary mb-6 leading-tight">
+                    High-Fidelity Financial Control for Modern Enterprises
+                </h2>
+                <!-- Value Props Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 glass-panel rounded-xl p-6">
+                    <div class="flex flex-col gap-2">
+                        <span class="material-symbols-outlined text-secondary-container text-3xl">bolt</span>
+                        <h3 class="font-title-sm text-title-sm text-on-primary">Tally Speed</h3>
+                        <p class="font-body-sm text-body-sm text-inverse-on-surface/80">Lightning-fast entry</p>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="material-symbols-outlined text-primary-fixed-dim text-3xl">design_services</span>
+                        <h3 class="font-title-sm text-title-sm text-on-primary">Stripe Aesthetics</h3>
+                        <p class="font-body-sm text-body-sm text-inverse-on-surface/80">Pixel-perfect clarity</p>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="material-symbols-outlined text-tertiary-fixed-dim text-3xl">keyboard</span>
+                        <h3 class="font-title-sm text-title-sm text-on-primary">Keyboard-Driven</h3>
+                        <p class="font-body-sm text-body-sm text-inverse-on-surface/80">Power user workflows</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Right Panel: Authentication Form -->
+    <section class="flex-1 flex flex-col relative w-full md:w-[45%] lg:w-[40%] bg-surface dark:bg-surface-dim transition-colors duration-300">
+        <!-- Theme Toggle -->
+        <header class="absolute top-0 right-0 p-6 flex justify-end z-50 w-full md:w-auto">
+            <button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container hover:bg-surface-variant dark:bg-inverse-surface dark:hover:bg-surface-variant transition-colors shadow-sm border border-outline-variant/30" id="themeToggle">
+                <span class="material-symbols-outlined text-on-surface dark:text-inverse-on-surface dark:hidden">dark_mode</span>
+                <span class="material-symbols-outlined text-on-surface dark:text-inverse-on-surface hidden dark:block">light_mode</span>
+            </button>
+        </header>
+        <!-- Form Container -->
+        <div class="flex-1 flex items-center justify-center p-6 sm:p-12">
+            <div class="w-full max-w-[420px] animate-fade-in-up">
+                <!-- Mobile Logo -->
+                <div class="flex md:hidden items-center gap-3 mb-10 justify-center">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-md">
+                        <span class="material-symbols-outlined text-on-primary">database</span>
+                    </div>
+                    <h1 class="font-display-lg-mobile text-display-lg-mobile text-primary font-bold">SmartERP</h1>
+                </div>
+                <div class="bg-surface-container-lowest dark:bg-[#131826] border border-outline-variant/50 dark:border-outline/30 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] p-8">
+                    <!-- Auth Tabs -->
+                    <div class="flex border-b border-outline-variant/30 mb-6">
+                        <button type="button" id="tab-signin" class="flex-1 pb-3 text-center font-title-sm text-sm border-b-2 border-primary text-primary focus:outline-none" onclick="switchAuthMode('signin')">Sign In</button>
+                        <button type="button" id="tab-signup" class="flex-1 pb-3 text-center font-title-sm text-sm border-b-2 border-transparent text-on-surface-variant hover:text-on-surface focus:outline-none" onclick="switchAuthMode('signup')">Sign Up</button>
+                    </div>
+
+                    <div class="mb-6">
+                        <h2 class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface mb-2" id="formTitle">Welcome to SmartERP</h2>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline" id="formSubtitle">Enter your credentials to access your workspace.</p>
+                    </div>
+
+                    <form class="space-y-5" id="loginForm" onsubmit="handleLogin(event)">
+                        <!-- Name Field (Only for Sign Up) -->
+                        <div class="space-y-1.5 hidden" id="nameFieldContainer">
+                            <label class="block font-title-sm text-[13px] text-on-surface-variant dark:text-inverse-on-surface" for="name">Full Name</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                                    <span class="material-symbols-outlined text-[20px]">badge</span>
+                                </span>
+                                <input class="block w-full pl-10 pr-3 py-2.5 bg-surface dark:bg-[#0B0F19] border border-outline-variant dark:border-outline/30 rounded-lg text-on-surface dark:text-inverse-on-surface font-body-md placeholder-outline-variant/70 focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="name" name="name" placeholder="John Doe" type="text"/>
+                            </div>
+                        </div>
+
+                        <!-- Phone Field (Only for Sign Up) -->
+                        <div class="space-y-1.5 hidden" id="phoneFieldContainer">
+                            <label class="block font-title-sm text-[13px] text-on-surface-variant dark:text-inverse-on-surface" for="phone">Phone Number</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                                    <span class="material-symbols-outlined text-[20px]">call</span>
+                                </span>
+                                <input class="block w-full pl-10 pr-3 py-2.5 bg-surface dark:bg-[#0B0F19] border border-outline-variant dark:border-outline/30 rounded-lg text-on-surface dark:text-inverse-on-surface font-body-md placeholder-outline-variant/70 focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="phone" name="phone" placeholder="+91 98765 43210" type="tel"/>
+                            </div>
+                        </div>
+
+                        <!-- Email/Identifier Field -->
+                        <div class="space-y-1.5">
+                            <label class="block font-title-sm text-[13px] text-on-surface-variant dark:text-inverse-on-surface" for="email">Email</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                                    <span class="material-symbols-outlined text-[20px]">mail</span>
+                                </span>
+                                <input class="block w-full pl-10 pr-3 py-2.5 bg-surface dark:bg-[#0B0F19] border border-outline-variant dark:border-outline/30 rounded-lg text-on-surface dark:text-inverse-on-surface font-body-md placeholder-outline-variant/70 focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="email" name="email" placeholder="admin@smarterp.com" required="" type="email"/>
+                            </div>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <label class="block font-title-sm text-[13px] text-on-surface-variant dark:text-inverse-on-surface" for="password">Password</label>
+                                <a class="font-title-sm text-[13px] text-primary hover:text-primary-container transition-colors" href="#">Forgot password?</a>
+                            </div>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                                    <span class="material-symbols-outlined text-[20px]">lock</span>
+                                </span>
+                                <input class="block w-full pl-10 pr-10 py-2.5 bg-surface dark:bg-[#0B0F19] border border-outline-variant dark:border-outline/30 rounded-lg text-on-surface dark:text-inverse-on-surface font-data-mono text-data-mono placeholder-outline-variant/70 focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+                                <button class="absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-on-surface-variant dark:hover:text-inverse-on-surface transition-colors" onclick="togglePassword()" type="button">
+                                    <span class="material-symbols-outlined text-[20px]" id="eyeIcon">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Remember Me -->
+                        <div class="flex items-center pt-2">
+                            <input class="h-4 w-4 rounded border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface dark:bg-inverse-surface dark:border-outline dark:checked:bg-primary" id="remember-me" name="remember-me" type="checkbox"/>
+                            <label class="ml-2 block font-body-sm text-body-sm text-on-surface-variant dark:text-outline" for="remember-me">
+                                Remember this device
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="pt-4">
+                            <button id="submitBtn" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-on-primary bg-primary hover:bg-primary-container font-title-sm text-title-sm hover:-translate-y-[2px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface dark:focus:ring-offset-surface-dim group" type="submit">Sign In</button>
+                        </div>
+
+                        <!-- Guest Login Button -->
+                        <div class="pt-2">
+                            <button type="button" onclick="loginAsGuest()" class="w-full flex justify-center items-center py-2.5 px-4 border border-outline-variant/50 dark:border-outline/30 rounded-lg text-on-surface dark:text-inverse-on-surface bg-transparent hover:bg-surface-variant/30 font-title-sm text-sm hover:-translate-y-[1px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary">
+                                <span class="material-symbols-outlined text-[18px] mr-2">person_outline</span>
+                                Login as Guest
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Footer Note -->
+                <p class="mt-8 text-center font-body-sm text-[13px] text-on-surface-variant/70 dark:text-outline">
+                    New to SmartERP? Request access from your Administrator.
+                </p>
+            </div>
+        </div>
+    </section>
+<!-- Supabase SDK & Config -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+<script>
+    // Theme Toggle Logic
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+
+    // Check local storage or system preference
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlElement.classList.add('dark');
+    } else {
+        htmlElement.classList.remove('dark');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+        htmlElement.classList.toggle('dark');
+        if (htmlElement.classList.contains('dark')) {
+            localStorage.theme = 'dark';
+        } else {
+            localStorage.theme = 'light';
+        }
+    });
+
+    // Password Visibility Toggle
+    function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.textContent = 'visibility_off';
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.textContent = 'visibility';
+        }
+    }
+
+    // Toggle between Sign In and Sign Up
+    let currentAuthMode = 'signin';
+
+    function switchAuthMode(mode) {
+        currentAuthMode = mode;
+        const tabSignin = document.getElementById('tab-signin');
+        const tabSignup = document.getElementById('tab-signup');
+        const nameField = document.getElementById('nameFieldContainer');
+        const phoneField = document.getElementById('phoneFieldContainer');
+        const formTitle = document.getElementById('formTitle');
+        const formSubtitle = document.getElementById('formSubtitle');
+        const submitBtn = document.getElementById('submitBtn');
+
+        if (mode === 'signin') {
+            tabSignin.className = 'flex-1 pb-3 text-center font-title-sm text-sm border-b-2 border-primary text-primary focus:outline-none';
+            tabSignup.className = 'flex-1 pb-3 text-center font-title-sm text-sm border-b-2 border-transparent text-on-surface-variant hover:text-on-surface focus:outline-none';
+            nameField.classList.add('hidden');
+            document.getElementById('name').removeAttribute('required');
+            phoneField.classList.add('hidden');
+            document.getElementById('phone').removeAttribute('required');
+            formTitle.textContent = 'Welcome to SmartERP';
+            formSubtitle.textContent = 'Enter your credentials to access your workspace.';
+            submitBtn.textContent = 'Sign In';
+        } else {
+            tabSignin.className = 'flex-1 pb-3 text-center font-title-sm text-sm border-b-2 border-transparent text-on-surface-variant hover:text-on-surface focus:outline-none';
+            tabSignup.className = 'flex-1 pb-3 text-center font-title-sm text-sm border-b-2 border-primary text-primary focus:outline-none';
+            nameField.classList.remove('hidden');
+            document.getElementById('name').setAttribute('required', 'true');
+            phoneField.classList.remove('hidden');
+            document.getElementById('phone').setAttribute('required', 'true');
+            formTitle.textContent = 'Create an Account';
+            formSubtitle.textContent = 'Get started with SmartERP in seconds.';
+            submitBtn.textContent = 'Sign Up';
+        }
+    }
+
+    // Form Submission Handler
+    async function handleLogin(event) {
+        event.preventDefault();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const btn = document.getElementById('submitBtn');
+        const originalText = btn.textContent;
+        
+        btn.innerHTML = '<span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Authenticating...';
+        btn.classList.add('opacity-80', 'cursor-not-allowed');
+        
+        if (supabaseClient) {
+            try {
+                if (currentAuthMode === 'signin') {
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+                    
+                    if (error) {
+                        alert('Authentication failed: ' + error.message);
+                        btn.textContent = originalText;
+                        btn.classList.remove('opacity-80', 'cursor-not-allowed');
+                        return;
+                    }
+                    
+                    console.log('Login successful:', data);
+                    localStorage.setItem('userEmail', data.user.email);
+                    localStorage.setItem('userName', data.user.user_metadata?.name || email.split('@')[0]);
+                    localStorage.setItem('userPhone', data.user.user_metadata?.phone || '');
+                    localStorage.setItem('userAvatar', data.user.user_metadata?.avatar_url || '');
+                } else {
+                    const fullName = document.getElementById('name').value.trim();
+                    const phoneNumber = document.getElementById('phone').value.trim();
+                    const { data, error } = await supabaseClient.auth.signUp({
+                        email: email,
+                        password: password,
+                        options: {
+                            data: {
+                                name: fullName,
+                                phone: phoneNumber
+                            }
+                        }
+                    });
+                    
+                    if (error) {
+                        alert('Signup failed: ' + error.message);
+                        btn.textContent = originalText;
+                        btn.classList.remove('opacity-80', 'cursor-not-allowed');
+                        return;
+                    }
+                    
+                    alert('Signup successful! Check your email for confirmation (if email confirmations are enabled). Logging in...');
+                    localStorage.setItem('userEmail', data.user.email);
+                    localStorage.setItem('userName', fullName);
+                    localStorage.setItem('userPhone', phoneNumber);
+                    localStorage.setItem('userAvatar', '');
+                }
+            } catch (e) {
+                console.warn('Supabase Auth failed, proceeding with local sandbox bypass:', e);
+            }
+        }
+        
+        const nameVal = currentAuthMode === 'signup' ? document.getElementById('name').value.trim() : (localStorage.getItem('userName') || email.split('@')[0]);
+        const phoneVal = currentAuthMode === 'signup' ? document.getElementById('phone').value.trim() : (localStorage.getItem('userPhone') || '');
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userName', nameVal);
+        localStorage.setItem('userPhone', phoneVal);
+        if (currentAuthMode === 'signup') {
+            localStorage.setItem('userAvatar', '');
+        }
+        
+        setTimeout(() => {
+            window.location.href = 'company-select.html';
+        }, 800);
+    }
+
+    function loginAsGuest() {
+        localStorage.setItem('userEmail', 'guest@smarterp.com');
+        localStorage.setItem('userName', 'Guest');
+        localStorage.setItem('userPhone', '');
+        localStorage.setItem('userAvatar', '');
+        
+        const btn = document.getElementById('submitBtn');
+        btn.innerHTML = '<span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Authenticating...';
+        btn.classList.add('opacity-80', 'cursor-not-allowed');
+        
+        setTimeout(() => {
+            window.location.href = 'company-select.html';
+        }, 600);
+    }
+</script>
+</body>
+</html>
