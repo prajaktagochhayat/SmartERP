@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <title>Welcome to SmartERP</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;650&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    },
+                    colors: {
+                        primary: '#CA3074',
+                        secondary: '#9AE1E2',
+                        tertiary: '#F6C667',
+                        darkBg: '#120c1f',
+                        darkSurface: '#1d152f'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth transitions */
+        .fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .slide-up {
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animated Mesh Background */
+        .mesh-bg {
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(202, 48, 116, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(154, 225, 226, 0.1) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(202, 48, 116, 0.08) 0px, transparent 50%);
+        }
+        html.dark .mesh-bg {
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(202, 48, 116, 0.18) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(154, 225, 226, 0.12) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(202, 48, 116, 0.1) 0px, transparent 50%);
+        }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        html.dark .glass-card {
+            background: rgba(29, 21, 47, 0.75);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(154, 225, 226, 0.1);
+        }
+
+        /* CSS animations for orbs */
+        .animate-orb {
+            animation: float 20s infinite alternate ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -60px) scale(1.1); }
+            100% { transform: translate(-20px, 30px) scale(0.9); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-darkBg text-gray-800 dark:text-gray-200 font-sans transition-colors duration-300 antialiased min-h-screen relative flex flex-col justify-between overflow-x-hidden mesh-bg">
+
+    <!-- Glowing Background Orbs -->
+    <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px] pointer-events-none animate-orb"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-secondary/8 blur-[130px] pointer-events-none animate-orb" style="animation-delay: -5s;"></div>
+
+    <!-- Header / Navigation Bar -->
+    <header class="w-full h-16 flex items-center justify-between px-6 lg:px-12 border-b border-gray-200/50 dark:border-gray-800/40 relative z-30">
+        <a href="home.html" class="flex items-center gap-3 cursor-pointer group">
+            <div class="w-9 h-9 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-white text-[20px] font-bold">layers</span>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold text-gray-900 dark:text-white tracking-tight flex items-center gap-1.5 group-hover:text-primary transition-colors">
+                    SmartERP <span class="text-[10px] font-semibold bg-primary/10 dark:bg-primary/20 text-primary dark:text-indigo-300 px-2 py-0.5 rounded-full">v1.2</span>
+                </h1>
+            </div>
+        </a>
+
+        <div class="flex items-center gap-4">
+            <!-- Theme Toggle -->
+            <button class="p-2 rounded-xl text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white hover:bg-gray-200/40 dark:hover:bg-gray-800/40 transition-colors" id="theme-toggle" title="Toggle Theme">
+                <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+            </button>
+
+            <!-- Company Selector Quick link -->
+            <a href="company-select.html" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-200/40 dark:hover:bg-gray-800/40 transition-colors">
+                <span class="material-symbols-outlined text-[16px]">business</span>
+                <span id="activeCompanyBadge">Vardhaman Distributors</span>
+            </a>
+
+            <!-- Profile Dropdown -->
+            <div class="relative" id="profileDropdownContainer">
+                <button id="profileMenuBtn" class="w-9 h-9 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700 hover:border-primary transition-colors shadow-sm bg-primary/10 text-primary dark:text-indigo-300 font-bold flex items-center justify-center text-sm focus:outline-none" onclick="toggleProfileDropdown(event)">
+                    <span id="profileAvatarText">U</span>
+                    <img id="profileAvatarImg" class="hidden w-full h-full object-cover" src="" alt="Profile"/>
+                </button>
+                <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-56 rounded-xl border border-gray-200/60 dark:border-gray-800 bg-white/95 dark:bg-[#1d152f]/95 backdrop-blur-md shadow-2xl p-1.5 z-[150] transform origin-top-right transition-all">
+                    <div class="px-3 py-2 border-b border-gray-200/30 dark:border-gray-800/40 mb-1">
+                        <p id="dropdownUserName" class="text-sm font-semibold text-gray-900 dark:text-white">User</p>
+                        <p id="dropdownUserEmail" class="text-xs text-gray-500 truncate dark:text-gray-400">user@example.com</p>
+                    </div>
+                    <a href="index.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">home</span>
+                        <span>Home (Dashboard)</span>
+                    </a>
+                    <button onclick="openSettingsModal(event)" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors text-left">
+                        <span class="material-symbols-outlined text-[18px]">settings</span>
+                        <span>Settings</span>
+                    </button>
+                    <a href="company-select.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">business</span>
+                        <span>Change Company</span>
+                    </a>
+                    <button onclick="toggleThemeGlobal(event)" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors text-left">
+                        <span class="material-symbols-outlined text-[18px] dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-[18px] hidden dark:block">light_mode</span>
+                        <span class="dark:hidden">Switch to Dark Mode</span>
+                        <span class="hidden dark:block">Switch to Light Mode</span>
+                    </button>
+                    <div class="h-px bg-gray-200/50 dark:bg-gray-800/40 my-1"></div>
+                    <a href="login.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-red-600 dark:text-red-400 hover:bg-red-500/10 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">logout</span>
+                        <span>Sign Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col items-center justify-center p-6 relative z-10 max-w-5xl mx-auto w-full">
+        <!-- Hero Section -->
+        <div class="text-center space-y-4 max-w-2xl slide-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-semibold uppercase tracking-wider mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+                <span>Active Financial Workspace</span>
+            </div>
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
+                Your Enterprise. <br class="sm:hidden"/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-400">Perfected in Real-Time.</span>
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed">
+                Welcome to SmartERP—a cloud-based, modern Tally-inspired billing, inventory, and accounting manager. Streamlined workflows and instant reports at your fingertips.
+            </p>
+        </div>
+
+        <!-- Thought of the Day -->
+        <div class="w-full max-w-lg mt-6 glass-card rounded-2xl p-4 shadow-xl shadow-gray-200/10 slide-up delay-1 flex items-start gap-3.5">
+            <span class="material-symbols-outlined text-primary text-[28px]">format_quote</span>
+            <div>
+                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-widest font-semibold">Good Thought</p>
+                <p class="text-sm italic font-medium text-gray-700 dark:text-gray-300 mt-1" id="dailyQuote">
+                    "Precision in books builds absolute trust in business. Effortless billing drives endless opportunities."
+                </p>
+            </div>
+        </div>
+
+        <!-- Primary Navigation Console -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full mt-10 slide-up delay-2">
+            <!-- Go to active company dashboard -->
+            <button onclick="goToActiveDashboard()" class="glass-card hover:bg-white dark:hover:bg-[#1C2436] rounded-2xl p-6 text-left shadow-lg border border-gray-200 dark:border-gray-800/30 transition-all hover:-translate-y-1 hover:shadow-2xl group flex flex-col justify-between h-48">
+                <div class="w-11 h-11 bg-primary/10 dark:bg-primary/20 text-primary dark:text-indigo-400 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl">dashboard</span>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors flex items-center gap-1">
+                        Active Dashboard <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Open the gateway dashboard for <span id="dashCompanyName" class="font-semibold text-gray-700 dark:text-gray-300">Vardhaman Distributors</span>.</p>
+                </div>
+            </button>
+
+            <!-- Select / Switch Company -->
+            <a href="company-select.html" class="glass-card hover:bg-white dark:hover:bg-[#1C2436] rounded-2xl p-6 text-left shadow-lg border border-gray-200 dark:border-gray-800/30 transition-all hover:-translate-y-1 hover:shadow-2xl group flex flex-col justify-between h-48">
+                <div class="w-11 h-11 bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-500 dark:text-emerald-400 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl">business</span>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-gray-900 dark:text-white group-hover:text-emerald-500 transition-colors flex items-center gap-1">
+                        Change Company <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Select from listed company profiles, or manage branches and financial years.</p>
+                </div>
+            </a>
+
+            <!-- Create New Company (Redirect to selector with form open) -->
+            <a href="company-select.html?action=create" class="glass-card hover:bg-white dark:hover:bg-[#1C2436] rounded-2xl p-6 text-left shadow-lg border border-gray-200 dark:border-gray-800/30 transition-all hover:-translate-y-1 hover:shadow-2xl group flex flex-col justify-between h-48">
+                <div class="w-11 h-11 bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-500 dark:text-indigo-400 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl">add_business</span>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-gray-900 dark:text-white group-hover:text-indigo-500 transition-colors flex items-center gap-1">
+                        Create Company <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Register a new business branch, input GSTIN details, and set financial period.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Search Bar for Companies -->
+        <div class="w-full max-w-lg mt-8 relative slide-up delay-3">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+            <input id="quickCompanySearch" type="text" placeholder="Quick find active company by name or GSTIN..." class="w-full pl-12 pr-4 py-3 bg-white/60 dark:bg-darkSurface/60 backdrop-blur-md border border-gray-200 dark:border-gray-800/60 rounded-2xl text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-all shadow-inner text-gray-900 dark:text-white" onkeyup="searchCompaniesDirect(event)"/>
+            <div id="searchResultsList" class="hidden absolute left-0 right-0 mt-2 bg-white dark:bg-darkSurface border border-gray-200 dark:border-gray-800 rounded-xl shadow-2xl z-40 max-h-48 overflow-y-auto p-1.5"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full p-6 text-center text-xs text-gray-400 dark:text-gray-600 border-t border-gray-200/50 dark:border-gray-800/40 relative z-20">
+        <p>© 2026 SmartERP Accounting Systems. All rights reserved.</p>
+    </footer>
+
+    <!-- Settings & Profile Modal -->
+    <div id="settingsModal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-[#0F172A]/30 dark:bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeSettingsModal()"></div>
+        <!-- Modal Content -->
+        <div class="relative w-full max-w-md bg-white dark:bg-darkSurface rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-805 overflow-hidden transform transition-all scale-95 opacity-0 duration-300 flex flex-col">
+            <header class="p-5 border-b border-gray-200 dark:border-gray-800/40 flex justify-between items-center shrink-0">
+                <div>
+                    <h3 class="text-base text-gray-900 dark:text-white font-bold">Profile &amp; Settings</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Update user details and profile picture.</p>
+                </div>
+                <button class="text-gray-400 hover:text-gray-600 dark:hover:text-white p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="closeSettingsModal()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </header>
+            <div class="p-5 space-y-4">
+                <div class="flex items-center gap-4">
+                    <div class="relative w-16 h-16 rounded-full overflow-hidden border border-gray-200 dark:border-gray-800 bg-primary/10 text-primary dark:text-indigo-300 font-bold flex items-center justify-center text-2xl" id="settingsAvatarContainer">
+                        <span id="settingsAvatarText">U</span>
+                        <img id="settingsAvatarImg" class="hidden w-full h-full object-cover" src="" alt="Profile"/>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300">Profile Photo</label>
+                        <div class="flex gap-2">
+                            <label class="px-3 py-1.5 bg-primary/10 hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30 text-primary dark:text-indigo-300 rounded-lg text-xs font-semibold cursor-pointer transition-colors">
+                                <span>Upload New</span>
+                                <input type="file" id="avatarFileInput" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)"/>
+                            </label>
+                            <button class="px-3 py-1.5 border border-gray-200 dark:border-gray-800 hover:bg-red-50 dark:hover:bg-red-900/10 text-red-600 dark:text-red-400 rounded-lg text-xs font-semibold transition-colors" onclick="removeAvatar()">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-gray-200 dark:border-gray-800/40"/>
+                <div class="space-y-3">
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsNameInput">Full Name</label>
+                        <input class="block w-full px-3 py-2 bg-white dark:bg-darkBg border border-gray-305 dark:border-gray-800 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsNameInput" type="text" placeholder="Your Name"/>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsEmailInput">Email Address</label>
+                        <input class="block w-full px-3 py-2 bg-white dark:bg-darkBg border border-gray-305 dark:border-gray-800 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsEmailInput" type="email" placeholder="email@example.com"/>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsPhoneInput">Phone Number</label>
+                        <input class="block w-full px-3 py-2 bg-white dark:bg-darkBg border border-gray-305 dark:border-gray-800 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsPhoneInput" type="text" placeholder="+91 98765 43210"/>
+                    </div>
+                </div>
+            </div>
+            <footer class="p-5 border-t border-gray-200 dark:border-gray-800/40 bg-gray-50 dark:bg-darkBg/40 flex justify-end gap-3 rounded-b-2xl">
+                <button class="px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg text-gray-600 dark:text-gray-400 text-xs font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="closeSettingsModal()">Cancel</button>
+                <button class="px-4 py-2 bg-primary hover:bg-primary/95 text-on-primary rounded-lg text-xs font-semibold transition-all shadow-md" onclick="saveSettings()">Save Changes</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- JavaScript logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme initial setup
+            const themeBtn = document.getElementById('theme-toggle');
+            const htmlEl = document.documentElement;
+
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlEl.classList.add('dark');
+            } else {
+                htmlEl.classList.remove('dark');
+            }
+
+            themeBtn.addEventListener('click', () => {
+                htmlEl.classList.toggle('dark');
+                localStorage.theme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
+            });
+
+            // Company details
+            const activeComp = localStorage.getItem('activeCompany') || 'Vardhaman Distributors Pvt. Ltd.';
+            document.getElementById('activeCompanyBadge').textContent = activeComp;
+            document.getElementById('dashCompanyName').textContent = activeComp;
+
+            initProfileSystem();
+            renderQuotes();
+        });
+
+        // Inspirational thoughts list
+        const quotes = [
+            "Precision in books builds absolute trust in business. Effortless billing drives endless opportunities.",
+            "Accounting is the language of business. Keep it clean, keep it truthful, and success will follow.",
+            "An enterprise built on data-dense clarity is resilient to any financial storm.",
+            "Honest books are the bedrock of strong credit, seamless partnerships, and compound growth.",
+            "Automate the compliance, calibrate the cash flows, and focus on expanding your market reach."
+        ];
+
+        function renderQuotes() {
+            const index = Math.floor(Math.random() * quotes.length);
+            const quoteEl = document.getElementById('dailyQuote');
+            if (quoteEl) quoteEl.textContent = `"${quotes[index]}"`;
+        }
+
+        function goToActiveDashboard() {
+            window.location.href = 'index.html';
+        }
+
+        // Quick search mock logic
+        const mockCompanies = [
+            { name: "Vardhaman Distributors Pvt. Ltd.", gst: "27AADCT1234E1Z5" },
+            { name: "Vardhaman Retail Store", gst: "27AADCT1234E2Z6" },
+            { name: "Vardhaman Logistics", gst: "27AADCT1234E3Z7" }
+        ];
+
+        function searchCompaniesDirect(e) {
+            const query = e.target.value.toLowerCase();
+            const resultsList = document.getElementById('searchResultsList');
+            if (!query) {
+                resultsList.classList.add('hidden');
+                return;
+            }
+
+            const filtered = mockCompanies.filter(c => c.name.toLowerCase().includes(query) || c.gst.toLowerCase().includes(query));
+            if (filtered.length === 0) {
+                resultsList.innerHTML = `<div class="p-2 text-xs text-gray-500">No companies found</div>`;
+            } else {
+                resultsList.innerHTML = filtered.map(c => `
+                    <button onclick="selectQuickCompany('${c.name}')" class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 text-left transition-colors text-xs font-semibold text-gray-700 dark:text-gray-200">
+                        <span>${c.name}</span>
+                        <span class="font-mono text-[10px] text-gray-400">${c.gst}</span>
+                    </button>
+                `).join('');
+            }
+            resultsList.classList.remove('hidden');
+        }
+
+        function selectQuickCompany(compName) {
+            localStorage.setItem('activeCompany', compName);
+            localStorage.setItem('activeCompanyFY', 'FY 26-27');
+            window.location.href = 'index.html';
+        }
+
+        // Close search list on outside click
+        document.addEventListener('click', (e) => {
+            const searchInput = document.getElementById('quickCompanySearch');
+            const resultsList = document.getElementById('searchResultsList');
+            if (searchInput && resultsList && !searchInput.contains(e.target) && !resultsList.contains(e.target)) {
+                resultsList.classList.add('hidden');
+            }
+        });
+
+        // Keyboard navigation bindings
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('settingsModal');
+                if (modal && !modal.classList.contains('hidden')) {
+                    closeSettingsModal();
+                }
+            }
+        });
+
+        // Global Profile System Scripts
+        function initProfileSystem() {
+            if (!localStorage.getItem('userName')) localStorage.setItem('userName', 'User');
+            if (!localStorage.getItem('userEmail')) localStorage.setItem('userEmail', 'user@example.com');
+            if (!localStorage.getItem('userPhone')) localStorage.setItem('userPhone', '');
+            if (!localStorage.getItem('userAvatar')) localStorage.setItem('userAvatar', '');
+
+            syncProfileUI();
+
+            document.addEventListener('click', (e) => {
+                const container = document.getElementById('profileDropdownContainer');
+                const dropdown = document.getElementById('profileDropdown');
+                if (container && dropdown && !container.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        }
+
+        function syncProfileUI() {
+            const name = localStorage.getItem('userName') || 'User';
+            const email = localStorage.getItem('userEmail') || 'user@example.com';
+            const avatar = localStorage.getItem('userAvatar') || '';
+            const initial = name.charAt(0).toUpperCase();
+
+            const avatarText = document.getElementById('profileAvatarText');
+            const avatarImg = document.getElementById('profileAvatarImg');
+            if (avatarText && avatarImg) {
+                if (avatar) {
+                    avatarText.classList.add('hidden');
+                    avatarImg.src = avatar;
+                    avatarImg.classList.remove('hidden');
+                } else {
+                    avatarText.textContent = initial;
+                    avatarText.classList.remove('hidden');
+                    avatarImg.classList.add('hidden');
+                }
+            }
+
+            const dropdownName = document.getElementById('dropdownUserName');
+            const dropdownEmail = document.getElementById('dropdownUserEmail');
+            if (dropdownName) dropdownName.textContent = name;
+            if (dropdownEmail) dropdownEmail.textContent = email;
+        }
+
+        function toggleProfileDropdown(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('profileDropdown');
+            if (dropdown) {
+                dropdown.classList.toggle('hidden');
+            }
+        }
+
+        function openSettingsModal(e) {
+            if (e) {
+                e.stopPropagation();
+                const dropdown = document.getElementById('profileDropdown');
+                if (dropdown) dropdown.classList.add('hidden');
+            }
+
+            const modal = document.getElementById('settingsModal');
+            document.getElementById('settingsNameInput').value = localStorage.getItem('userName') || 'User';
+            document.getElementById('settingsEmailInput').value = localStorage.getItem('userEmail') || 'user@example.com';
+            document.getElementById('settingsPhoneInput').value = localStorage.getItem('userPhone') || '';
+
+            const name = localStorage.getItem('userName') || 'User';
+            const avatar = localStorage.getItem('userAvatar') || '';
+            const initial = name.charAt(0).toUpperCase();
+            const setAvText = document.getElementById('settingsAvatarText');
+            const setAvImg = document.getElementById('settingsAvatarImg');
+            
+            if (avatar) {
+                setAvText.classList.add('hidden');
+                setAvImg.src = avatar;
+                setAvImg.classList.remove('hidden');
+            } else {
+                setAvText.textContent = initial;
+                setAvText.classList.remove('hidden');
+                setAvImg.classList.add('hidden');
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.querySelector('.relative').classList.remove('scale-95', 'opacity-0');
+                modal.querySelector('.relative').classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeSettingsModal() {
+            const modal = document.getElementById('settingsModal');
+            const content = modal.querySelector('.relative');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        function handleAvatarUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const base64 = evt.target.result;
+                const setAvText = document.getElementById('settingsAvatarText');
+                const setAvImg = document.getElementById('settingsAvatarImg');
+                setAvText.classList.add('hidden');
+                setAvImg.src = base64;
+                setAvImg.classList.remove('hidden');
+                
+                window.tempAvatar = base64;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeAvatar() {
+            const setAvText = document.getElementById('settingsAvatarText');
+            const setAvImg = document.getElementById('settingsAvatarImg');
+            const nameInput = document.getElementById('settingsNameInput').value || 'User';
+            
+            setAvText.textContent = nameInput.charAt(0).toUpperCase();
+            setAvText.classList.remove('hidden');
+            setAvImg.classList.add('hidden');
+            
+            window.tempAvatar = 'REMOVE';
+        }
+
+        function saveSettings() {
+            const name = document.getElementById('settingsNameInput').value.trim();
+            const email = document.getElementById('settingsEmailInput').value.trim();
+            const phone = document.getElementById('settingsPhoneInput').value.trim();
+
+            if (!name) {
+                alert("Name is required!");
+                return;
+            }
+
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPhone', phone);
+
+            if (window.tempAvatar === 'REMOVE') {
+                localStorage.setItem('userAvatar', '');
+            } else if (window.tempAvatar) {
+                localStorage.setItem('userAvatar', window.tempAvatar);
+            }
+            window.tempAvatar = null;
+
+            syncProfileUI();
+            closeSettingsModal();
+            window.location.reload();
+        }
+
+        function toggleThemeGlobal(e) {
+            if (e) e.stopPropagation();
+            const html = document.documentElement;
+            const isDark = html.classList.toggle('dark');
+            localStorage.theme = isDark ? 'dark' : 'light';
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
