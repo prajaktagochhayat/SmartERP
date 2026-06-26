@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <title>Ledger Management - SmartERP</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#4d44e3",
+                        "on-surface-variant": "#464555",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "surface-container": "#eaedff",
+                        "outline-variant": "#c7c4d8",
+                        "inverse-on-surface": "#eef0ff",
+                        "primary-container": "#4f46e5",
+                        "surface-dim": "#d2d9f4",
+                        "primary-fixed": "#e2dfff",
+                        "on-secondary-fixed-variant": "#00504f",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#7df5f4",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-variant": "#dae2fd",
+                        "background": "#faf8ff",
+                        "secondary-fixed-dim": "#5ed9d7",
+                        "on-surface": "#131b2e",
+                        "tertiary-container": "#a44100",
+                        "inverse-surface": "#283044",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "error": "#ba1a1a",
+                        "on-background": "#131b2e",
+                        "secondary": "#9AE1E2",
+                        "tertiary": "#F6C667",
+                        "primary": "#CA3074",
+                        "on-tertiary-fixed": "#351000",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-error": "#ffffff",
+                        "outline": "#777587",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#7e3000",
+                        "on-secondary-fixed": "#002020",
+                        "surface": "#faf8ff",
+                        "surface-container-low": "#f2f3ff",
+                        "surface-container-highest": "#dae2fd",
+                        "on-tertiary-container": "#ffd2be",
+                        "on-secondary-container": "#007070",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "surface-bright": "#faf8ff",
+                        "on-primary-container": "#dad7ff",
+                        "secondary-container": "#7df5f4",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#0f0069",
+                        "inverse-primary": "#c3c0ff"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "12px",
+                        xl: "16px",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "scale-base": "4px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "sidebar-width": "280px"
+                    },
+                    fontFamily: {
+                        "data-mono": ["JetBrains Mono"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "title-sm": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "data-mono": ["14px", { lineHeight: "20px", fontWeight: "500" }],
+                        "display-lg-mobile": ["28px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "label-caps": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "display-lg": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "title-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom Scrollbar Styles */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 9999px;
+        }
+        html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .dark .glass-panel {
+            background: rgba(19, 24, 38, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(199, 196, 216, 0.5);
+        }
+
+        /* Print Layout Rules */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            #sidebar, header, .shrink-0, .flex-none, .gap-6 > .w-1\/3, .flex.gap-2, button {
+                display: none !important;
+            }
+            .gap-6 > .w-2\/3 {
+                width: 100% !important;
+            }
+            main {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+        }
+
+        /* Custom Premium Dark Palette Overrides (9AE1E2, 332851, CA3074, F6C667) */
+        html.dark body, html.dark .bg-background, html.dark .bg-surface-container-lowest {
+            background-color: #120c1f !important;
+        }
+        html.dark .bg-surface {
+            background-color: #1d152f !important;
+        }
+        html.dark .bg-surface-container-low {
+            background-color: #181128 !important;
+        }
+        html.dark .bg-surface-container {
+            background-color: #251c3a !important;
+        }
+        html.dark .bg-surface-container-high {
+            background-color: #2d2247 !important;
+        }
+        html.dark .bg-surface-variant {
+            background-color: #251c3a !important;
+        }
+        html.dark nav, html.dark aside {
+            background-color: #120c1f !important;
+        }
+        html.dark header {
+            background-color: rgba(18, 12, 31, 0.8) !important;
+        }
+        html.dark .border-outline-variant {
+            border-color: rgba(154, 225, 226, 0.1) !important;
+        }
+        html.dark .text-on-surface {
+            color: #F8FAFC !important;
+        }
+        html.dark .text-on-surface-variant {
+            color: #d1cbdc !important;
+        }
+        html.dark .text-outline {
+            color: rgba(154, 225, 226, 0.4) !important;
+        }
+        html.dark th {
+            color: #9AE1E2 !important;
+        }
+        html.dark .bg-\[1E293B\]\/70, html.dark .dark\:bg-\[\#1E293B\]\/70 {
+            background-color: rgba(37, 28, 58, 0.7) !important;
+        }
+        html.dark .dark\:bg-\[\#1E293B\] {
+            background-color: #251c3a !important;
+        }
+        html.dark .dark\:bg-\[\#0B0F19\]\/80 {
+            background-color: rgba(18, 12, 31, 0.8) !important;
+        }
+        html.dark .dark\:bg-\[\#0B0F19\] {
+            background-color: #120c1f !important;
+        }
+    </style>
+</head>
+<body class="bg-background dark:bg-[#0B0F19] text-on-background dark:text-gray-100 font-body-md transition-colors duration-300 antialiased overflow-hidden flex h-screen">
+<!-- SideNavBar -->
+<nav class="bg-surface dark:bg-[#131826] border-r border-outline-variant dark:border-outline shadow-sm flex flex-col h-screen sticky top-0 transition-all duration-300 ease-in-out w-[280px] z-50 flex-shrink-0" id="sidebar">
+    <!-- Brand Header -->
+    <div class="h-16 flex items-center px-6 border-b border-outline-variant/50 dark:border-outline/50">
+        <a href="home.html" class="flex items-center gap-3 group cursor-pointer">
+            <div class="w-8 h-8 rounded bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-on-primary shadow-sm group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined fill text-[20px]">dataset</span>
+            </div>
+            <div class="sidebar-text flex flex-col overflow-hidden transition-all duration-300">
+                <span class="font-display-lg text-display-lg font-bold text-primary dark:text-surface-tint text-[18px] leading-tight tracking-tight whitespace-nowrap group-hover:text-primary transition-colors">SmartERP</span>
+                <span class="font-label-caps text-label-caps text-on-surface-variant whitespace-nowrap">GATEWAY</span>
+            </div>
+        </a>
+        <button class="ml-auto text-on-surface-variant hover:text-primary transition-colors p-1 rounded-md hover:bg-surface-variant/50" id="sidebarToggle">
+            <span class="material-symbols-outlined text-[20px]">menu_open</span>
+        </button>
+    </div>
+    <!-- Navigation Tabs -->
+    <div class="flex-1 overflow-y-auto custom-scrollbar py-4 px-3 flex flex-col gap-1">
+        <!-- Masters -->
+        <div class="mb-4">
+            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">MASTERS</p>
+            <a id="nav-ledgers" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="ledger.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">database</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Ledgers</span>
+            </a>
+            <a id="nav-inventory" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="inventory.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">inventory_2</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Stock Items</span>
+            </a>
+        </div>
+        <!-- Transactions -->
+        <div class="mb-4">
+            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">TRANSACTIONS</p>
+            <a id="nav-dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="index.html">
+                <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Dashboard</span>
+            </a>
+            <a id="nav-sales" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="sales-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">receipt_long</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Sales <span class="text-[11px] font-normal opacity-60 ml-1">(F8)</span></span>
+            </a>
+            <a id="nav-purchase" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="purchase-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">shopping_cart</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Purchase <span class="text-[11px] font-normal opacity-60 ml-1">(F9)</span></span>
+            </a>
+            <a id="nav-receipt" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="receipt-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">account_balance_wallet</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Receipt <span class="text-[11px] font-normal opacity-60 ml-1">(F6)</span></span>
+            </a>
+            <a id="nav-payment" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="payment-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">payments</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Payment <span class="text-[11px] font-normal opacity-60 ml-1">(F5)</span></span>
+            </a>
+            <a id="nav-contra" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="contra-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">sync_alt</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Contra</span>
+            </a>
+            <a id="nav-journal" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="journal-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">menu_book</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Journal</span>
+            </a>
+            <a id="nav-credit" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="credit-note.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">assignment_return</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Credit Note</span>
+            </a>
+            <a id="nav-debit" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="debit-note.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">assignment_returned</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Debit Note</span>
+            </a>
+        </div>
+        <!-- Reports -->
+        <div class="mb-4">
+            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">REPORTS</p>
+            <a id="nav-reports" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="reports.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">assessment</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Reports Hub</span>
+            </a>
+        </div>
+        <!-- Admin -->
+        <div class="mb-4">
+            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">ADMIN</p>
+            <a id="nav-gst" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="gst-settings.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">settings</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">GST Settings</span>
+            </a>
+            <a id="nav-roles" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="user-roles.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">admin_panel_settings</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">User Roles</span>
+            </a>
+        </div>
+    </div>
+    <!-- Footer Actions -->
+    <div class="p-3 border-t border-outline-variant/50 dark:border-outline/50 mt-auto">
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="login.html">
+            <span class="material-symbols-outlined text-[20px] group-hover:text-error transition-colors">logout</span>
+            <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Sign Out</span>
+        </a>
+    </div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+    <!-- TopNavBar -->
+    <header class="sticky top-0 w-full h-16 flex justify-between items-center px-margin-desktop z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant dark:border-outline shadow-sm transition-colors flex-shrink-0">
+        <!-- Left: Breadcrumb -->
+        <div class="flex items-center gap-6">
+            <div class="flex items-center space-x-2">
+                <span class="font-body-md text-body-md text-on-surface-variant dark:text-outline">Masters</span>
+                <span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
+                <span class="font-body-md text-body-md font-semibold text-primary dark:text-primary-fixed-dim">Ledgers</span>
+                <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-surface-container-high dark:bg-inverse-surface text-on-surface-variant dark:text-outline border border-outline-variant dark:border-outline/30">
+                    F4
+                </span>
+            </div>
+        </div>
+        <!-- Right Actions -->
+        <div class="flex items-center gap-3">
+            <!-- Search -->
+            <div class="hidden md:flex relative mr-4">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+                <input class="bg-surface-container dark:bg-inverse-surface border border-outline-variant dark:border-outline/30 rounded-full pl-9 pr-4 py-1.5 text-sm w-48 focus:w-64 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-on-surface dark:text-inverse-on-surface placeholder:text-outline-variant" placeholder="Search cmd+K" onclick="toggleCommandPalette()"/>
+            </div>
+            <!-- Theme Toggle -->
+            <button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-variant/50 dark:hover:bg-inverse-surface transition-colors" id="theme-toggle" title="Toggle Theme">
+                <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+            </button>
+            <!-- Notifications -->
+            <button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-variant/50 dark:hover:bg-inverse-surface transition-colors relative">
+                <span class="material-symbols-outlined">notifications</span>
+                <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface dark:border-[#0B0F19]"></span>
+            </button>
+            <!-- Company Selector -->
+            <button class="ml-2 flex items-center space-x-2 bg-surface-container-high dark:bg-inverse-surface border border-outline-variant dark:border-outline/30 px-3 py-1.5 rounded-lg hover:bg-surface-variant dark:hover:bg-inverse-surface/80 transition-colors" onclick="window.location.href='company-select.html'">
+                <span id="activeCompanyHeader" class="font-title-sm text-title-sm text-on-surface dark:text-inverse-on-surface whitespace-nowrap">Vardhaman Distributors</span>
+                <span class="material-symbols-outlined text-outline">expand_more</span>
+            </button>
+
+            <!-- Profile Dropdown -->
+            <div class="relative ml-2" id="profileDropdownContainer">
+                <button id="profileMenuBtn" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant dark:border-gray-700 hover:border-primary transition-colors shadow-sm bg-primary/10 text-primary dark:text-indigo-300 font-bold flex items-center justify-center text-sm focus:outline-none" onclick="toggleProfileDropdown(event)">
+                    <span id="profileAvatarText">U</span>
+                    <img id="profileAvatarImg" class="hidden w-full h-full object-cover" src="" alt="Profile"/>
+                </button>
+                <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-56 rounded-xl border border-outline-variant/60 dark:border-gray-800 bg-white/95 dark:bg-[#1d152f]/95 backdrop-blur-md shadow-2xl p-1.5 z-[150] transform origin-top-right transition-all">
+                    <div class="px-3 py-2 border-b border-outline-variant/30 dark:border-gray-800/40 mb-1">
+                        <p id="dropdownUserName" class="text-sm font-semibold text-gray-900 dark:text-white">User</p>
+                        <p id="dropdownUserEmail" class="text-xs text-gray-500 truncate dark:text-gray-400">user@example.com</p>
+                    </div>
+                    <a href="index.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">home</span>
+                        <span>Home (Dashboard)</span>
+                    </a>
+                    <button onclick="openSettingsModal(event)" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors text-left">
+                        <span class="material-symbols-outlined text-[18px]">settings</span>
+                        <span>Settings</span>
+                    </button>
+                    <a href="company-select.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">business</span>
+                        <span>Change Company</span>
+                    </a>
+                    <button onclick="toggleThemeGlobal(event)" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors text-left">
+                        <span class="material-symbols-outlined text-[18px] dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-[18px] hidden dark:block">light_mode</span>
+                        <span class="dark:hidden">Switch to Dark Mode</span>
+                        <span class="hidden dark:block">Switch to Light Mode</span>
+                    </button>
+                    <div class="h-px bg-outline-variant/30 dark:bg-gray-805/40 my-1"></div>
+                    <a href="login.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-red-600 dark:text-red-400 hover:bg-red-500/10 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">logout</span>
+                        <span>Sign Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Workspace Canvas -->
+    <main class="flex-1 overflow-hidden flex flex-col p-6 max-w-container-max mx-auto w-full relative">
+        <!-- Page Header -->
+        <div class="flex justify-between items-end mb-6 shrink-0">
+            <div>
+                <h2 class="font-headline-md text-headline-md text-on-surface dark:text-white font-bold">Ledger Directory</h2>
+                <p class="font-body-sm text-body-sm text-on-surface-variant dark:text-gray-400 mt-1">Manage accounts, view statements, and track balances.</p>
+            </div>
+            <div class="flex gap-3">
+                <button class="flex items-center px-4 py-2 bg-surface-container border border-outline-variant dark:border-gray-750 dark:bg-[#131826] rounded-lg text-on-surface dark:text-white font-title-sm text-sm hover:bg-surface-variant dark:hover:bg-gray-800 transition-all shadow-sm group" onclick="toggleFilterOverlay()">
+                    <span class="material-symbols-outlined mr-2 text-[18px] text-outline group-hover:text-primary">filter_list</span>
+                    Filter View
+                </button>
+                <button class="flex items-center px-4 py-2 bg-primary hover:bg-primary/90 text-on-primary rounded-lg font-title-sm text-sm transition-all shadow-sm hover:-translate-y-[1px]" onclick="openCreateModal()">
+                    <span class="material-symbols-outlined mr-2 text-[18px]">add</span>
+                    Create Ledger
+                    <span class="ml-2 px-1.5 py-0.5 rounded bg-on-primary/20 text-[10px] uppercase font-bold tracking-wider">Alt+C</span>
+                </button>
+            </div>
+        </div>
+        <!-- Two Column Layout Area -->
+        <div class="flex-1 flex gap-6 overflow-hidden min-h-0">
+            <!-- Left Column: Master List (1/3) -->
+            <div class="w-1/3 flex flex-col bg-white dark:bg-[#131826] border border-outline-variant dark:border-gray-800 rounded-xl shadow-sm overflow-hidden">
+                <!-- List Header/Tools -->
+                <div class="p-4 border-b border-outline-variant dark:border-gray-800 bg-surface-container-low dark:bg-[#0B0F19]/50 shrink-0 space-y-3">
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+                        <input id="ledgerSearchInput" oninput="searchLedgers()" class="w-full bg-surface dark:bg-[#0B0F19] border border-outline-variant dark:border-gray-700 rounded-lg pl-9 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all text-on-surface dark:text-white placeholder:text-outline-variant" placeholder="Search ledgers..." type="text"/>
+                    </div>
+                    <div class="flex gap-2 overflow-x-auto custom-scrollbar pb-1">
+                        <button id="groupFilterAll" onclick="filterGroup('All')" class="px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-primary/30 dark:text-indigo-300 border border-primary/30 font-label-caps text-label-caps whitespace-nowrap">All</button>
+                        <button id="groupFilterCustomers" onclick="filterGroup('Sundry Debtors')" class="px-3 py-1 rounded-full bg-white dark:bg-[#0B0F19] text-on-surface-variant dark:text-gray-400 border border-outline-variant dark:border-gray-800 font-label-caps text-label-caps whitespace-nowrap hover:bg-gray-100 dark:hover:bg-gray-800">Customers</button>
+                        <button id="groupFilterSuppliers" onclick="filterGroup('Sundry Creditors')" class="px-3 py-1 rounded-full bg-white dark:bg-[#0B0F19] text-on-surface-variant dark:text-gray-400 border border-outline-variant dark:border-gray-800 font-label-caps text-label-caps whitespace-nowrap hover:bg-gray-100 dark:hover:bg-gray-800">Suppliers</button>
+                        <button id="groupFilterBanks" onclick="filterGroup('Bank Accounts')" class="px-3 py-1 rounded-full bg-white dark:bg-[#0B0F19] text-on-surface-variant dark:text-gray-400 border border-outline-variant dark:border-gray-800 font-label-caps text-label-caps whitespace-nowrap hover:bg-gray-100 dark:hover:bg-gray-800">Banks</button>
+                    </div>
+                </div>
+                <!-- Scrollable List -->
+                <div id="ledgerListContainer" class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
+                    <!-- Loaded dynamically -->
+                </div>
+                <!-- Master List Footer count -->
+                <div class="p-3 border-t border-outline-variant dark:border-gray-800 bg-surface-container-low dark:bg-[#0B0F19]/50 text-center shrink-0">
+                    <span id="listFooterCount" class="font-body-sm text-[11px] text-outline">Showing 5 of 5 Ledgers</span>
+                </div>
+            </div>
+            <!-- Right Column: Detail View (2/3) -->
+            <div id="detailViewPanel" class="w-2/3 flex flex-col bg-white dark:bg-[#131826] border border-outline-variant dark:border-gray-800 rounded-xl shadow-sm overflow-hidden relative">
+                <!-- Decorative Background Gradient (Subtle) -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+                <!-- Detail Header -->
+                <div class="p-6 border-b border-outline-variant dark:border-gray-800 shrink-0">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-3 mb-1">
+                                <h3 id="detailName" class="font-headline-md text-xl text-on-surface dark:text-white font-bold">TechCorp Solutions</h3>
+                                <span class="px-2 py-0.5 rounded-full bg-secondary/10 dark:bg-secondary/20 border border-secondary/20 text-secondary dark:text-secondary-fixed text-[10px] font-label-caps uppercase tracking-wider">Active</span>
+                            </div>
+                            <p class="font-body-sm text-sm text-on-surface-variant dark:text-gray-400 mb-4">Under <span id="detailGroup" class="font-semibold text-on-surface dark:text-white">Sundry Debtors</span></p>
+                            <div class="grid grid-cols-2 gap-x-8 gap-y-2">
+                                <div>
+                                    <span class="block font-body-sm text-[11px] text-outline uppercase tracking-wider mb-0.5">GSTIN / UIN</span>
+                                    <span id="detailGstin" class="font-data-mono text-sm text-on-surface dark:text-gray-200">27AADCT1234E1Z5</span>
+                                </div>
+                                <div>
+                                    <span class="block font-body-sm text-[11px] text-outline uppercase tracking-wider mb-0.5">Primary Contact</span>
+                                    <span id="detailContact" class="font-body-md text-sm text-on-surface dark:text-gray-200">Priya Sharma (+91 98765 43210)</span>
+                                </div>
+                                <div class="col-span-2 mt-1">
+                                    <span class="block font-body-sm text-[11px] text-outline uppercase tracking-wider mb-0.5">Address</span>
+                                    <span id="detailAddress" class="font-body-md text-sm text-on-surface dark:text-gray-200">14/A, Tech Park, Andheri East, Mumbai, Maharashtra 400069</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mini KPI Strip -->
+                <div class="flex border-b border-outline-variant dark:border-gray-800 bg-surface-container-low/50 dark:bg-[#0B0F19]/30 shrink-0">
+                    <div class="flex-1 p-4 border-r border-outline-variant dark:border-gray-800">
+                        <span class="block font-body-sm text-[11px] text-outline uppercase tracking-wider mb-1">Running Balance</span>
+                        <div class="flex items-baseline gap-1">
+                            <span id="detailRunningBalance" class="font-data-mono text-lg font-bold text-secondary dark:text-secondary-fixed">₹1,25,000.00</span>
+                            <span id="detailRunningBalanceType" class="font-data-mono text-xs text-secondary/80">Dr</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 p-4 border-r border-outline-variant dark:border-gray-800">
+                        <span class="block font-body-sm text-[11px] text-outline uppercase tracking-wider mb-1">MTD Volume</span>
+                        <span id="detailMtdVolume" class="font-data-mono text-lg font-bold text-on-surface dark:text-white">₹4,50,000.00</span>
+                    </div>
+                    <div class="flex-1 p-4">
+                        <span class="block font-body-sm text-[11px] text-outline uppercase tracking-wider mb-1">Credit Limit</span>
+                        <div class="flex items-center gap-2">
+                            <span id="detailCreditLimit" class="font-data-mono text-lg font-bold text-on-surface dark:text-white">₹5,000,000</span>
+                            <div class="flex-1 h-1.5 bg-outline-variant/30 dark:bg-gray-800 rounded-full overflow-hidden">
+                                <div id="detailCreditLimitProgress" class="h-full bg-secondary" style="width: 2.5%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ledger Statement Table -->
+                <div class="flex-1 overflow-auto custom-scrollbar bg-white dark:bg-[#131826]">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="sticky top-0 bg-surface-container dark:bg-[#0B0F19] border-b border-outline-variant dark:border-gray-800 shadow-sm z-10">
+                            <tr>
+                                <th class="py-2.5 px-4 font-label-caps text-xs text-on-surface-variant dark:text-gray-400 w-24">Date</th>
+                                <th class="py-2.5 px-4 font-label-caps text-xs text-on-surface-variant dark:text-gray-400">Particulars</th>
+                                <th class="py-2.5 px-4 font-label-caps text-xs text-on-surface-variant dark:text-gray-400 w-24">Vch Type</th>
+                                <th class="py-2.5 px-4 font-label-caps text-xs text-on-surface-variant dark:text-gray-400 w-20">Vch No</th>
+                                <th class="py-2.5 px-4 font-label-caps text-xs text-on-surface-variant dark:text-gray-400 text-right w-28">Debit (Dr)</th>
+                                <th class="py-2.5 px-4 font-label-caps text-xs text-on-surface-variant dark:text-gray-400 text-right w-28">Credit (Cr)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statementTableBody" class="font-data-mono text-[13px] text-on-surface dark:text-gray-200 divide-y divide-outline-variant/30 dark:divide-outline/10">
+                            <!-- Loaded dynamically -->
+                        </tbody>
+                        <tfoot class="sticky bottom-0 bg-surface-container dark:bg-[#0B0F19] border-t border-outline-variant dark:border-gray-800 z-10 font-data-mono font-semibold text-sm">
+                            <tr>
+                                <td class="py-3 px-4 text-right font-body-md font-bold text-on-surface dark:text-white" colspan="4">Closing Balance:</td>
+                                <td id="statementTotalDebit" class="py-3 px-4 text-right text-secondary dark:text-secondary-fixed border-t-2 border-secondary/50 font-bold">2,50,000.00</td>
+                                <td id="statementTotalCredit" class="py-3 px-4 text-right border-t-2 border-outline-variant dark:border-gray-700 font-bold">1,25,000.00</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- Action Footer -->
+                <div class="p-4 border-t border-outline-variant dark:border-gray-800 bg-surface-container-low dark:bg-[#0B0F19]/50 shrink-0 flex justify-end gap-3">
+                    <button id="deleteBtn" onclick="deleteActiveLedger()" class="px-4 py-2 bg-white dark:bg-gray-800 border border-outline-variant dark:border-gray-700 rounded-lg text-on-surface dark:text-white font-title-sm text-sm hover:bg-error/10 hover:text-error hover:border-error/30 transition-all">
+                        Delete Ledger <span class="ml-1 text-[10px] text-outline font-normal">(F6)</span>
+                    </button>
+                    <button id="printBtn" onclick="printStatement()" class="px-4 py-2 bg-white dark:bg-gray-800 border border-outline-variant dark:border-gray-700 rounded-lg text-on-surface dark:text-white font-title-sm text-sm hover:bg-surface-variant dark:hover:bg-gray-700 transition-all">
+                        Print Statement <span class="ml-1 text-[10px] text-outline font-normal">(Ctrl+P)</span>
+                    </button>
+                    <button id="alterBtn" onclick="alterActiveLedger()" class="px-4 py-2 bg-primary-container text-on-primary-container rounded-lg font-title-sm text-sm hover:bg-primary-container/90 transition-all shadow-sm">
+                        Alter Option <span class="ml-1 text-[10px] opacity-70 font-normal">(Ctrl+E)</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Empty details panel -->
+            <div id="emptyViewPanel" class="hidden w-2/3 bg-white dark:bg-[#131826] border border-outline-variant dark:border-gray-800 rounded-xl shadow-sm items-center justify-center flex-col text-center p-8">
+                <span class="material-symbols-outlined text-6xl text-outline mb-4">account_balance_wallet</span>
+                <h3 class="font-title-sm text-xl text-on-surface dark:text-white font-bold">No Ledger Selected</h3>
+                <p class="font-body-sm text-sm text-on-surface-variant dark:text-gray-400 mt-2 max-w-sm">Create a new ledger or click on an existing one from the directory to inspect statements.</p>
+                <button class="mt-4 px-5 py-2 bg-primary hover:bg-primary/95 text-on-primary rounded-lg font-title-sm text-sm transition-all shadow-md" onclick="openCreateModal()">Create Ledger</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Create / Edit Ledger Modal Overlay -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300" id="createLedgerModal">
+    <!-- Frosted Backdrop -->
+    <div class="absolute inset-0 bg-on-background/20 dark:bg-black/60 backdrop-blur-sm" onclick="closeLedgerModal()"></div>
+    <!-- Modal Content (Glassmorphic) -->
+    <div class="glass-panel w-full max-w-2xl rounded-2xl shadow-2xl relative z-10 flex flex-col max-h-full transform scale-95 transition-transform duration-300" id="modalContent">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center p-6 border-b border-outline-variant/30 dark:border-gray-800 shrink-0">
+            <h2 id="modalTitle" class="font-headline-md text-2xl text-on-surface dark:text-white font-bold">Create Ledger Master</h2>
+            <button class="p-2 rounded-full hover:bg-surface-variant/50 dark:hover:bg-gray-800 text-on-surface-variant transition-colors" onclick="closeLedgerModal()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <!-- Modal Body -->
+        <div class="p-6 overflow-y-auto custom-scrollbar space-y-6">
+            <!-- Group 1: Identity -->
+            <div class="space-y-4">
+                <div>
+                    <label class="block font-title-sm text-sm text-on-surface dark:text-gray-300 mb-1.5">Name <span class="text-error">*</span></label>
+                    <input id="modalLedgerName" class="w-full bg-white dark:bg-[#0B0F19] border border-outline-variant dark:border-gray-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-on-surface dark:text-white" type="text" required/>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-title-sm text-sm text-on-surface dark:text-gray-300 mb-1.5">Under Group <span class="text-error">*</span></label>
+                        <div class="relative">
+                            <select id="modalLedgerGroup" class="w-full bg-white dark:bg-[#0B0F19] border border-outline-variant dark:border-gray-800 rounded-lg pl-4 pr-10 py-2 appearance-none focus:ring-2 focus:ring-primary focus:border-primary transition-all text-on-surface dark:text-white" required>
+                                <option value="">Select Group</option>
+                                <option value="Sundry Debtors">Sundry Debtors (Customers)</option>
+                                <option value="Sundry Creditors">Sundry Creditors (Suppliers)</option>
+                                <option value="Bank Accounts">Bank Accounts (Banks)</option>
+                                <option value="Cash Accounts">Cash Accounts (Cash)</option>
+                                <option value="Indirect Expenses">Indirect Expenses (Expenses)</option>
+                                <option value="Indirect Incomes">Indirect Incomes (Income)</option>
+                                <option value="Assets">Assets</option>
+                                <option value="Liabilities">Liabilities</option>
+                                <option value="Income">Income</option>
+                                <option value="Expenses">Expenses</option>
+                            </select>
+                            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">arrow_drop_down</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-title-sm text-sm text-on-surface dark:text-gray-300 mb-1.5">Opening Balance</label>
+                        <div class="flex gap-2">
+                            <input id="modalLedgerBalance" class="flex-1 font-data-mono bg-white dark:bg-[#0B0F19] border border-outline-variant dark:border-gray-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-on-surface dark:text-white text-right" placeholder="0.00" type="text"/>
+                            <select id="modalLedgerBalanceType" class="w-20 bg-white dark:bg-[#0B0F19] border border-outline-variant dark:border-gray-800 rounded-lg px-2 py-2 appearance-none focus:ring-2 focus:ring-primary focus:border-primary transition-all text-on-surface dark:text-white text-center">
+                                <option value="Dr">Dr</option>
+                                <option value="Cr">Cr</option>
+                                <option value="-">-</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-outline-variant/30 dark:border-gray-800"/>
+            <!-- Group 2: Compliance & Contact -->
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-title-sm text-sm text-on-surface dark:text-gray-300 mb-1.5">GSTIN / UIN</label>
+                        <input id="modalLedgerGstin" class="w-full font-data-mono uppercase bg-white dark:bg-[#0B0F19] border border-outline-variant dark:border-gray-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-on-surface dark:text-white" type="text"/>
+                    </div>
+                    <div>
+                        <label class="block font-title-sm text-sm text-on-surface dark:text-gray-300 mb-1.5">Primary Contact</label>
+                        <input id="modalLedgerContact" class="w-full bg-white dark:bg-[#0B0F19] border border-outline-variant dark:border-gray-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-on-surface dark:text-white" placeholder="e.g. Priya Sharma (+91 98765 43210)" type="text"/>
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-title-sm text-sm text-on-surface dark:text-gray-300 mb-1.5">Mailing Address</label>
+                    <textarea id="modalLedgerAddress" class="w-full bg-white dark:bg-[#0B0F19] border border-outline-variant dark:border-gray-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-on-surface dark:text-white resize-none" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Footer -->
+        <div class="p-6 border-t border-outline-variant/30 dark:border-gray-800 shrink-0 flex justify-end gap-3 bg-surface/30 dark:bg-[#0B0F19]/30 rounded-b-2xl">
+            <button class="px-6 py-2.5 bg-transparent border border-outline-variant dark:border-gray-700 rounded-lg text-on-surface dark:text-white font-title-sm text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-all" onclick="closeLedgerModal()">
+                Cancel
+            </button>
+            <button id="modalSaveButton" class="px-6 py-2.5 bg-primary hover:bg-primary/90 text-on-primary rounded-lg font-title-sm text-sm transition-all shadow-md hover:-translate-y-[1px]" onclick="saveLedger()">
+                Save Ledger
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- COMMAND PALETTE MODAL (Ctrl+K) -->
+<div class="fixed inset-0 z-[110] hidden items-start justify-center pt-[153px]" id="commandPalette">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-on-background/20 dark:bg-black/50 backdrop-blur-sm transition-opacity" onclick="toggleCommandPalette()"></div>
+    <!-- Modal Content -->
+    <div class="relative w-full max-w-2xl bg-white/95 dark:bg-[#131826] backdrop-blur-xl rounded-2xl shadow-2xl border border-outline-variant/50 dark:border-gray-800 overflow-hidden flex flex-col transform transition-all scale-95 opacity-0" id="commandModalInner">
+        <!-- Search Input -->
+        <div class="flex items-center px-4 py-4 border-b border-outline-variant/30 dark:border-gray-800">
+            <span class="material-symbols-outlined text-[24px] text-on-surface-variant mr-3">search</span>
+            <input autofocus class="flex-1 bg-transparent border-none outline-none font-title-sm text-title-sm text-on-surface dark:text-white placeholder:text-on-surface-variant/50 focus:ring-0 p-0" placeholder="Type a menu search or navigation command..." type="text" id="cmdInput" oninput="filterCommands()"/>
+            <kbd class="font-data-mono text-data-mono text-[10px] px-2 py-1 rounded bg-surface-variant dark:bg-gray-800 text-on-surface-variant dark:text-gray-400 ml-3 border border-outline-variant/30 dark:border-gray-800">ESC</kbd>
+        </div>
+        <!-- Results Area -->
+        <div class="max-h-[380px] overflow-y-auto p-2 no-scrollbar" id="cmdResults">
+            <div class="px-3 py-2">
+                <p class="font-label-caps text-label-caps text-on-surface-variant mb-2 pl-2">SUGGESTED ACTIONS</p>
+                <a href="sales-voucher.html" class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-primary/10 hover:text-primary text-on-surface dark:text-gray-200 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary">receipt_long</span>
+                        <span class="font-body-md text-body-md">Create Sale Invoice (F8)</span>
+                    </div>
+                    <span class="font-data-mono text-[11px] text-on-surface-variant border border-outline-variant/30 rounded px-1.5 py-0.5">F8</span>
+                </a>
+                <a href="purchase-voucher.html" class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-primary/10 hover:text-primary text-on-surface dark:text-gray-200 transition-colors group mt-1">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary">shopping_cart</span>
+                        <span class="font-body-md text-body-md">Record Purchase Voucher (F9)</span>
+                    </div>
+                    <span class="font-data-mono text-[11px] text-on-surface-variant border border-outline-variant/30 rounded px-1.5 py-0.5">F9</span>
+                </a>
+                <a href="ledger.html" class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-primary/10 hover:text-primary text-on-surface dark:text-gray-200 transition-colors group mt-1">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary">account_balance_wallet</span>
+                        <span class="font-body-md text-body-md">Ledger Directories</span>
+                    </div>
+                    <span class="font-data-mono text-[11px] text-on-surface-variant border border-outline-variant/30 rounded px-1.5 py-0.5">F4</span>
+                </a>
+                <a href="inventory.html" class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-primary/10 hover:text-primary text-on-surface dark:text-gray-200 transition-colors group mt-1">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary">category</span>
+                        <span class="font-body-md text-body-md">Stock Inventory Summary</span>
+                    </div>
+                    <span class="font-data-mono text-[11px] text-on-surface-variant border border-outline-variant/30 rounded px-1.5 py-0.5">F2</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dynamic Toast Container -->
+<div id="toast-container" class="fixed bottom-6 right-6 z-[120] flex flex-col gap-2 pointer-events-none"></div>
+
+<!-- Supabase SDK & Config -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+<script>
+    // --- Dynamic State ---
+    let ledgers = [
+        {
+            id: 0,
+            name: "TechCorp Solutions",
+            group: "Sundry Debtors",
+            gstin: "27AADCT1234E1Z5",
+            contact: "Priya Sharma (+91 98765 43210)",
+            address: "14/A, Tech Park, Andheri East, Mumbai, Maharashtra 400069",
+            balance: 125000,
+            type: "Dr",
+            mtdVolume: 450000,
+            creditLimit: 5000000,
+            statement: [
+                { date: "01-Apr-24", particulars: "Opening Balance", type: "-", no: "-", debit: 50000, credit: null },
+                { date: "15-Apr-24", particulars: "Sales A/c", type: "Sales", no: "SI-042", debit: 200000, credit: null },
+                { date: "18-Apr-24", particulars: "HDFC Current A/c", type: "Receipt", no: "RV-018", debit: null, credit: 125000 }
+            ]
+        },
+        {
+            id: 1,
+            name: "Vardhaman Wholesalers",
+            group: "Sundry Creditors",
+            gstin: "27AADCT1234E3Z7",
+            contact: "Ramesh Shah (+91 98200 12345)",
+            address: "52, Wholesale Market, Masjid Bunder, Mumbai, MH 400003",
+            balance: 180000,
+            type: "Cr",
+            mtdVolume: 720000,
+            creditLimit: 3000000,
+            statement: [
+                { date: "02-Apr-24", particulars: "Opening Balance", type: "-", no: "-", debit: null, credit: 100000 },
+                { date: "10-Apr-24", particulars: "Purchase A/c", type: "Purchase", no: "PU-089", debit: null, credit: 180000 },
+                { date: "19-Apr-24", particulars: "HDFC Current A/c", type: "Payment", no: "PV-091", debit: 100000, credit: null }
+            ]
+        },
+        {
+            id: 2,
+            name: "HDFC Current A/c",
+            group: "Bank Accounts",
+            gstin: "HDFCB0000060",
+            contact: "Karan Johar (+91 22 6655 4433)",
+            address: "HDFC Bank House, Senapati Bapat Marg, Lower Parel, Mumbai 400013",
+            balance: 540000,
+            type: "Dr",
+            mtdVolume: 1250000,
+            creditLimit: 0,
+            statement: [
+                { date: "01-Apr-24", particulars: "Opening Balance", type: "-", no: "-", debit: 450000, credit: null },
+                { date: "18-Apr-24", particulars: "TechCorp Solutions Receipt", type: "Receipt", no: "RV-018", debit: 125000, credit: null },
+                { date: "19-Apr-24", particulars: "Vardhaman Wholesalers Payment", type: "Payment", no: "PV-091", debit: null, credit: 100000 }
+            ]
+        },
+        {
+            id: 3,
+            name: "IGST Output 18%",
+            group: "Duties & Taxes",
+            gstin: "Tax Ledger",
+            contact: "N/A",
+            address: "GST Revenue Ledger",
+            balance: 45200,
+            type: "Cr",
+            mtdVolume: 180000,
+            creditLimit: 0,
+            statement: [
+                { date: "01-Apr-24", particulars: "Opening Balance", type: "-", no: "-", debit: null, credit: 15200 },
+                { date: "15-Apr-24", particulars: "IGST Output on Invoice SI-042", type: "Sales", no: "SI-042", debit: null, credit: 30000 }
+            ]
+        },
+        {
+            id: 4,
+            name: "Salary Expense",
+            group: "Indirect Expenses",
+            gstin: "Expense Ledger",
+            contact: "N/A",
+            address: "Company Payroll Account",
+            balance: 0,
+            type: "-",
+            mtdVolume: 180000,
+            creditLimit: 0,
+            statement: [
+                { date: "01-Apr-24", particulars: "Opening Balance", type: "-", no: "-", debit: 0, credit: null }
+            ]
+        }
+    ];
+
+    let activeLedgerId = 0;
+    let activeGroupFilter = "All";
+    let searchQuery = "";
+    let isEditing = false;
+    let filterGstType = "All";
+    let filterState = "All";
+    let filterStatus = "All";
+
+    // --- Dom Load & Setup ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Theme config
+        const html = document.documentElement;
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        // Active company selector
+        const activeComp = localStorage.getItem('activeCompany') || 'Vardhaman Distributors Pvt. Ltd.';
+        const activeCompFY = localStorage.getItem('activeCompanyFY') || 'FY 26-27';
+        const headerEl = document.getElementById('activeCompanyHeader');
+        if (headerEl) {
+            headerEl.textContent = `${activeComp.split(' ')[0]} ${activeComp.includes('Distributors') ? 'Distributors' : ''} (${activeCompFY})`;
+        }
+
+        // Check if redirected with new ledger query
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('action') === 'new') {
+            openCreateModal();
+        }
+
+        loadLedgersFromDb();
+        
+        // Initialize user profile
+        initProfileSystem();
+    });
+
+    async function loadLedgersFromDb() {
+        if (supabaseClient) {
+            const dbLedgers = await dbFetchLedgers(1);
+            if (dbLedgers && dbLedgers.length > 0) {
+                ledgers = dbLedgers;
+                activeLedgerId = ledgers[0].id;
+            }
+        }
+        drawLedgerList();
+        loadLedgerDetails(activeLedgerId);
+    }
+
+    // --- Theme Switcher ---
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn.addEventListener('click', () => {
+        const html = document.documentElement;
+        html.classList.toggle('dark');
+        localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+    });
+
+    // --- Sidebar Collapse ---
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggle-sidebar');
+    const sidebarTexts = document.querySelectorAll('.sidebar-text');
+    let isCollapsed = false;
+
+    toggleBtn.addEventListener('click', () => {
+        isCollapsed = !isCollapsed;
+        if (isCollapsed) {
+            sidebar.classList.remove('w-[280px]');
+            sidebar.classList.add('w-[80px]');
+            sidebarTexts.forEach(el => el.classList.add('opacity-0', 'w-0', 'hidden'));
+            toggleBtn.innerHTML = '<span class="material-symbols-outlined">menu</span>';
+        } else {
+            sidebar.classList.remove('w-[80px]');
+            sidebar.classList.add('w-[280px]');
+            sidebarTexts.forEach(el => el.classList.remove('opacity-0', 'w-0', 'hidden'));
+            toggleBtn.innerHTML = '<span class="material-symbols-outlined">menu_open</span>';
+        }
+    });
+
+    // --- Search & Filters ---
+    function filterGroup(group) {
+        activeGroupFilter = group;
+        const groups = ["All", "Sundry Debtors", "Sundry Creditors", "Bank Accounts"];
+        const ids = ["groupFilterAll", "groupFilterCustomers", "groupFilterSuppliers", "groupFilterBanks"];
+        
+        ids.forEach((id, idx) => {
+            const btn = document.getElementById(id);
+            if (groups[idx] === group) {
+                btn.className = "px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-primary/30 dark:text-indigo-300 border border-primary/30 font-label-caps text-label-caps whitespace-nowrap";
+            } else {
+                btn.className = "px-3 py-1 rounded-full bg-white dark:bg-[#0B0F19] text-on-surface-variant dark:text-gray-400 border border-outline-variant dark:border-gray-800 font-label-caps text-label-caps whitespace-nowrap hover:bg-gray-100 dark:hover:bg-gray-800";
+            }
+        });
+
+        drawLedgerList();
+    }
+
+    function searchLedgers() {
+        searchQuery = document.getElementById('ledgerSearchInput').value.toLowerCase();
+        drawLedgerList();
+    }
+
+    // --- Render List & Details ---
+    function drawLedgerList() {
+        const container = document.getElementById('ledgerListContainer');
+        container.innerHTML = '';
+
+        let visibleCount = 0;
+        let firstVisibleId = null;
+
+        ledgers.forEach(l => {
+            const matchesSearch = l.name.toLowerCase().includes(searchQuery) || l.group.toLowerCase().includes(searchQuery);
+            const matchesGroup = (activeGroupFilter === "All" || l.group === activeGroupFilter);
+            const matchesGst = (filterGstType === "All" || (l.gstin && l.gstin !== "Tax Ledger" && l.gstin !== "Expense Ledger" && filterGstType === "Regular") || (filterGstType === "Unregistered" && (!l.gstin || l.gstin === "Tax Ledger" || l.gstin === "Expense Ledger")));
+            const matchesState = (filterState === "All" || (l.address && l.address.toLowerCase().includes(filterState.toLowerCase())));
+            const matchesStatus = (filterStatus === "All" || (filterStatus === "Active" && l.balance > 0) || (filterStatus === "Inactive" && l.balance === 0));
+
+            if (matchesSearch && matchesGroup && matchesGst && matchesState && matchesStatus) {
+                visibleCount++;
+                if (firstVisibleId === null) firstVisibleId = l.id;
+
+                const isActive = l.id === activeLedgerId;
+                const card = document.createElement('div');
+                card.onclick = () => loadLedgerDetails(l.id);
+                card.className = `p-3 rounded-lg cursor-pointer transition-all border ${isActive ? 'bg-surface-container-high dark:bg-gray-800/80 border-l-4 border-primary dark:border-l-primary dark:border-gray-800 shadow-sm' : 'hover:bg-gray-50 dark:hover:bg-gray-800/30 border-transparent border-b-outline-variant/30 dark:border-b-gray-800/40'}`;
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-title-sm text-sm ${isActive ? 'font-bold text-primary dark:text-indigo-400' : 'text-on-surface dark:text-gray-200'}">${l.name}</h4>
+                            <p class="font-body-sm text-xs text-on-surface-variant dark:text-gray-400 mt-0.5">${l.group}</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-data-mono text-sm ${l.type === 'Dr' ? 'text-secondary dark:text-teal-400' : l.type === 'Cr' ? 'text-error' : 'text-gray-500'}">₹${l.balance.toLocaleString('en-IN')}</span>
+                            <p class="font-data-mono text-[10px] text-gray-500">${l.type}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            }
+        });
+
+        document.getElementById('listFooterCount').textContent = `Showing ${visibleCount} of ${ledgers.length} Ledgers`;
+
+        if (visibleCount === 0) {
+            document.getElementById('detailViewPanel').classList.add('hidden');
+            document.getElementById('emptyViewPanel').classList.remove('hidden');
+            document.getElementById('emptyViewPanel').classList.add('flex');
+        } else {
+            document.getElementById('emptyViewPanel').classList.add('hidden');
+            document.getElementById('emptyViewPanel').classList.remove('flex');
+            document.getElementById('detailViewPanel').classList.remove('hidden');
+            if (!ledgers.find(l => l.id === activeLedgerId && l.name.toLowerCase().includes(searchQuery) && (activeGroupFilter === "All" || l.group === activeGroupFilter))) {
+                loadLedgerDetails(firstVisibleId);
+            }
+        }
+    }
+
+    function loadLedgerDetails(id) {
+        activeLedgerId = id;
+        const ledger = ledgers.find(l => l.id === id);
+        if (!ledger) return;
+
+        // Reset list selection highlights
+        const cards = document.getElementById('ledgerListContainer').children;
+        // Just redraw the list to update selection border styles cleanly
+        drawLedgerListOnly();
+
+        // Update fields
+        document.getElementById('detailName').textContent = ledger.name;
+        document.getElementById('detailGroup').textContent = ledger.group;
+        document.getElementById('detailGstin').textContent = ledger.gstin || "N/A";
+        document.getElementById('detailContact').textContent = ledger.contact || "N/A";
+        document.getElementById('detailAddress').textContent = ledger.address || "N/A";
+        
+        document.getElementById('detailRunningBalance').textContent = `₹${ledger.balance.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        document.getElementById('detailRunningBalanceType').textContent = ledger.type;
+        document.getElementById('detailMtdVolume').textContent = `₹${ledger.mtdVolume.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        document.getElementById('detailCreditLimit').textContent = ledger.creditLimit > 0 ? `₹${ledger.creditLimit.toLocaleString('en-IN')}` : "Unlimited";
+        
+        const progress = ledger.creditLimit > 0 ? Math.min((ledger.balance / ledger.creditLimit) * 100, 100) : 0;
+        document.getElementById('detailCreditLimitProgress').style.width = `${progress}%`;
+
+        // Render statement table
+        const tbody = document.getElementById('statementTableBody');
+        tbody.innerHTML = '';
+
+        let debitTotal = 0;
+        let creditTotal = 0;
+
+        ledger.statement.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.className = "hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors";
+            
+            const debText = row.debit !== null ? row.debit.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '';
+            const credText = row.credit !== null ? row.credit.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '';
+            
+            if (row.debit !== null) debitTotal += row.debit;
+            if (row.credit !== null) creditTotal += row.credit;
+
+            tr.innerHTML = `
+                <td class="py-2.5 px-4 text-outline">${row.date}</td>
+                <td class="py-2.5 px-4 font-body-sm">${row.particulars}</td>
+                <td class="py-2.5 px-4">${row.type}</td>
+                <td class="py-2.5 px-4 text-primary dark:text-indigo-400 font-medium">${row.no}</td>
+                <td class="py-2.5 px-4 text-right">${debText}</td>
+                <td class="py-2.5 px-4 text-right">${credText}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // Totals
+        document.getElementById('statementTotalDebit').textContent = debitTotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('statementTotalCredit').textContent = creditTotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function drawLedgerListOnly() {
+        const container = document.getElementById('ledgerListContainer');
+        const cards = container.children;
+        let idx = 0;
+        ledgers.forEach(l => {
+            const matchesSearch = l.name.toLowerCase().includes(searchQuery) || l.group.toLowerCase().includes(searchQuery);
+            const matchesGroup = (activeGroupFilter === "All" || l.group === activeGroupFilter);
+
+            if (matchesSearch && matchesGroup) {
+                const card = cards[idx];
+                if (card) {
+                    const isActive = l.id === activeLedgerId;
+                    card.className = `p-3 rounded-lg cursor-pointer transition-all border ${isActive ? 'bg-surface-container-high dark:bg-gray-800 border-l-4 border-primary dark:border-l-indigo-400 dark:border-gray-800 shadow-sm' : 'hover:bg-gray-55 dark:hover:bg-gray-800/30 border-transparent border-b-outline-variant/30 dark:border-b-gray-800/40'}`;
+                }
+                idx++;
+            }
+        });
+    }
+
+    // --- Deletion Logic ---
+    function deleteActiveLedger() {
+        const index = ledgers.findIndex(l => l.id === activeLedgerId);
+        if (index === -1) return;
+
+        const ledgerName = ledgers[index].name;
+        ledgers.splice(index, 1);
+
+        showToast(`Ledger "${ledgerName}" deleted successfully!`);
+
+        // Select next visible ledger if available
+        if (ledgers.length > 0) {
+            activeLedgerId = ledgers[0].id;
+        } else {
+            activeLedgerId = null;
+        }
+
+        drawLedgerList();
+        if (activeLedgerId !== null) {
+            loadLedgerDetails(activeLedgerId);
+        }
+    }
+
+    // --- Alter Option (Edit Modal) ---
+    function alterActiveLedger() {
+        const ledger = ledgers.find(l => l.id === activeLedgerId);
+        if (!ledger) return;
+
+        isEditing = true;
+        document.getElementById('modalTitle').textContent = "Alter Ledger Option";
+        document.getElementById('modalLedgerName').value = ledger.name;
+        document.getElementById('modalLedgerGroup').value = ledger.group;
+        document.getElementById('modalLedgerBalance').value = ledger.balance;
+        document.getElementById('modalLedgerBalanceType').value = ledger.type;
+        document.getElementById('modalLedgerGstin').value = ledger.gstin || '';
+        document.getElementById('modalLedgerContact').value = ledger.contact || '';
+        document.getElementById('modalLedgerAddress').value = ledger.address || '';
+
+        toggleModal('createLedgerModal');
+    }
+
+    function openCreateModal() {
+        isEditing = false;
+        document.getElementById('modalTitle').textContent = "Create Ledger Master";
+        document.getElementById('modalLedgerName').value = '';
+        document.getElementById('modalLedgerGroup').value = '';
+        document.getElementById('modalLedgerBalance').value = '';
+        document.getElementById('modalLedgerBalanceType').value = 'Dr';
+        document.getElementById('modalLedgerGstin').value = '';
+        document.getElementById('modalLedgerContact').value = '';
+        document.getElementById('modalLedgerAddress').value = '';
+
+        toggleModal('createLedgerModal');
+    }
+
+    async function saveLedger() {
+        const name = document.getElementById('modalLedgerName').value.trim();
+        const group = document.getElementById('modalLedgerGroup').value;
+        const balance = parseFloat(document.getElementById('modalLedgerBalance').value) || 0;
+        const type = document.getElementById('modalLedgerBalanceType').value;
+        const gstin = document.getElementById('modalLedgerGstin').value.trim();
+        const contact = document.getElementById('modalLedgerContact').value.trim();
+        const address = document.getElementById('modalLedgerAddress').value.trim();
+
+        if (!name || !group) {
+            showToast("Please fill in the required fields (*)", "error");
+            return;
+        }
+
+        if (isEditing) {
+            // Update active ledger
+            const ledger = ledgers.find(l => l.id === activeLedgerId);
+            if (ledger) {
+                ledger.name = name;
+                ledger.group = group;
+                ledger.balance = balance;
+                ledger.type = type;
+                ledger.gstin = gstin;
+                ledger.contact = contact;
+                ledger.address = address;
+                
+                showToast(`Ledger "${name}" updated successfully!`);
+            }
+        } else {
+            // Add new ledger
+            const newId = ledgers.length > 0 ? Math.max(...ledgers.map(l => l.id)) + 1 : 0;
+            const newLedger = {
+                id: newId,
+                name: name,
+                group: group,
+                gstin: gstin,
+                contact: contact,
+                address: address,
+                balance: balance,
+                type: type,
+                mtdVolume: 0,
+                creditLimit: group === "Sundry Debtors" ? 5000000 : 0,
+                statement: [
+                    { date: "01-Apr-24", particulars: "Opening Balance", type: "-", no: "-", debit: type === 'Dr' ? balance : null, credit: type === 'Cr' ? balance : null }
+                ]
+            };
+
+            if (supabaseClient) {
+                const saved = await dbCreateLedger(newLedger);
+                if (saved) {
+                    newLedger.id = saved.id;
+                }
+            }
+
+            ledgers.push(newLedger);
+            activeLedgerId = newLedger.id;
+            showToast(`Ledger "${name}" created successfully!`);
+        }
+
+        closeLedgerModal();
+        drawLedgerList();
+        loadLedgerDetails(activeLedgerId);
+    }
+
+    // --- Print Function ---
+    function printStatement() {
+        window.print();
+    }
+
+    // --- Modal Animations ---
+    function toggleModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const content = modal.querySelector('#modalContent');
+        
+        if (modal.classList.contains('hidden')) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // force repaint
+            void modal.offsetWidth;
+            modal.classList.remove('opacity-0');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        } else {
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+    }
+
+    function closeLedgerModal() {
+        toggleModal('createLedgerModal');
+    }
+
+    // --- Command Palette Toggle ---
+    const commandPalette = document.getElementById('commandPalette');
+    const commandModalInner = document.getElementById('commandModalInner');
+    let isCommandPaletteOpen = false;
+
+    function toggleCommandPalette() {
+        isCommandPaletteOpen = !isCommandPaletteOpen;
+        if (isCommandPaletteOpen) {
+            commandPalette.classList.remove('hidden');
+            commandPalette.classList.add('flex');
+            setTimeout(() => {
+                commandModalInner.classList.remove('scale-95', 'opacity-0');
+                commandModalInner.classList.add('scale-100', 'opacity-100');
+                document.getElementById('cmdInput').focus();
+            }, 10);
+        } else {
+            commandModalInner.classList.remove('scale-100', 'opacity-100');
+            commandModalInner.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                commandPalette.classList.add('hidden');
+                commandPalette.classList.remove('flex');
+            }, 200);
+        }
+    }
+
+    function filterCommands() {
+        const query = document.getElementById('cmdInput').value.toLowerCase();
+        const results = document.getElementById('cmdResults').querySelectorAll('a');
+        results.forEach(el => {
+            const text = el.textContent.toLowerCase();
+            el.style.display = text.includes(query) ? 'flex' : 'none';
+        });
+    }
+
+    // --- Dynamic Toast Alert ---
+    function showToast(message, type = "success") {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        const color = type === "success" ? "bg-[#006a69]" : "bg-red-700";
+        toast.className = `flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg font-body-sm text-sm text-white ${color} transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-auto`;
+        toast.innerHTML = `
+            <span class="material-symbols-outlined text-[20px]">${type === "success" ? "check_circle" : "warning"}</span>
+            <span>${message}</span>
+        `;
+        
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.classList.remove('translate-y-20', 'opacity-0');
+        }, 10);
+        setTimeout(() => {
+            toast.classList.add('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // --- Keyboard Bindings ---
+    document.addEventListener('keydown', (e) => {
+        // Alt+C -> Open Create Modal
+        if (e.altKey && e.key.toLowerCase() === 'c') {
+            e.preventDefault();
+            const modal = document.getElementById('createLedgerModal');
+            if (modal.classList.contains('hidden')) {
+                openCreateModal();
+            }
+        }
+        // Ctrl+E -> Alter Option
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'e') {
+            e.preventDefault();
+            const modal = document.getElementById('createLedgerModal');
+            if (modal.classList.contains('hidden') && activeLedgerId !== null) {
+                alterActiveLedger();
+            }
+        }
+        // F6 -> Delete Ledger
+        if (e.key === 'F6') {
+            e.preventDefault();
+            if (activeLedgerId !== null) {
+                deleteActiveLedger();
+            }
+        }
+        // Ctrl+P -> Print / Print Statement
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+            e.preventDefault();
+            printStatement();
+        }
+        // Escape -> Close modal / command palette
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('createLedgerModal');
+            if (!modal.classList.contains('hidden')) {
+                closeLedgerModal();
+            }
+            if (isCommandPaletteOpen) {
+                toggleCommandPalette();
+            }
+        }
+        // Ctrl+K -> Command Palette
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            toggleCommandPalette();
+        }
+        
+        // F-Keys Navigation
+        if (e.key === 'F2') {
+            e.preventDefault();
+            window.location.href = 'inventory.html';
+        }
+        if (e.key === 'F4') {
+            e.preventDefault();
+            // Already here, do nothing or toast
+        }
+        if (e.key === 'F8') {
+            e.preventDefault();
+            window.location.href = 'sales-voucher.html';
+        }
+        if (e.key === 'F9') {
+            e.preventDefault();
+            window.location.href = 'purchase-voucher.html';
+        }
+        if (e.key === 'F10') {
+            e.preventDefault();
+            window.location.href = 'reports.html';
+        }
+        if (e.key === 'F5') {
+            e.preventDefault();
+            window.location.href = 'payment-voucher.html';
+        }
+    });
+
+    // Toggle Filter Overlay Modal
+    function toggleFilterOverlay() {
+        const modal = document.getElementById('filterOverlayModal');
+        if (modal.classList.contains('hidden')) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Sync current inputs
+            document.getElementById('filterGstType').value = filterGstType;
+            document.getElementById('filterState').value = filterState;
+            setFilterStatus(filterStatus);
+            setTimeout(() => {
+                modal.querySelector('.relative').classList.remove('scale-95', 'opacity-0');
+                modal.querySelector('.relative').classList.add('scale-100', 'opacity-100');
+            }, 10);
+        } else {
+            const content = modal.querySelector('.relative');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+    }
+
+    let tempFilterStatus = "All";
+    function setFilterStatus(status) {
+        tempFilterStatus = status;
+        const btnAll = document.getElementById('btnStatusAll');
+        const btnActive = document.getElementById('btnStatusActive');
+        if (status === "All") {
+            btnAll.className = "flex-grow py-1.5 px-3 rounded-lg border border-primary/30 bg-primary/10 text-primary dark:bg-primary/20 text-xs font-semibold";
+            btnActive.className = "flex-grow py-1.5 px-3 rounded-lg border border-outline-variant/30 text-on-surface-variant dark:text-outline text-xs";
+        } else {
+            btnActive.className = "flex-grow py-1.5 px-3 rounded-lg border border-primary/30 bg-primary/10 text-primary dark:bg-primary/20 text-xs font-semibold";
+            btnAll.className = "flex-grow py-1.5 px-3 rounded-lg border border-outline-variant/30 text-on-surface-variant dark:text-outline text-xs";
+        }
+    }
+
+    function applyFilters() {
+        filterGstType = document.getElementById('filterGstType').value;
+        filterState = document.getElementById('filterState').value;
+        filterStatus = tempFilterStatus;
+        drawLedgerList();
+        toggleFilterOverlay();
+        showToast('Filters applied successfully.');
+    }
+
+    function resetFilters() {
+        filterGstType = "All";
+        filterState = "All";
+        filterStatus = "All";
+        document.getElementById('filterGstType').value = "All";
+        document.getElementById('filterState').value = "All";
+        setFilterStatus("All");
+        drawLedgerList();
+        toggleFilterOverlay();
+        showToast('Filters reset.');
+    }
+</script>
+
+<!-- Filter Overlay Modal -->
+<div id="filterOverlayModal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-[#0F172A]/30 dark:bg-black/60 backdrop-blur-sm transition-opacity" onclick="toggleFilterOverlay()"></div>
+    <!-- Modal Content -->
+    <div class="relative w-full max-w-sm bg-white dark:bg-[#131826] rounded-2xl shadow-2xl border border-gray-250 dark:border-gray-800 overflow-hidden transform transition-all scale-95 opacity-0 duration-300 flex flex-col">
+        <header class="p-4 border-b border-gray-200 dark:border-gray-800/40 flex justify-between items-center shrink-0">
+            <div>
+                <h3 class="font-title-sm text-base text-gray-900 dark:text-white font-bold">Filter Ledgers</h3>
+            </div>
+            <button class="text-gray-400 hover:text-gray-600 dark:hover:text-white p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="toggleFilterOverlay()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </header>
+        <div class="p-4 space-y-4">
+            <div class="space-y-1">
+                <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300">GST Registration Type</label>
+                <select id="filterGstType" class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-gray-300 dark:border-gray-800 rounded-lg text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option value="All">All Types</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Unregistered">Unregistered / Tax-Free</option>
+                </select>
+            </div>
+            <div class="space-y-1">
+                <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300">State / Region</label>
+                <select id="filterState" class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-gray-300 dark:border-gray-800 rounded-lg text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option value="All">All States</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                </select>
+            </div>
+            <div class="space-y-1">
+                <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300">Outstanding Balance Status</label>
+                <div class="flex gap-2">
+                    <button onclick="setFilterStatus('All')" class="flex-grow py-1.5 px-3 rounded-lg border border-primary/30 bg-primary/10 text-primary dark:bg-primary/20 text-xs font-semibold" id="btnStatusAll">All Balance</button>
+                    <button onclick="setFilterStatus('Active')" class="flex-grow py-1.5 px-3 rounded-lg border border-outline text-on-surface-variant dark:text-outline text-xs" id="btnStatusActive">Has Balance</button>
+                </div>
+            </div>
+        </div>
+        <footer class="p-4 border-t border-gray-200 dark:border-gray-800/40 bg-gray-50 dark:bg-[#0B0F19]/40 flex justify-end gap-3 shrink-0 rounded-b-2xl">
+            <button class="px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-lg text-gray-600 dark:text-gray-400 text-xs font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="resetFilters()">Reset</button>
+            <button class="px-4 py-1.5 bg-primary hover:bg-primary/95 text-on-primary rounded-lg text-xs font-semibold transition-all shadow-md" onclick="applyFilters()">Apply Filters</button>
+        </footer>
+    </div>
+</div>
+
+<!-- Settings & Profile Modal -->
+<div id="settingsModal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-[#0F172A]/30 dark:bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeSettingsModal()"></div>
+    <!-- Modal Content -->
+    <div class="relative w-full max-w-md bg-white dark:bg-[#131826] rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden transform transition-all scale-95 opacity-0 duration-300 flex flex-col">
+        <header class="p-5 border-b border-gray-200 dark:border-gray-800/40 flex justify-between items-center shrink-0">
+            <div>
+                <h3 class="font-title-sm text-base text-gray-900 dark:text-white font-bold">Profile &amp; Settings</h3>
+                <p class="font-body-sm text-xs text-gray-500 dark:text-gray-400">Update your user details and profile picture.</p>
+            </div>
+            <button class="text-gray-400 hover:text-gray-600 dark:hover:text-white p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="closeSettingsModal()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </header>
+        <div class="p-5 space-y-4">
+            <!-- Profile Photo Upload -->
+            <div class="flex items-center gap-4">
+                <div class="relative w-16 h-16 rounded-full overflow-hidden border border-gray-200 dark:border-gray-800 bg-primary/10 text-primary dark:text-indigo-300 font-bold flex items-center justify-center text-2xl" id="settingsAvatarContainer">
+                    <span id="settingsAvatarText">U</span>
+                    <img id="settingsAvatarImg" class="hidden w-full h-full object-cover" src="" alt="Profile"/>
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300">Profile Photo</label>
+                    <div class="flex gap-2">
+                        <label class="px-3 py-1.5 bg-primary/10 hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30 text-primary dark:text-indigo-300 rounded-lg text-xs font-semibold cursor-pointer transition-colors">
+                            <span>Upload New</span>
+                            <input type="file" id="avatarFileInput" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)"/>
+                        </label>
+                        <button class="px-3 py-1.5 border border-gray-200 dark:border-gray-800 hover:bg-red-55 dark:hover:bg-red-900/10 text-red-600 dark:text-red-400 rounded-lg text-xs font-semibold transition-colors" onclick="removeAvatar()">
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-gray-250 dark:border-gray-850"/>
+            <!-- Fields -->
+            <div class="space-y-3">
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsNameInput">Full Name</label>
+                    <input class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-gray-300 dark:border-gray-850 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsNameInput" type="text" placeholder="Your Name"/>
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsEmailInput">Email Address</label>
+                    <input class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-gray-300 dark:border-gray-850 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsEmailInput" type="email" placeholder="email@example.com"/>
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsPhoneInput">Phone Number</label>
+                    <input class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-gray-300 dark:border-gray-850 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsPhoneInput" type="text" placeholder="+91 98765 43210"/>
+                </div>
+            </div>
+        </div>
+        <footer class="p-5 border-t border-gray-200 dark:border-gray-850 bg-gray-50 dark:bg-[#0B0F19]/40 flex justify-end gap-3 rounded-b-2xl">
+            <button class="px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg text-gray-600 dark:text-gray-400 text-xs font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="closeSettingsModal()">Cancel</button>
+            <button class="px-4 py-2 bg-primary hover:bg-primary/95 text-on-primary rounded-lg text-xs font-semibold transition-all shadow-md" onclick="saveSettings()">Save Changes</button>
+        </footer>
+    </div>
+</div>
+
+<!-- JavaScript logic for profile, drop down, and settings modal -->
+<script>
+    function initProfileSystem() {
+        if (!localStorage.getItem('userName')) localStorage.setItem('userName', 'User');
+        if (!localStorage.getItem('userEmail')) localStorage.setItem('userEmail', 'user@example.com');
+        if (!localStorage.getItem('userPhone')) localStorage.setItem('userPhone', '');
+        if (!localStorage.getItem('userAvatar')) localStorage.setItem('userAvatar', '');
+
+        syncProfileUI();
+
+        document.addEventListener('click', (e) => {
+            const container = document.getElementById('profileDropdownContainer');
+            const dropdown = document.getElementById('profileDropdown');
+            if (container && dropdown && !container.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    }
+
+    function syncProfileUI() {
+        const name = localStorage.getItem('userName') || 'User';
+        const email = localStorage.getItem('userEmail') || 'user@example.com';
+        const avatar = localStorage.getItem('userAvatar') || '';
+        const initial = name.charAt(0).toUpperCase();
+
+        const avatarText = document.getElementById('profileAvatarText');
+        const avatarImg = document.getElementById('profileAvatarImg');
+        if (avatarText && avatarImg) {
+            if (avatar) {
+                avatarText.classList.add('hidden');
+                avatarImg.src = avatar;
+                avatarImg.classList.remove('hidden');
+            } else {
+                avatarText.textContent = initial;
+                avatarText.classList.remove('hidden');
+                avatarImg.classList.add('hidden');
+            }
+        }
+
+        const dropdownName = document.getElementById('dropdownUserName');
+        const dropdownEmail = document.getElementById('dropdownUserEmail');
+        if (dropdownName) dropdownName.textContent = name;
+        if (dropdownEmail) dropdownEmail.textContent = email;
+    }
+
+    function toggleProfileDropdown(e) {
+        e.stopPropagation();
+        const dropdown = document.getElementById('profileDropdown');
+        if (dropdown) {
+            dropdown.classList.toggle('hidden');
+        }
+    }
+
+    function openSettingsModal(e) {
+        if (e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('profileDropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+        }
+
+        const modal = document.getElementById('settingsModal');
+        document.getElementById('settingsNameInput').value = localStorage.getItem('userName') || 'User';
+        document.getElementById('settingsEmailInput').value = localStorage.getItem('userEmail') || 'user@example.com';
+        document.getElementById('settingsPhoneInput').value = localStorage.getItem('userPhone') || '';
+
+        const name = localStorage.getItem('userName') || 'User';
+        const avatar = localStorage.getItem('userAvatar') || '';
+        const initial = name.charAt(0).toUpperCase();
+        const setAvText = document.getElementById('settingsAvatarText');
+        const setAvImg = document.getElementById('settingsAvatarImg');
+        
+        if (avatar) {
+            setAvText.classList.add('hidden');
+            setAvImg.src = avatar;
+            setAvImg.classList.remove('hidden');
+        } else {
+            setAvText.textContent = initial;
+            setAvText.classList.remove('hidden');
+            setAvImg.classList.add('hidden');
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => {
+            modal.querySelector('.relative').classList.remove('scale-95', 'opacity-0');
+            modal.querySelector('.relative').classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+
+    function closeSettingsModal() {
+        const modal = document.getElementById('settingsModal');
+        const content = modal.querySelector('.relative');
+        content.classList.remove('scale-100', 'opacity-100');
+        content.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }, 300);
+    }
+
+    function handleAvatarUpload(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            const base64 = evt.target.result;
+            const setAvText = document.getElementById('settingsAvatarText');
+            const setAvImg = document.getElementById('settingsAvatarImg');
+            setAvText.classList.add('hidden');
+            setAvImg.src = base64;
+            setAvImg.classList.remove('hidden');
+            
+            window.tempAvatar = base64;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function removeAvatar() {
+        const setAvText = document.getElementById('settingsAvatarText');
+        const setAvImg = document.getElementById('settingsAvatarImg');
+        const nameInput = document.getElementById('settingsNameInput').value || 'User';
+        
+        setAvText.textContent = nameInput.charAt(0).toUpperCase();
+        setAvText.classList.remove('hidden');
+        setAvImg.classList.add('hidden');
+        
+        window.tempAvatar = 'REMOVE';
+    }
+
+    function saveSettings() {
+        const name = document.getElementById('settingsNameInput').value.trim();
+        const email = document.getElementById('settingsEmailInput').value.trim();
+        const phone = document.getElementById('settingsPhoneInput').value.trim();
+
+        if (!name) {
+            alert("Name is required!");
+            return;
+        }
+
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userPhone', phone);
+
+        if (window.tempAvatar === 'REMOVE') {
+            localStorage.setItem('userAvatar', '');
+        } else if (window.tempAvatar) {
+            localStorage.setItem('userAvatar', window.tempAvatar);
+        }
+        window.tempAvatar = null;
+
+        syncProfileUI();
+        closeSettingsModal();
+        
+        if (typeof showToast === 'function') {
+            showToast("Profile settings saved successfully!");
+        } else {
+            alert("Profile settings saved successfully!");
+        }
+    }
+
+    function toggleThemeGlobal(e) {
+        if (e) e.stopPropagation();
+        const html = document.documentElement;
+        const isDark = html.classList.toggle('dark');
+        localStorage.theme = isDark ? 'dark' : 'light';
+        
+        // Reload or sync manually
+        window.location.reload();
+    }
+</script>
+</body>
+</html>
