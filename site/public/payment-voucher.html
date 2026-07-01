@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <title>SmartERP - Payment Voucher</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#faf8ff",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#4f46e5",
+                      "on-error-container": "#93000a",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed-variant": "#00504f",
+                      "secondary-fixed-dim": "#5ed9d7",
+                      "inverse-on-surface": "#eef0ff",
+                      "outline-variant": "#c7c4d8",
+                      "on-background": "#131b2e",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "surface": "#faf8ff",
+                      "on-surface-variant": "#464555",
+                      "on-surface": "#131b2e",
+                      "surface-dim": "#d2d9f4",
+                      "tertiary-container": "#a44100",
+                      "on-tertiary-container": "#ffd2be",
+                      "on-secondary-container": "#007070",
+                      "surface-tint": "#4d44e3",
+                      "surface-container-high": "#e2e7ff",
+                      "secondary": "#9AE1E2",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "on-primary-fixed": "#0f0069",
+                      "on-tertiary-fixed": "#351000",
+                      "outline": "#777587",
+                      "on-tertiary-fixed-variant": "#7b2f00",
+                      "primary": "#CA3074",
+                      "surface-bright": "#faf8ff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "surface-container-highest": "#dae2fd",
+                      "primary-fixed": "#e2dfff",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#ffdbcc",
+                      "surface-container-low": "#f2f3ff",
+                      "surface-container": "#eaedff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed": "#002020",
+                      "inverse-primary": "#c3c0ff",
+                      "on-primary-container": "#dad7ff",
+                      "tertiary-fixed-dim": "#ffb695",
+                      "tertiary": "#7e3000",
+                      "surface-variant": "#dae2fd",
+                      "secondary-fixed": "#7df5f4",
+                      "inverse-surface": "#283044",
+                      "secondary-container": "#7df5f4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "scale-base": "4px",
+                      "container-max": "1440px",
+                      "margin-desktop": "32px",
+                      "sidebar-width": "280px"
+              },
+              "fontFamily": {
+                      "title-sm": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "data-mono": ["JetBrains Mono"],
+                      "body-md": ["Plus Jakarta Sans"],
+                      "display-lg-mobile": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "label-caps": ["Plus Jakarta Sans"],
+                      "body-sm": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom Scrollbar Styles */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 9999px;
+        }
+        html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Custom Premium Dark Palette Overrides (9AE1E2, 332851, CA3074, F6C667) */
+        html.dark body, html.dark .bg-background, html.dark .bg-surface-container-lowest {
+            background-color: #120c1f !important;
+        }
+        html.dark .bg-surface {
+            background-color: #1d152f !important;
+        }
+        html.dark .bg-surface-container-low {
+            background-color: #181128 !important;
+        }
+        html.dark .bg-surface-container {
+            background-color: #251c3a !important;
+        }
+        html.dark .bg-surface-container-high {
+            background-color: #2d2247 !important;
+        }
+        html.dark .bg-surface-variant {
+            background-color: #251c3a !important;
+        }
+        html.dark nav, html.dark aside {
+            background-color: #120c1f !important;
+        }
+        html.dark header {
+            background-color: rgba(18, 12, 31, 0.8) !important;
+        }
+        html.dark .border-outline-variant {
+            border-color: rgba(154, 225, 226, 0.1) !important;
+        }
+        html.dark .text-on-surface {
+            color: #F8FAFC !important;
+        }
+        html.dark .text-on-surface-variant {
+            color: #d1cbdc !important;
+        }
+        html.dark .text-outline {
+            color: rgba(154, 225, 226, 0.4) !important;
+        }
+        html.dark th {
+            color: #9AE1E2 !important;
+        }
+        html.dark .bg-\[1E293B\]\/70, html.dark .dark\:bg-\[\#1E293B\]\/70 {
+            background-color: rgba(37, 28, 58, 0.7) !important;
+        }
+        html.dark .dark\:bg-\[\#1E293B\] {
+            background-color: #251c3a !important;
+        }
+        html.dark .dark\:bg-\[\#0B0F19\]\/80 {
+            background-color: rgba(18, 12, 31, 0.8) !important;
+        }
+        html.dark .dark\:bg-\[\#0B0F19\] {
+            background-color: #120c1f !important;
+        }
+    </style>
+</head>
+<body class="bg-background dark:bg-[#0B0F19] text-on-background dark:text-inverse-on-surface font-body-md transition-colors duration-300 antialiased overflow-hidden flex h-screen">
+<!-- SideNavBar -->
+<nav class="bg-surface dark:bg-[#131826] border-r border-outline-variant dark:border-outline shadow-sm flex flex-col h-screen sticky top-0 transition-all duration-300 ease-in-out w-[280px] z-50 flex-shrink-0" id="sidebar">
+    <!-- Brand Header -->
+    <div class="h-16 flex items-center px-6 border-b border-outline-variant/50 dark:border-outline/50">
+        <a href="home.html" class="flex items-center gap-3 group cursor-pointer">
+            <div class="w-8 h-8 rounded bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-on-primary shadow-sm group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined fill text-[20px]">dataset</span>
+            </div>
+            <div class="sidebar-text flex flex-col overflow-hidden transition-all duration-300">
+                <span class="font-display-lg text-display-lg font-bold text-primary dark:text-surface-tint text-[18px] leading-tight tracking-tight whitespace-nowrap group-hover:text-primary transition-colors">SmartERP</span>
+                <span class="font-label-caps text-label-caps text-on-surface-variant whitespace-nowrap">GATEWAY</span>
+            </div>
+        </a>
+        <button class="ml-auto text-on-surface-variant hover:text-primary transition-colors p-1 rounded-md hover:bg-surface-variant/50" id="sidebarToggle">
+            <span class="material-symbols-outlined text-[20px]">menu_open</span>
+        </button>
+    </div>
+    <!-- Navigation Tabs -->
+    <div class="flex-1 overflow-y-auto custom-scrollbar py-4 px-3 flex flex-col gap-1">
+        <!-- Masters -->
+        <div class="mb-4">
+            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">MASTERS</p>
+            <a id="nav-ledgers" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="ledger.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">database</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Ledgers</span>
+            </a>
+            <a id="nav-inventory" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="inventory.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">inventory_2</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Stock Items</span>
+            </a>
+        </div>
+        <!-- Transactions -->
+        <div class="mb-4">
+            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">TRANSACTIONS</p>
+            <a id="nav-dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="index.html">
+                <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Dashboard</span>
+            </a>
+            <a id="nav-sales" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="sales-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">receipt_long</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Sales <span class="text-[11px] font-normal opacity-60 ml-1">(F8)</span></span>
+            </a>
+            <a id="nav-purchase" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="purchase-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">shopping_cart</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Purchase <span class="text-[11px] font-normal opacity-60 ml-1">(F9)</span></span>
+            </a>
+            <a id="nav-receipt" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="receipt-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">account_balance_wallet</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Receipt <span class="text-[11px] font-normal opacity-60 ml-1">(F6)</span></span>
+            </a>
+            <a id="nav-payment" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="payment-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">payments</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Payment <span class="text-[11px] font-normal opacity-60 ml-1">(F5)</span></span>
+            </a>
+            <a id="nav-contra" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="contra-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">sync_alt</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Contra</span>
+            </a>
+            <a id="nav-journal" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="journal-voucher.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">menu_book</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Journal</span>
+            </a>
+            <a id="nav-credit" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="credit-note.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">assignment_return</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Credit Note</span>
+            </a>
+            <a id="nav-debit" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="debit-note.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">assignment_returned</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Debit Note</span>
+            </a>
+        </div>
+        <!-- Reports -->
+        <div class="mb-4">
+            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">REPORTS</p>
+            <a id="nav-reports" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="reports.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">assessment</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Reports Hub</span>
+            </a>
+        </div>
+        <!-- Admin -->
+        <div class="mb-4">
+            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">ADMIN</p>
+            <a id="nav-gst" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="gst-settings.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">settings</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">GST Settings</span>
+            </a>
+            <a id="nav-roles" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="user-roles.html">
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">admin_panel_settings</span>
+                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">User Roles</span>
+            </a>
+        </div>
+    </div>
+    <!-- Footer Actions -->
+    <div class="p-3 border-t border-outline-variant/50 dark:border-outline/50 mt-auto">
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="login.html">
+            <span class="material-symbols-outlined text-[20px] group-hover:text-error transition-colors">logout</span>
+            <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Sign Out</span>
+        </a>
+    </div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden relative h-screen">
+    <!-- TopNavBar -->
+    <header class="sticky top-0 w-full h-16 flex justify-between items-center px-margin-desktop z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant dark:border-outline shadow-sm transition-colors flex-shrink-0">
+        <!-- Left: Breadcrumb -->
+        <div class="flex items-center gap-6">
+            <div class="flex items-center space-x-2">
+                <span class="font-body-md text-body-md text-on-surface-variant dark:text-outline">Transactions</span>
+                <span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
+                <span class="font-body-md text-body-md font-semibold text-primary dark:text-primary-fixed-dim">Payment Voucher</span>
+                <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-surface-container-high dark:bg-inverse-surface text-on-surface-variant dark:text-outline border border-outline-variant dark:border-outline/30">
+                    F5
+                </span>
+            </div>
+        </div>
+        <!-- Right Actions -->
+        <div class="flex items-center gap-3">
+            <!-- Search -->
+            <div class="hidden md:flex relative mr-4">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+                <input class="bg-surface-container dark:bg-inverse-surface border border-outline-variant dark:border-outline/30 rounded-full pl-9 pr-4 py-1.5 text-sm w-48 focus:w-64 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-on-surface dark:text-inverse-on-surface placeholder:text-outline-variant" placeholder="Search cmd+K" onclick="toggleCommandPalette()"/>
+            </div>
+            <!-- Theme Toggle -->
+            <button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-variant/50 dark:hover:bg-inverse-surface transition-colors" id="theme-toggle" title="Toggle Theme">
+                <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+            </button>
+            <!-- Notifications -->
+            <button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-variant/50 dark:hover:bg-inverse-surface transition-colors relative">
+                <span class="material-symbols-outlined">notifications</span>
+                <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface dark:border-[#0B0F19]"></span>
+            </button>
+            <!-- Company Selector -->
+            <button class="ml-2 flex items-center space-x-2 bg-surface-container-high dark:bg-inverse-surface border border-outline-variant dark:border-outline/30 px-3 py-1.5 rounded-lg hover:bg-surface-variant dark:hover:bg-inverse-surface/80 transition-colors" onclick="window.location.href='company-select.html'">
+                <span id="activeCompanyHeader" class="font-title-sm text-title-sm text-on-surface dark:text-inverse-on-surface whitespace-nowrap">Vardhaman Distributors</span>
+                <span class="material-symbols-outlined text-outline">expand_more</span>
+            </button>
+
+            <!-- Profile Dropdown -->
+            <div class="relative ml-2" id="profileDropdownContainer">
+                <button id="profileMenuBtn" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant dark:border-gray-700 hover:border-primary transition-colors shadow-sm bg-primary/10 text-primary dark:text-indigo-300 font-bold flex items-center justify-center text-sm focus:outline-none" onclick="toggleProfileDropdown(event)">
+                    <span id="profileAvatarText">U</span>
+                    <img id="profileAvatarImg" class="hidden w-full h-full object-cover" src="" alt="Profile"/>
+                </button>
+                <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-56 rounded-xl border border-outline-variant/60 dark:border-gray-800 bg-white/95 dark:bg-[#1d152f]/95 backdrop-blur-md shadow-2xl p-1.5 z-[150] transform origin-top-right transition-all">
+                    <div class="px-3 py-2 border-b border-outline-variant/30 dark:border-gray-800/40 mb-1">
+                        <p id="dropdownUserName" class="text-sm font-semibold text-gray-900 dark:text-white">User</p>
+                        <p id="dropdownUserEmail" class="text-xs text-gray-500 truncate dark:text-gray-400">user@example.com</p>
+                    </div>
+                    <a href="index.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">home</span>
+                        <span>Home (Dashboard)</span>
+                    </a>
+                    <button onclick="openSettingsModal(event)" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors text-left">
+                        <span class="material-symbols-outlined text-[18px]">settings</span>
+                        <span>Settings</span>
+                    </button>
+                    <a href="company-select.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">business</span>
+                        <span>Change Company</span>
+                    </a>
+                    <button onclick="toggleThemeGlobal(event)" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors text-left">
+                        <span class="material-symbols-outlined text-[18px] dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-[18px] hidden dark:block">light_mode</span>
+                        <span class="dark:hidden">Switch to Dark Mode</span>
+                        <span class="hidden dark:block">Switch to Light Mode</span>
+                    </button>
+                    <div class="h-px bg-outline-variant/30 dark:bg-gray-850 my-1"></div>
+                    <a href="login.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-red-600 dark:text-red-400 hover:bg-red-500/10 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">logout</span>
+                        <span>Sign Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flex-1 overflow-y-auto p-6 max-w-container-max mx-auto w-full relative custom-scrollbar flex flex-col space-y-6">
+        <!-- Page Header -->
+        <div class="flex justify-between items-end shrink-0">
+            <div>
+                <h2 class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface">Payment Voucher</h2>
+                <p class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline mt-1">Record outgoing expenses and vendor payments.</p>
+            </div>
+            <div class="flex gap-2">
+                <span class="px-3 py-1 rounded bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 text-xs font-semibold uppercase flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-600 dark:bg-red-400 animate-pulse"></span>
+                    Active Payment Session
+                </span>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-6 items-start">
+            <!-- Left Form Area (2/3) -->
+            <div class="w-full lg:w-2/3 flex flex-col gap-6">
+                <!-- Voucher Properties -->
+                <div class="bg-surface dark:bg-surface-dim border border-outline-variant dark:border-outline/20 rounded-xl p-5 shadow-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="space-y-1">
+                            <label class="block text-xs font-semibold text-on-surface-variant dark:text-outline">Payment Voucher No.</label>
+                            <input class="block w-full px-3 py-2 bg-surface-container dark:bg-inverse-surface border border-outline-variant/60 rounded-lg text-on-surface font-data-mono text-sm" readonly type="text" value="PM-26-0914"/>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block text-xs font-semibold text-on-surface-variant dark:text-outline">Payment Date</label>
+                            <input class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-outline-variant/60 rounded-lg text-on-surface font-body-sm text-sm focus:ring-1 focus:ring-primary" type="date" value="2026-06-21"/>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block text-xs font-semibold text-on-surface-variant dark:text-outline">Payment Mode (Cash/Bank)</label>
+                            <select id="paymentAccount" class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-outline-variant/60 rounded-lg text-on-surface font-body-sm text-sm focus:ring-1 focus:ring-primary" onchange="calculateTotals()">
+                                <option value="HDFC Bank Current Account">HDFC Bank A/c</option>
+                                <option value="Cash-in-Hand">Cash-in-Hand</option>
+                                <option value="Petty Cash">Petty Cash</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ledger Accounts Allocation Table -->
+                <div class="bg-surface dark:bg-surface-dim border border-outline-variant dark:border-outline/20 rounded-xl shadow-sm overflow-hidden">
+                    <div class="p-4 border-b border-outline-variant/30 bg-surface-container-low dark:bg-inverse-surface/40 flex justify-between items-center">
+                        <h3 class="font-title-sm text-sm font-bold text-on-surface dark:text-inverse-on-surface">Paid To (Debit Ledger)</h3>
+                        <span class="text-outline text-xs">Specify ledger destination and values</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse" id="paymentTable">
+                            <thead>
+                                <tr class="font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/30 bg-surface-container/50">
+                                    <th class="p-3 w-12 text-center">S.NO</th>
+                                    <th class="p-3">LEDGER ACCOUNT / SUPPLIER</th>
+                                    <th class="p-3 text-right w-44">AMOUNT PAID (₹)</th>
+                                    <th class="p-3 w-48">NARRATION / REFERENCE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="font-body-sm text-body-sm divide-y divide-outline-variant/20">
+                                <tr class="item-row">
+                                    <td class="p-3 text-center text-on-surface-variant dark:text-outline font-data-mono">1</td>
+                                    <td class="p-3">
+                                        <select class="party-select block w-full bg-transparent border-none text-on-surface dark:text-inverse-on-surface focus:ring-0 p-0" onchange="calculateTotals()">
+                                            <option value="Vardhaman Wholesalers">Vardhaman Wholesalers (Supplier)</option>
+                                            <option value="TechCorp Solutions">TechCorp Solutions (Supplier)</option>
+                                            <option value="Global Industries Ltd.">Global Industries Ltd. (Supplier)</option>
+                                        </select>
+                                    </td>
+                                    <td class="p-3 text-right">
+                                        <input class="amount-val w-full bg-transparent border-none text-right font-data-mono focus:ring-0 p-0 text-on-surface dark:text-inverse-on-surface font-semibold" onchange="calculateTotals()" type="number" value="82000"/>
+                                    </td>
+                                    <td class="p-3">
+                                        <input class="w-full bg-transparent border-none focus:ring-0 p-0 text-on-surface-variant dark:text-outline font-body-sm placeholder:text-outline-variant" placeholder="Against Ref PU-24-0012" type="text" value="Against Invoice PU-24-0012"/>
+                                    </td>
+                                </tr>
+                                <tr class="item-row">
+                                    <td class="p-3 text-center text-on-surface-variant dark:text-outline font-data-mono">2</td>
+                                    <td class="p-3">
+                                        <select class="party-select block w-full bg-transparent border-none text-on-surface dark:text-inverse-on-surface focus:ring-0 p-0" onchange="calculateTotals()">
+                                            <option value="Office Rent Expenses">Office Rent Expenses</option>
+                                            <option value="Vardhaman Wholesalers">Vardhaman Wholesalers (Supplier)</option>
+                                            <option value="Electricity Charges">Electricity Charges</option>
+                                        </select>
+                                    </td>
+                                    <td class="p-3 text-right">
+                                        <input class="amount-val w-full bg-transparent border-none text-right font-data-mono focus:ring-0 p-0 text-on-surface dark:text-inverse-on-surface font-semibold" onchange="calculateTotals()" type="number" value="25000"/>
+                                    </td>
+                                    <td class="p-3">
+                                        <input class="w-full bg-transparent border-none focus:ring-0 p-0 text-on-surface-variant dark:text-outline font-body-sm placeholder:text-outline-variant" placeholder="Office Rent Jun 2026" type="text" value="Office Rent Jun 2026"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="p-3 bg-surface-container-low dark:bg-inverse-surface/20 border-t border-outline-variant dark:border-outline/30 flex justify-between items-center">
+                        <button class="flex items-center gap-2 text-primary dark:text-primary-fixed-dim hover:text-primary font-body-sm font-medium transition-colors px-2 py-1 rounded hover:bg-primary/5" onclick="addNewRow()">
+                            <span class="material-symbols-outlined text-[18px]">add</span>
+                            Add Ledger Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column Summary (1/3) -->
+            <div class="w-full lg:w-1/3 flex flex-col gap-6">
+                <!-- Summary Card -->
+                <div class="bg-surface dark:bg-[#1E293B] border border-outline-variant rounded-xl p-6 flex flex-col gap-6 shadow-sm">
+                    <h3 class="font-title-sm text-title-sm text-on-surface dark:text-inverse-on-surface border-b border-outline-variant pb-3 flex justify-between items-center">
+                        Voucher Summary
+                        <span class="material-symbols-outlined text-on-surface-variant">receipt_long</span>
+                    </h3>
+                    
+                    <div class="space-y-4 font-data-mono text-data-mono tabular-nums">
+                        <div class="flex justify-between items-center text-body-md text-on-surface-variant dark:text-outline">
+                            <span>Payment Source</span>
+                            <span class="font-semibold text-on-surface dark:text-inverse-on-surface" id="summarySource">HDFC Bank A/c</span>
+                        </div>
+                        <div class="flex justify-between items-center text-body-md text-on-surface-variant dark:text-outline">
+                            <span>Total Ledgers</span>
+                            <span id="summaryLedgerCount">2 Ledger(s)</span>
+                        </div>
+                    </div>
+
+                    <!-- Grand Total Box -->
+                    <div class="bg-[#0B0F19]/10 dark:bg-[#0B0F19]/40 rounded-lg p-4 border border-outline-variant/60 flex flex-col items-end shadow-inner">
+                        <span class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline mb-1">Total Amount Paid</span>
+                        <span class="font-data-mono text-[28px] font-bold text-red-600 dark:text-red-400 tracking-tight" id="grandTotal">₹1,07,000.00</span>
+                    </div>
+
+                    <div class="flex flex-col gap-3 mt-4">
+                        <button class="w-full py-3 px-4 rounded-lg bg-primary hover:bg-primary/95 text-on-primary font-title-sm text-title-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2" onclick="saveAndPrint()">
+                            <span class="material-symbols-outlined text-[20px]">print</span>
+                            Save &amp; Print Payment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Settings & Profile Modal -->
+<div id="settingsModal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4">
+    <div class="absolute inset-0 bg-[#0F172A]/30 dark:bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeSettingsModal()"></div>
+    <div class="relative w-full max-w-md bg-white dark:bg-[#131826] rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden transform transition-all scale-95 opacity-0 duration-300 flex flex-col">
+        <header class="p-5 border-b border-gray-200 dark:border-gray-800/40 flex justify-between items-center shrink-0">
+            <div>
+                <h3 class="font-title-sm text-base text-gray-900 dark:text-white font-bold">Profile &amp; Settings</h3>
+                <p class="font-body-sm text-xs text-gray-500 dark:text-gray-400">Update your user details and profile picture.</p>
+            </div>
+            <button class="text-gray-400 hover:text-gray-600 dark:hover:text-white p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="closeSettingsModal()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </header>
+        <div class="p-5 space-y-4">
+            <div class="flex items-center gap-4">
+                <div class="relative w-16 h-16 rounded-full overflow-hidden border border-gray-200 dark:border-gray-800 bg-primary/10 text-primary dark:text-indigo-300 font-bold flex items-center justify-center text-2xl" id="settingsAvatarContainer">
+                    <span id="settingsAvatarText">U</span>
+                    <img id="settingsAvatarImg" class="hidden w-full h-full object-cover" src="" alt="Profile"/>
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300">Profile Photo</label>
+                    <div class="flex gap-2">
+                        <label class="px-3 py-1.5 bg-primary/10 hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30 text-primary dark:text-indigo-300 rounded-lg text-xs font-semibold cursor-pointer transition-colors">
+                            <span>Upload New</span>
+                            <input type="file" id="avatarFileInput" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)"/>
+                        </label>
+                        <button class="px-3 py-1.5 border border-gray-200 dark:border-gray-800 hover:bg-red-55 dark:hover:bg-red-900/10 text-red-600 dark:text-red-400 rounded-lg text-xs font-semibold transition-colors" onclick="removeAvatar()">
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-gray-250 dark:border-gray-850"/>
+            <div class="space-y-3">
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsNameInput">Full Name</label>
+                    <input class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-gray-303 dark:border-gray-850 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:outline-none transition-shadow" id="settingsNameInput" type="text" placeholder="Your Name"/>
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsEmailInput">Email Address</label>
+                    <input class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-gray-303 dark:border-gray-850 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:outline-none transition-shadow" id="settingsEmailInput" type="email" placeholder="email@example.com"/>
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsPhoneInput">Phone Number</label>
+                    <input class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-gray-303 dark:border-gray-850 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:outline-none transition-shadow" id="settingsPhoneInput" type="text" placeholder="+91 98765 43210"/>
+                </div>
+            </div>
+        </div>
+        <footer class="p-5 border-t border-gray-200 dark:border-gray-850 bg-gray-50 dark:bg-[#0B0F19]/40 flex justify-end gap-3 rounded-b-2xl">
+            <button class="px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg text-gray-600 dark:text-gray-400 text-xs font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="closeSettingsModal()">Cancel</button>
+            <button class="px-4 py-2 bg-primary hover:bg-primary/95 text-on-primary rounded-lg text-xs font-semibold transition-all shadow-md" onclick="saveSettings()">Save Changes</button>
+        </footer>
+    </div>
+</div>
+
+<!-- Supabase SDK & Config -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeBtn = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlEl.classList.add('dark');
+        } else {
+            htmlEl.classList.remove('dark');
+        }
+
+        themeBtn.addEventListener('click', () => {
+            htmlEl.classList.toggle('dark');
+            localStorage.theme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
+        });
+
+        // Set Company Header
+        const activeComp = localStorage.getItem('activeCompany') || 'Vardhaman Distributors Pvt. Ltd.';
+        const activeCompFY = localStorage.getItem('activeCompanyFY') || 'FY 26-27';
+        document.getElementById('activeCompanyHeader').textContent = `${activeComp.split(' ')[0]} ${activeComp.includes('Distributors') ? 'Distributors' : ''} (${activeCompFY})`;
+
+        initProfileSystem();
+        calculateTotals();
+    });
+
+    function calculateTotals() {
+        const rows = document.querySelectorAll('#paymentTable tbody tr.item-row');
+        let total = 0;
+        rows.forEach(r => {
+            const input = r.querySelector('.amount-val');
+            if (input) {
+                total += parseFloat(input.value) || 0;
+            }
+        });
+
+        document.getElementById('grandTotal').textContent = '₹' + total.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('summaryLedgerCount').textContent = `${rows.length} Ledger(s)`;
+        
+        const dest = document.getElementById('paymentAccount').value;
+        document.getElementById('summarySource').textContent = dest.includes('Bank') ? 'Bank Account' : 'Cash Box';
+    }
+
+    function addNewRow() {
+        const tbody = document.querySelector('#paymentTable tbody');
+        const currentCount = tbody.querySelectorAll('tr.item-row').length;
+        const newRow = document.createElement('tr');
+        newRow.className = "item-row";
+        newRow.innerHTML = `
+            <td class="p-3 text-center text-on-surface-variant dark:text-outline font-data-mono">${currentCount + 1}</td>
+            <td class="p-3">
+                <select class="party-select block w-full bg-transparent border-none text-on-surface dark:text-inverse-on-surface focus:ring-0 p-0" onchange="calculateTotals()">
+                    <option value="Electricity Charges">Electricity Charges</option>
+                    <option value="Office Rent Expenses">Office Rent Expenses</option>
+                    <option value="Vardhaman Wholesalers">Vardhaman Wholesalers (Supplier)</option>
+                </select>
+            </td>
+            <td class="p-3 text-right">
+                <input class="amount-val w-full bg-transparent border-none text-right font-data-mono focus:ring-0 p-0 text-on-surface dark:text-inverse-on-surface font-semibold" onchange="calculateTotals()" type="number" value="0"/>
+            </td>
+            <td class="p-3">
+                <input class="w-full bg-transparent border-none focus:ring-0 p-0 text-on-surface-variant dark:text-outline font-body-sm placeholder:text-outline-variant" placeholder="Enter reference details..." type="text"/>
+            </td>
+        `;
+        tbody.appendChild(newRow);
+        calculateTotals();
+    }
+
+    async function saveAndPrint() {
+        const partySelect = document.querySelector('.party-select');
+        const partyName = partySelect ? partySelect.value : "Vardhaman Wholesalers";
+        const voucherNo = "PV-24-0091";
+        const totalText = document.getElementById('grandTotal').textContent;
+        const amount = parseFloat(totalText.replace(/[^\d.-]/g, '')) || 0;
+        
+        const voucherData = {
+            company_id: 1,
+            voucher_no: voucherNo,
+            date: new Date().toISOString().split('T')[0],
+            type: "Payment",
+            party_name: partyName,
+            amount: amount,
+            status: "Cleared",
+            details: {
+                destination: document.getElementById('summaryDestination').textContent,
+                ledgerCount: document.getElementById('summaryLedgerCount').textContent,
+                account: document.getElementById('paymentAccount').value
+            }
+        };
+
+        if (supabaseClient) {
+            const saved = await dbCreateVoucher(voucherData);
+            if (saved) {
+                showToast("Payment Voucher saved to Supabase successfully!");
+            } else {
+                showToast("Failed to save Payment Voucher to database.");
+            }
+        } else {
+            showToast("Offline mode: Voucher saved locally!");
+        }
+
+        setTimeout(() => {
+            window.print();
+        }, 1000);
+    }
+
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = "fixed bottom-6 right-6 z-[100] bg-primary text-on-primary font-body-sm text-sm px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 transition-all duration-300 transform translate-y-20 opacity-0";
+        toast.innerHTML = `<span class="material-symbols-outlined text-[20px]">info</span><span>${message}</span>`;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.classList.remove('translate-y-20', 'opacity-0');
+        }, 10);
+        setTimeout(() => {
+            toast.classList.add('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // Keyboard bindings (Alt+A, ESC, F-Keys)
+    document.addEventListener('keydown', (e) => {
+        if (e.altKey && e.key.toLowerCase() === 'a') {
+            e.preventDefault();
+            addNewRow();
+        }
+        if (e.key === 'Escape') {
+            const setModal = document.getElementById('settingsModal');
+            if (setModal && !setModal.classList.contains('hidden')) {
+                closeSettingsModal();
+            }
+        }
+        if (e.key === 'F2') {
+            e.preventDefault();
+            window.location.href = 'inventory.html';
+        }
+        if (e.key === 'F4') {
+            e.preventDefault();
+            window.location.href = 'ledger.html';
+        }
+        if (e.key === 'F8') {
+            e.preventDefault();
+            window.location.href = 'sales-voucher.html';
+        }
+        if (e.key === 'F9') {
+            e.preventDefault();
+            window.location.href = 'purchase-voucher.html';
+        }
+        if (e.key === 'F10') {
+            e.preventDefault();
+            window.location.href = 'reports.html';
+        }
+        if (e.key === 'F5') {
+            e.preventDefault();
+            // Already here
+        }
+        if (e.key === 'F6') {
+            e.preventDefault();
+            window.location.href = 'receipt-voucher.html';
+        }
+    });
+
+    // Profile Dropdown logic
+    function initProfileSystem() {
+        if (!localStorage.getItem('userName')) localStorage.setItem('userName', 'User');
+        if (!localStorage.getItem('userEmail')) localStorage.setItem('userEmail', 'user@example.com');
+        if (!localStorage.getItem('userPhone')) localStorage.setItem('userPhone', '');
+        if (!localStorage.getItem('userAvatar')) localStorage.setItem('userAvatar', '');
+
+        syncProfileUI();
+
+        document.addEventListener('click', (e) => {
+            const container = document.getElementById('profileDropdownContainer');
+            const dropdown = document.getElementById('profileDropdown');
+            if (container && dropdown && !container.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    }
+
+    function syncProfileUI() {
+        const name = localStorage.getItem('userName') || 'User';
+        const email = localStorage.getItem('userEmail') || 'user@example.com';
+        const avatar = localStorage.getItem('userAvatar') || '';
+        const initial = name.charAt(0).toUpperCase();
+
+        const avatarText = document.getElementById('profileAvatarText');
+        const avatarImg = document.getElementById('profileAvatarImg');
+        if (avatarText && avatarImg) {
+            if (avatar) {
+                avatarText.classList.add('hidden');
+                avatarImg.src = avatar;
+                avatarImg.classList.remove('hidden');
+            } else {
+                avatarText.textContent = initial;
+                avatarText.classList.remove('hidden');
+                avatarImg.classList.add('hidden');
+            }
+        }
+
+        const dropdownName = document.getElementById('dropdownUserName');
+        const dropdownEmail = document.getElementById('dropdownUserEmail');
+        if (dropdownName) dropdownName.textContent = name;
+        if (dropdownEmail) dropdownEmail.textContent = email;
+    }
+
+    function toggleProfileDropdown(e) {
+        e.stopPropagation();
+        const dropdown = document.getElementById('profileDropdown');
+        if (dropdown) {
+            dropdown.classList.toggle('hidden');
+        }
+    }
+
+    function openSettingsModal(e) {
+        if (e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('profileDropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+        }
+
+        const modal = document.getElementById('settingsModal');
+        document.getElementById('settingsNameInput').value = localStorage.getItem('userName') || 'User';
+        document.getElementById('settingsEmailInput').value = localStorage.getItem('userEmail') || 'user@example.com';
+        document.getElementById('settingsPhoneInput').value = localStorage.getItem('userPhone') || '';
+
+        const name = localStorage.getItem('userName') || 'User';
+        const avatar = localStorage.getItem('userAvatar') || '';
+        const initial = name.charAt(0).toUpperCase();
+        const setAvText = document.getElementById('settingsAvatarText');
+        const setAvImg = document.getElementById('settingsAvatarImg');
+        
+        if (avatar) {
+            setAvText.classList.add('hidden');
+            setAvImg.src = avatar;
+            setAvImg.classList.remove('hidden');
+        } else {
+            setAvText.textContent = initial;
+            setAvText.classList.remove('hidden');
+            setAvImg.classList.add('hidden');
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => {
+            modal.querySelector('.relative').classList.remove('scale-95', 'opacity-0');
+            modal.querySelector('.relative').classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+
+    // Modal Close
+    function closeSettingsModal() {
+        const modal = document.getElementById('settingsModal');
+        const content = modal.querySelector('.relative');
+        content.classList.remove('scale-100', 'opacity-100');
+        content.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }, 300);
+    }
+
+    function handleAvatarUpload(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            const base64 = evt.target.result;
+            const setAvText = document.getElementById('settingsAvatarText');
+            const setAvImg = document.getElementById('settingsAvatarImg');
+            setAvText.classList.add('hidden');
+            setAvImg.src = base64;
+            setAvImg.classList.remove('hidden');
+            
+            window.tempAvatar = base64;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function removeAvatar() {
+        const setAvText = document.getElementById('settingsAvatarText');
+        const setAvImg = document.getElementById('settingsAvatarImg');
+        const nameInput = document.getElementById('settingsNameInput').value || 'User';
+        
+        setAvText.textContent = nameInput.charAt(0).toUpperCase();
+        setAvText.classList.remove('hidden');
+        setAvImg.classList.add('hidden');
+        
+        window.tempAvatar = 'REMOVE';
+    }
+
+    function saveSettings() {
+        const name = document.getElementById('settingsNameInput').value.trim();
+        const email = document.getElementById('settingsEmailInput').value.trim();
+        const phone = document.getElementById('settingsPhoneInput').value.trim();
+
+        if (!name) {
+            alert("Name is required!");
+            return;
+        }
+
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userPhone', phone);
+
+        if (window.tempAvatar === 'REMOVE') {
+            localStorage.setItem('userAvatar', '');
+        } else if (window.tempAvatar) {
+            localStorage.setItem('userAvatar', window.tempAvatar);
+        }
+        window.tempAvatar = null;
+
+        syncProfileUI();
+        closeSettingsModal();
+        window.location.reload();
+    }
+
+    function toggleThemeGlobal(e) {
+        if (e) e.stopPropagation();
+        const html = document.documentElement;
+        const isDark = html.classList.toggle('dark');
+        localStorage.theme = isDark ? 'dark' : 'light';
+        window.location.reload();
+    }
+</script>
+</body>
+</html>
