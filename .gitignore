@@ -12,3 +12,7 @@ Thumbs.db
 *.ntvs*
 *.njsproj
 *.sln
+
+# Word Temp Files
+SmartERP_Project_Documentation_files/
+

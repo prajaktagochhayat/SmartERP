@@ -165,11 +165,11 @@ async function dbCreateVoucher(voucher) {
 // ==========================================================
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Sidebar Active State Synchronization
-    const activePath = window.location.pathname.split('/').pop() || 'index.html';
+    const activePath = window.location.pathname.split('/').pop() || 'dashboard.html';
     const linkMap = {
         'ledger.html': 'nav-ledgers',
         'inventory.html': 'nav-inventory',
-        'index.html': 'nav-dashboard',
+        'dashboard.html': 'nav-dashboard',
         'sales-voucher.html': 'nav-sales',
         'purchase-voucher.html': 'nav-purchase',
         'receipt-voucher.html': 'nav-receipt',

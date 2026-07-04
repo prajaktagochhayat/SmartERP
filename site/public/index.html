@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html class="light" lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -10,359 +10,135 @@
             document.documentElement.classList.remove('dark');
         }
     </script>
-    <title>Gateway of SmartERP</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-    <!-- Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <!-- Tailwind Config -->
-    <script id="tailwind-config">
+    <title>Welcome to SmartERP</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;650&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    
+    <script>
         tailwind.config = {
-            darkMode: "class",
+            darkMode: 'class',
             theme: {
                 extend: {
-                    "colors": {
-                        "on-tertiary": "#ffffff",
-                        "surface-container": "#eaedff",
-                        "on-primary": "#ffffff",
-                        "error": "#ba1a1a",
-                        "outline-variant": "#c7c4d8",
-                        "surface-tint": "#4d44e3",
-                        "on-primary-fixed": "#0f0069",
-                        "error-container": "#ffdad6",
-                        "background": "#faf8ff",
-                        "secondary": "#9AE1E2",
-                        "tertiary": "#F6C667",
-                        "primary": "#CA3074",
-                        "on-background": "#131b2e",
-                        "secondary-fixed-dim": "#5ed9d7",
-                        "surface-variant": "#dae2fd",
-                        "surface-dim": "#f0edf5",
-                        "on-error-container": "#93000a",
-                        "inverse-primary": "#c3c0ff",
-                        "on-secondary-fixed-variant": "#00504f",
-                        "surface-container-highest": "#dae2fd",
-                        "inverse-on-surface": "#eef0ff",
-                        "on-secondary": "#ffffff",
-                        "secondary-container": "#7df5f4",
-                        "on-secondary-container": "#007070",
-                        "on-surface": "#131b2e",
-                        "on-primary-container": "#dad7ff",
-                        "surface-container-lowest": "#ffffff",
-                        "on-tertiary-container": "#ffd2be",
-                        "inverse-surface": "#283044",
-                        "primary-fixed": "#e2dfff",
-                        "on-primary-fixed-variant": "#3323cc",
-                        "surface-container-high": "#e2e7ff",
-                        "outline": "#777587",
-                        "primary-fixed-dim": "#c3c0ff",
-                        "surface-container-low": "#f2f3ff",
-                        "surface": "#faf8ff",
-                        "surface-bright": "#faf8ff",
-                        "tertiary": "#7e3000",
-                        "secondary-fixed": "#7df5f4",
-                        "on-surface-variant": "#464555",
-                        "on-secondary-fixed": "#002020",
-                        "tertiary-fixed": "#ffdbcc",
-                        "on-error": "#ffffff",
-                        "tertiary-fixed-dim": "#ffb695",
-                        "primary-container": "#4f46e5",
-                        "on-tertiary-fixed-variant": "#7b2f00"
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
                     },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "margin-mobile": "16px",
-                        "gutter": "24px",
-                        "margin-desktop": "32px",
-                        "scale-base": "4px",
-                        "container-max": "1440px",
-                        "sidebar-width": "280px"
-                    },
-                    "fontFamily": {
-                        "label-caps": ["Plus Jakarta Sans"],
-                        "body-sm": ["Plus Jakarta Sans"],
-                        "title-sm": ["Plus Jakarta Sans"],
-                        "body-md": ["Plus Jakarta Sans"],
-                        "headline-md": ["Plus Jakarta Sans"],
-                        "display-lg-mobile": ["Plus Jakarta Sans"],
-                        "display-lg": ["Plus Jakarta Sans"],
-                        "data-mono": ["JetBrains Mono"]
-                    },
-                    "fontSize": {
-                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
-                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
-                        "title-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
-                        "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "data-mono": ["14px", { "lineHeight": "20px", "fontWeight": "500" }]
+                    colors: {
+                        primary: '#CA3074',
+                        secondary: '#9AE1E2',
+                        tertiary: '#F6C667',
+                        darkBg: '#120c1f',
+                        darkSurface: '#1d152f'
                     }
                 }
             }
         }
     </script>
     <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        /* Smooth transitions */
+        .fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        .material-symbols-outlined.fill {
-            font-variation-settings: 'FILL' 1;
+        .slide-up {
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        
-        /* Smooth scrolling and basic resets */
-        html { scroll-behavior: smooth; }
-        body { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
-        
-        /* Hide scrollbar for clean UI but keep functionality */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
 
-        /* Custom Scrollbar Styles */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(0, 0, 0, 0.15);
-            border-radius: 9999px;
-        }
-        html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 0, 0, 0.3);
-        }
-        html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Custom Chart Animation */
-        @keyframes drawLine {
-            from { stroke-dashoffset: 1000; }
-            to { stroke-dashoffset: 0; }
+        /* Animated Mesh Background */
+        .mesh-bg {
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(202, 48, 116, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(154, 225, 226, 0.1) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(202, 48, 116, 0.08) 0px, transparent 50%);
         }
-        .chart-line {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: drawLine 2s ease-out forwards;
+        html.dark .mesh-bg {
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(202, 48, 116, 0.18) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(154, 225, 226, 0.12) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(202, 48, 116, 0.1) 0px, transparent 50%);
         }
 
-        /* Custom Premium Dark Palette Overrides (9AE1E2, 332851, CA3074, F6C667) */
-        html.dark body, html.dark .bg-background, html.dark .bg-surface-container-lowest {
-            background-color: #120c1f !important;
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
         }
-        html.dark .bg-surface {
-            background-color: #1d152f !important;
+        html.dark .glass-card {
+            background: rgba(29, 21, 47, 0.75);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(154, 225, 226, 0.1);
         }
-        html.dark .bg-surface-container-low {
-            background-color: #181128 !important;
+
+        /* CSS animations for orbs */
+        .animate-orb {
+            animation: float 20s infinite alternate ease-in-out;
         }
-        html.dark .bg-surface-container {
-            background-color: #251c3a !important;
-        }
-        html.dark .bg-surface-container-high {
-            background-color: #2d2247 !important;
-        }
-        html.dark .bg-surface-variant {
-            background-color: #251c3a !important;
-        }
-        html.dark nav, html.dark aside {
-            background-color: #120c1f !important;
-        }
-        html.dark header {
-            background-color: rgba(18, 12, 31, 0.8) !important;
-        }
-        html.dark .border-outline-variant {
-            border-color: rgba(154, 225, 226, 0.1) !important;
-        }
-        html.dark .text-on-surface {
-            color: #F8FAFC !important;
-        }
-        html.dark .text-on-surface-variant {
-            color: #d1cbdc !important;
-        }
-        html.dark .text-outline {
-            color: rgba(154, 225, 226, 0.4) !important;
-        }
-        html.dark th {
-            color: #9AE1E2 !important;
-        }
-        html.dark .bg-\[1E293B\]\/70, html.dark .dark\:bg-\[\#1E293B\]\/70 {
-            background-color: rgba(37, 28, 58, 0.7) !important;
-        }
-        html.dark .dark\:bg-\[\#1E293B\] {
-            background-color: #251c3a !important;
-        }
-        html.dark .dark\:bg-\[\#0B0F19\]\/80 {
-            background-color: rgba(18, 12, 31, 0.8) !important;
-        }
-        html.dark .dark\:bg-\[\#0B0F19\] {
-            background-color: #120c1f !important;
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -60px) scale(1.1); }
+            100% { transform: translate(-20px, 30px) scale(0.9); }
         }
     </style>
 </head>
-<body class="bg-background text-on-background transition-colors duration-300 font-body-md text-body-md overflow-hidden flex h-screen">
-<!-- SIDEBAR -->
-<nav class="bg-surface dark:bg-[#131826] border-r border-outline-variant dark:border-outline shadow-sm flex flex-col h-screen sticky top-0 transition-all duration-300 ease-in-out w-[280px] z-50 flex-shrink-0" id="sidebar">
-    <!-- Brand Header -->
-    <div class="h-16 flex items-center px-6 border-b border-outline-variant/50 dark:border-outline/50">
-        <a href="home.html" class="flex items-center gap-3 group cursor-pointer">
-            <div class="w-8 h-8 rounded bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-on-primary shadow-sm group-hover:scale-105 transition-transform">
-                <span class="material-symbols-outlined fill text-[20px]">dataset</span>
+<body class="bg-gray-50 dark:bg-darkBg text-gray-800 dark:text-gray-200 font-sans transition-colors duration-300 antialiased min-h-screen relative flex flex-col justify-between overflow-x-hidden mesh-bg">
+
+    <!-- Glowing Background Orbs -->
+    <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px] pointer-events-none animate-orb"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-secondary/8 blur-[130px] pointer-events-none animate-orb" style="animation-delay: -5s;"></div>
+
+    <!-- Header / Navigation Bar -->
+    <header class="w-full h-16 flex items-center justify-between px-6 lg:px-12 border-b border-gray-200/50 dark:border-gray-800/40 relative z-30">
+        <a href="index.html" class="flex items-center gap-3 cursor-pointer group">
+            <div class="w-9 h-9 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-white text-[20px] font-bold">layers</span>
             </div>
-            <div class="sidebar-text flex flex-col overflow-hidden transition-all duration-300">
-                <span class="font-display-lg text-display-lg font-bold text-primary dark:text-surface-tint text-[18px] leading-tight tracking-tight whitespace-nowrap group-hover:text-primary transition-colors">SmartERP</span>
-                <span class="font-label-caps text-label-caps text-on-surface-variant whitespace-nowrap">GATEWAY</span>
+            <div>
+                <h1 class="text-lg font-bold text-gray-900 dark:text-white tracking-tight flex items-center gap-1.5 group-hover:text-primary transition-colors">
+                    SmartERP <span class="text-[10px] font-semibold bg-primary/10 dark:bg-primary/20 text-primary dark:text-indigo-300 px-2 py-0.5 rounded-full">v1.2</span>
+                </h1>
             </div>
         </a>
-        <button class="ml-auto text-on-surface-variant hover:text-primary transition-colors p-1 rounded-md hover:bg-surface-variant/50" id="sidebarToggle">
-            <span class="material-symbols-outlined text-[20px]">menu_open</span>
-        </button>
-    </div>
-    <!-- Navigation Tabs -->
-    <div class="flex-1 overflow-y-auto custom-scrollbar py-4 px-3 flex flex-col gap-1">
-        <!-- Masters -->
-        <div class="mb-4">
-            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">MASTERS</p>
-            <a id="nav-ledgers" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="ledger.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">database</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Ledgers</span>
-            </a>
-            <a id="nav-inventory" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="inventory.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">inventory_2</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Stock Items</span>
-            </a>
-        </div>
-        <!-- Transactions -->
-        <div class="mb-4">
-            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">TRANSACTIONS</p>
-            <a id="nav-dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="index.html">
-                <span class="material-symbols-outlined text-[20px]">dashboard</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Dashboard</span>
-            </a>
-            <a id="nav-sales" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="sales-voucher.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">receipt_long</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Sales <span class="text-[11px] font-normal opacity-60 ml-1">(F8)</span></span>
-            </a>
-            <a id="nav-purchase" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="purchase-voucher.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">shopping_cart</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Purchase <span class="text-[11px] font-normal opacity-60 ml-1">(F9)</span></span>
-            </a>
-            <a id="nav-receipt" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="receipt-voucher.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">account_balance_wallet</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Receipt <span class="text-[11px] font-normal opacity-60 ml-1">(F6)</span></span>
-            </a>
-            <a id="nav-payment" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="payment-voucher.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">payments</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Payment <span class="text-[11px] font-normal opacity-60 ml-1">(F5)</span></span>
-            </a>
-            <a id="nav-contra" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="contra-voucher.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">sync_alt</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Contra</span>
-            </a>
-            <a id="nav-journal" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="journal-voucher.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">menu_book</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Journal</span>
-            </a>
-            <a id="nav-credit" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="credit-note.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">assignment_return</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Credit Note</span>
-            </a>
-            <a id="nav-debit" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="debit-note.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">assignment_returned</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Debit Note</span>
-            </a>
-        </div>
-        <!-- Reports -->
-        <div class="mb-4">
-            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">REPORTS</p>
-            <a id="nav-reports" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="reports.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">assessment</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Reports Hub</span>
-            </a>
-        </div>
-        <!-- Admin -->
-        <div class="mb-4">
-            <p class="font-label-caps text-label-caps text-outline px-3 mb-2 sidebar-text transition-opacity duration-300">ADMIN</p>
-            <a id="nav-gst" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="gst-settings.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">settings</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">GST Settings</span>
-            </a>
-            <a id="nav-roles" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 transition-all duration-200 group" href="user-roles.html">
-                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">admin_panel_settings</span>
-                <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">User Roles</span>
-            </a>
-        </div>
-    </div>
-    <!-- Footer Actions -->
-    <div class="p-3 border-t border-outline-variant/50 dark:border-outline/50 mt-auto">
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="login.html">
-            <span class="material-symbols-outlined text-[20px] group-hover:text-error transition-colors">logout</span>
-            <span class="font-body-sm text-body-sm sidebar-text whitespace-nowrap">Sign Out</span>
-        </a>
-    </div>
-</nav>
-<!-- MAIN CONTENT AREA -->
-<div class="flex-1 flex flex-col h-screen overflow-hidden bg-surface-container-lowest dark:bg-[#0B0F19]">
-    <!-- TOP NAV BAR -->
-    <header class="sticky top-0 w-full h-16 flex justify-between items-center px-margin-desktop z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant dark:border-outline shadow-sm transition-colors flex-shrink-0">
-        <!-- Left: Breadcrumb -->
-        <div class="flex items-center gap-6">
-            <div class="flex items-center space-x-2">
-                <span class="font-body-md text-body-md text-on-surface-variant dark:text-outline">Gateway of SmartERP</span>
-                <span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
-                <span class="font-body-md text-body-md font-semibold text-primary dark:text-primary-fixed-dim">Dashboard</span>
-            </div>
-        </div>
-        <!-- Right Actions -->
-        <div class="flex items-center gap-3">
-            <!-- Search -->
-            <div class="hidden md:flex relative mr-4">
-                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
-                <input class="bg-surface-container dark:bg-inverse-surface border border-outline-variant dark:border-outline/30 rounded-full pl-9 pr-4 py-1.5 text-sm w-48 focus:w-64 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-on-surface dark:text-inverse-on-surface placeholder:text-outline-variant" placeholder="Search cmd+K" onclick="toggleCommandPalette()"/>
-            </div>
+
+        <div class="flex items-center gap-4">
             <!-- Theme Toggle -->
-            <button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-variant/50 dark:hover:bg-inverse-surface transition-colors" id="theme-toggle" title="Toggle Theme">
+            <button class="p-2 rounded-xl text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white hover:bg-gray-200/40 dark:hover:bg-gray-800/40 transition-colors" id="theme-toggle" title="Toggle Theme">
                 <span class="material-symbols-outlined dark:hidden">dark_mode</span>
                 <span class="material-symbols-outlined hidden dark:block">light_mode</span>
             </button>
-            <!-- Notifications -->
-            <button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-variant/50 dark:hover:bg-inverse-surface transition-colors relative">
-                <span class="material-symbols-outlined">notifications</span>
-                <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface dark:border-[#0B0F19]"></span>
-            </button>
-            <!-- Company Selector -->
-            <button class="ml-2 flex items-center space-x-2 bg-surface-container-high dark:bg-inverse-surface border border-outline-variant dark:border-outline/30 px-3 py-1.5 rounded-lg hover:bg-surface-variant dark:hover:bg-inverse-surface/80 transition-colors" onclick="window.location.href='company-select.html'">
-                <span id="activeCompanyHeader" class="font-title-sm text-title-sm text-on-surface dark:text-inverse-on-surface whitespace-nowrap">Vardhaman Distributors</span>
-                <span class="material-symbols-outlined text-outline">expand_more</span>
-            </button>
+
+            <!-- Company Selector Quick link -->
+            <a href="company-select.html" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-200/40 dark:hover:bg-gray-800/40 transition-colors">
+                <span class="material-symbols-outlined text-[16px]">business</span>
+                <span id="activeCompanyBadge">Vardhaman Distributors</span>
+            </a>
 
             <!-- Profile Dropdown -->
-            <div class="relative ml-2" id="profileDropdownContainer">
-                <button id="profileMenuBtn" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant dark:border-gray-700 hover:border-primary transition-colors shadow-sm bg-primary/10 text-primary dark:text-indigo-300 font-bold flex items-center justify-center text-sm focus:outline-none" onclick="toggleProfileDropdown(event)">
+            <div class="relative" id="profileDropdownContainer">
+                <button id="profileMenuBtn" class="w-9 h-9 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700 hover:border-primary transition-colors shadow-sm bg-primary/10 text-primary dark:text-indigo-300 font-bold flex items-center justify-center text-sm focus:outline-none" onclick="toggleProfileDropdown(event)">
                     <span id="profileAvatarText">U</span>
                     <img id="profileAvatarImg" class="hidden w-full h-full object-cover" src="" alt="Profile"/>
                 </button>
-                <!-- Dropdown Menu -->
-                <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-56 rounded-xl border border-outline-variant/60 dark:border-gray-800 bg-white/95 dark:bg-[#131826]/95 backdrop-blur-md shadow-2xl p-1.5 z-[150] transform origin-top-right transition-all">
-                    <div class="px-3 py-2 border-b border-outline-variant/30 dark:border-gray-800/40 mb-1">
+                <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-56 rounded-xl border border-gray-200/60 dark:border-gray-800 bg-white/95 dark:bg-[#1d152f]/95 backdrop-blur-md shadow-2xl p-1.5 z-[150] transform origin-top-right transition-all">
+                    <div class="px-3 py-2 border-b border-gray-200/30 dark:border-gray-800/40 mb-1">
                         <p id="dropdownUserName" class="text-sm font-semibold text-gray-900 dark:text-white">User</p>
                         <p id="dropdownUserEmail" class="text-xs text-gray-500 truncate dark:text-gray-400">user@example.com</p>
                     </div>
-                    <a href="index.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors">
+                    <a href="dashboard.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors">
                         <span class="material-symbols-outlined text-[18px]">home</span>
                         <span>Home (Dashboard)</span>
                     </a>
@@ -380,7 +156,7 @@
                         <span class="dark:hidden">Switch to Dark Mode</span>
                         <span class="hidden dark:block">Switch to Light Mode</span>
                     </button>
-                    <div class="h-px bg-outline-variant/30 dark:bg-gray-805/40 my-1"></div>
+                    <div class="h-px bg-gray-200/50 dark:bg-gray-800/40 my-1"></div>
                     <a href="login.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-red-600 dark:text-red-400 hover:bg-red-500/10 transition-colors">
                         <span class="material-symbols-outlined text-[18px]">logout</span>
                         <span>Sign Out</span>
@@ -389,802 +165,409 @@
             </div>
         </div>
     </header>
-    <!-- SCROLLABLE DASHBOARD CANVAS -->
-    <main class="flex-1 overflow-y-auto p-gutter custom-scrollbar">
-        <div class="max-w-container-max mx-auto space-y-gutter">
-            <!-- KPI STRIP -->
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                <!-- KPI 1: Sales -->
-                <div class="bg-surface border border-outline-variant/50 rounded-xl p-4 shadow-sm hover:-translate-y-1 transition-transform duration-200 flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="font-body-sm text-body-sm text-on-surface-variant">Total Sales</span>
-                        <div class="p-1.5 rounded-lg bg-surface-container">
-                            <span class="material-symbols-outlined text-[18px] text-primary">trending_up</span>
-                        </div>
-                    </div>
-                    <div class="flex items-baseline gap-2">
-                        <span class="font-data-mono text-data-mono text-[24px] font-bold text-on-surface">₹24,50,000</span>
-                    </div>
-                    <div class="mt-2 flex items-center gap-1 text-[12px] font-medium text-secondary">
-                        <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
-                        <span>8.4% vs last month</span>
-                    </div>
-                </div>
-                <!-- KPI 2: Purchases -->
-                <div class="bg-surface border border-outline-variant/50 rounded-xl p-4 shadow-sm hover:-translate-y-1 transition-transform duration-200 flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="font-body-sm text-body-sm text-on-surface-variant">Total Purchases</span>
-                        <div class="p-1.5 rounded-lg bg-surface-container">
-                            <span class="material-symbols-outlined text-[18px] text-on-surface-variant">shopping_bag</span>
-                        </div>
-                    </div>
-                    <div class="flex items-baseline gap-2">
-                        <span class="font-data-mono text-data-mono text-[24px] font-bold text-on-surface">₹18,20,000</span>
-                    </div>
-                    <div class="mt-2 flex items-center gap-1 text-[12px] text-on-surface-variant">
-                        <span>Invoiced MTD</span>
-                    </div>
-                </div>
-                <!-- KPI 3: Receivables -->
-                <div class="bg-surface border border-outline-variant/50 rounded-xl p-4 shadow-sm hover:-translate-y-1 transition-transform duration-200 flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="font-body-sm text-body-sm text-on-surface-variant">Receivables</span>
-                        <div class="p-1.5 rounded-lg bg-surface-container">
-                            <span class="material-symbols-outlined text-[18px] text-on-surface-variant">account_balance_wallet</span>
-                        </div>
-                    </div>
-                    <div class="flex items-baseline gap-2">
-                        <span class="font-data-mono text-data-mono text-[24px] font-bold text-on-surface">₹3,40,000</span>
-                    </div>
-                    <div class="mt-2 flex items-center gap-1 text-[12px] text-on-surface-variant">
-                        <span>42 Invoices Pending</span>
-                    </div>
-                </div>
-                <!-- KPI 4: Payables -->
-                <div class="bg-surface border border-outline-variant/50 rounded-xl p-4 shadow-sm hover:-translate-y-1 transition-transform duration-200 flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="font-body-sm text-body-sm text-on-surface-variant">Payables</span>
-                        <div class="p-1.5 rounded-lg bg-surface-container">
-                            <span class="material-symbols-outlined text-[18px] text-on-surface-variant">credit_card</span>
-                        </div>
-                    </div>
-                    <div class="flex items-baseline gap-2">
-                        <span class="font-data-mono text-data-mono text-[24px] font-bold text-on-surface">₹1,80,000</span>
-                    </div>
-                    <div class="mt-2 flex items-center gap-1 text-[12px] text-on-surface-variant">
-                        <span>15 Bills Overdue</span>
-                    </div>
-                </div>
-                <!-- KPI 5: Stock Value (Highlighted) -->
-                <div class="bg-gradient-to-br from-secondary/10 to-transparent border border-secondary/30 rounded-xl p-4 shadow-sm hover:-translate-y-1 transition-transform duration-200 flex flex-col justify-between relative overflow-hidden group">
-                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary/10 rounded-full blur-xl group-hover:bg-secondary/20 transition-all"></div>
-                    <div class="flex justify-between items-start mb-2 relative z-10">
-                        <span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Closing Stock Value</span>
-                        <div class="p-1.5 rounded-lg bg-secondary/20 text-secondary">
-                            <span class="material-symbols-outlined text-[18px]">inventory_2</span>
-                        </div>
-                    </div>
-                    <div class="flex items-baseline gap-2 relative z-10">
-                        <span class="font-data-mono text-data-mono text-[24px] font-bold text-secondary">₹12,40,000</span>
-                    </div>
-                    <div class="mt-2 flex items-center gap-1 text-[12px] text-secondary relative z-10">
-                        <span class="material-symbols-outlined text-[14px]">info</span>
-                        <span>As per average cost</span>
-                    </div>
-                </div>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col items-center justify-center p-6 relative z-10 max-w-5xl mx-auto w-full">
+        <!-- Hero Section -->
+        <div class="text-center space-y-4 max-w-2xl slide-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-semibold uppercase tracking-wider mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+                <span>Active Financial Workspace</span>
             </div>
-            <!-- MAIN BENTO GRID -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
-                <!-- Left: Transactions Table (Spans 2 cols) -->
-                <div class="lg:col-span-2 bg-surface border border-outline-variant/50 rounded-xl shadow-sm flex flex-col overflow-hidden">
-                    <div class="p-5 border-b border-outline-variant/30 flex justify-between items-center bg-surface/50">
-                        <div>
-                            <h2 class="font-title-sm text-title-sm text-on-surface">Recent Transactions</h2>
-                            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 text-[13px]">Latest entries across sales and receipts</p>
-                        </div>
-                        <button onclick="window.location.href='reports.html'" class="px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary-container/50 rounded-md transition-colors flex items-center gap-1">
-                            View All Register <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                        </button>
-                    </div>
-                    <div class="overflow-x-auto flex-1 p-2">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/30">
-                                    <th class="p-3 font-medium">DATE / VCH</th>
-                                    <th class="p-3 font-medium">PARTICULARS</th>
-                                    <th class="p-3 font-medium">TYPE</th>
-                                    <th class="p-3 font-medium text-right">AMOUNT (₹)</th>
-                                    <th class="p-3 font-medium text-center">STATUS</th>
-                                    <th class="p-3 w-10"></th>
-                                </tr>
-                            </thead>
-                            <tbody id="recentTransactionsTableBody" class="font-body-sm text-body-sm divide-y divide-outline-variant/20">
-                                <tr class="hover:bg-surface-variant/30 transition-colors group cursor-pointer">
-                                    <td class="p-3">
-                                        <div class="font-data-mono text-data-mono text-[13px] text-on-surface">24 Oct</div>
-                                        <div class="text-[12px] text-on-surface-variant mt-0.5">SL-24-1042</div>
-                                    </td>
-                                    <td class="p-3 font-medium text-on-surface">TechCorp Solutions</td>
-                                    <td class="p-3">
-                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant text-[12px]">
-                                            <span class="material-symbols-outlined text-[14px]">receipt_long</span> Sales
-                                        </span>
-                                    </td>
-                                    <td class="p-3 font-data-mono text-data-mono text-right text-on-surface font-semibold">1,25,000.00</td>
-                                    <td class="p-3 text-center">
-                                        <span class="inline-flex px-2 py-1 rounded-full text-[11px] font-semibold bg-[#e6f4ea] text-[#137333] dark:bg-[#137333]/20 dark:text-[#81c995]">Paid</span>
-                                    </td>
-                                    <td class="p-3 text-right relative">
-                                        <button onclick="toggleTransactionMenu(event, 'SL-24-1042')" class="opacity-100 lg:opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-primary transition-all"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-surface-variant/30 transition-colors group cursor-pointer">
-                                    <td class="p-3">
-                                        <div class="font-data-mono text-data-mono text-[13px] text-on-surface">23 Oct</div>
-                                        <div class="text-[12px] text-on-surface-variant mt-0.5">SL-24-1041</div>
-                                    </td>
-                                    <td class="p-3 font-medium text-on-surface">Global Industries Ltd.</td>
-                                    <td class="p-3">
-                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant text-[12px]">
-                                            <span class="material-symbols-outlined text-[14px]">receipt_long</span> Sales
-                                        </span>
-                                    </td>
-                                    <td class="p-3 font-data-mono text-data-mono text-right text-on-surface font-semibold">84,500.00</td>
-                                    <td class="p-3 text-center">
-                                        <span class="inline-flex px-2 py-1 rounded-full text-[11px] font-semibold bg-[#fef7e0] text-[#b06000] dark:bg-[#b06000]/20 dark:text-[#fde293]">Pending</span>
-                                    </td>
-                                    <td class="p-3 text-right relative">
-                                        <button onclick="toggleTransactionMenu(event, 'SL-24-1041')" class="opacity-100 lg:opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-primary transition-all"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-surface-variant/30 transition-colors group cursor-pointer">
-                                    <td class="p-3">
-                                        <div class="font-data-mono text-data-mono text-[13px] text-on-surface">21 Oct</div>
-                                        <div class="text-[12px] text-on-surface-variant mt-0.5">SL-24-1038</div>
-                                    </td>
-                                    <td class="p-3 font-medium text-on-surface">Apex Electronics</td>
-                                    <td class="p-3">
-                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant text-[12px]">
-                                            <span class="material-symbols-outlined text-[14px]">receipt_long</span> Sales
-                                        </span>
-                                    </td>
-                                    <td class="p-3 font-data-mono text-data-mono text-right text-on-surface font-semibold">2,10,000.00</td>
-                                    <td class="p-3 text-center">
-                                        <span class="inline-flex px-2 py-1 rounded-full text-[11px] font-semibold bg-[#fce8e6] text-[#c5221f] dark:bg-[#c5221f]/20 dark:text-[#f28b82]">Overdue</span>
-                                    </td>
-                                    <td class="p-3 text-right relative">
-                                        <button onclick="toggleTransactionMenu(event, 'SL-24-1038')" class="opacity-100 lg:opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-primary transition-all"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-surface-variant/30 transition-colors group cursor-pointer">
-                                    <td class="p-3">
-                                        <div class="font-data-mono text-data-mono text-[13px] text-on-surface">20 Oct</div>
-                                        <div class="text-[12px] text-on-surface-variant mt-0.5">RC-24-0512</div>
-                                    </td>
-                                    <td class="p-3 font-medium text-on-surface">Zenith Traders</td>
-                                    <td class="p-3">
-                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant text-[12px]">
-                                            <span class="material-symbols-outlined text-[14px]">account_balance_wallet</span> Receipt
-                                        </span>
-                                    </td>
-                                    <td class="p-3 font-data-mono text-data-mono text-right text-on-surface font-semibold">45,000.00</td>
-                                    <td class="p-3 text-center">
-                                        <span class="inline-flex px-2 py-1 rounded-full text-[11px] font-semibold bg-[#e6f4ea] text-[#137333] dark:bg-[#137333]/20 dark:text-[#81c995]">Cleared</span>
-                                    </td>
-                                    <td class="p-3 text-right relative">
-                                        <button onclick="toggleTransactionMenu(event, 'RC-24-0512')" class="opacity-100 lg:opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-primary transition-all"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- Right Column: Actions & Alerts -->
-                <div class="flex flex-col gap-gutter">
-                    <!-- Quick Actions Panel -->
-                    <div class="bg-surface border border-outline-variant/50 rounded-xl p-5 shadow-sm">
-                        <h3 class="font-title-sm text-title-sm text-on-surface mb-4">Quick Actions</h3>
-                        <div class="grid grid-cols-2 gap-3">
-                            <a href="sales-voucher.html" class="flex flex-col items-center justify-center p-4 rounded-xl border border-outline-variant/50 hover:bg-primary hover:border-primary hover:text-on-primary text-on-surface-variant transition-all duration-200 group">
-                                <span class="material-symbols-outlined text-[24px] mb-2 group-hover:scale-110 transition-transform">receipt_long</span>
-                                <span class="font-body-sm text-[13px] font-medium text-center leading-tight">Create<br/>Invoice (F8)</span>
-                            </a>
-                            <a href="ledger.html?action=new" class="flex flex-col items-center justify-center p-4 rounded-xl border border-outline-variant/50 hover:bg-surface-variant hover:border-primary/50 text-on-surface-variant hover:text-primary transition-all duration-200 group">
-                                <span class="material-symbols-outlined text-[24px] mb-2 group-hover:scale-110 transition-transform">person_add</span>
-                                <span class="font-body-sm text-[13px] font-medium text-center leading-tight">Add<br/>Ledger</span>
-                            </a>
-                            <a href="inventory.html?action=new" class="flex flex-col items-center justify-center p-4 rounded-xl border border-outline-variant/50 hover:bg-surface-variant hover:border-primary/50 text-on-surface-variant hover:text-primary transition-all duration-200 group">
-                                <span class="material-symbols-outlined text-[24px] mb-2 group-hover:scale-110 transition-transform">category</span>
-                                <span class="font-body-sm text-[13px] font-medium text-center leading-tight">New<br/>Stock Item</span>
-                            </a>
-                            <a href="purchase-voucher.html" class="flex flex-col items-center justify-center p-4 rounded-xl border border-outline-variant/50 hover:bg-surface-variant hover:border-primary/50 text-on-surface-variant hover:text-primary transition-all duration-200 group">
-                                <span class="material-symbols-outlined text-[24px] mb-2 group-hover:scale-110 transition-transform">shopping_cart</span>
-                                <span class="font-body-sm text-[13px] font-medium text-center leading-tight">Record<br/>Purchase (F9)</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Low Stock Alerts -->
-                    <div class="bg-surface border border-[#fef7e0] dark:border-[#b06000]/30 rounded-xl p-5 shadow-sm flex-1 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-1 h-full bg-[#fbbc04]"></div>
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="material-symbols-outlined text-[#f9ab00] text-[20px]">warning</span>
-                            <h3 class="font-title-sm text-title-sm text-on-surface">Low Stock Alert</h3>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center p-2.5 rounded-lg bg-surface-container-lowest hover:bg-surface-variant/30 border border-outline-variant/20 transition-colors">
-                                <div class="flex flex-col">
-                                    <span class="font-body-sm text-[13px] font-medium text-on-surface">Asus ROG Motherboard</span>
-                                    <span class="font-body-sm text-[11px] text-on-surface-variant">Cat: Electronics</span>
-                                </div>
-                                <div class="text-right flex flex-col items-end">
-                                    <span class="font-data-mono text-data-mono text-[13px] font-bold text-error">2 pcs</span>
-                                    <span class="font-body-sm text-[11px] text-on-surface-variant">Min: 10</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center p-2.5 rounded-lg bg-surface-container-lowest hover:bg-surface-variant/30 border border-outline-variant/20 transition-colors">
-                                <div class="flex flex-col">
-                                    <span class="font-body-sm text-[13px] font-medium text-on-surface">Samsung 1TB NVMe SSD</span>
-                                    <span class="font-body-sm text-[11px] text-on-surface-variant">Cat: Storage</span>
-                                </div>
-                                <div class="text-right flex flex-col items-end">
-                                    <span class="font-data-mono text-data-mono text-[13px] font-bold text-error">5 pcs</span>
-                                    <span class="font-body-sm text-[11px] text-on-surface-variant">Min: 15</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center p-2.5 rounded-lg bg-surface-container-lowest hover:bg-surface-variant/30 border border-outline-variant/20 transition-colors">
-                                <div class="flex flex-col">
-                                    <span class="font-body-sm text-[13px] font-medium text-on-surface">Corsair 16GB RAM DDR5</span>
-                                    <span class="font-body-sm text-[11px] text-on-surface-variant">Cat: Memory</span>
-                                </div>
-                                <div class="text-right flex flex-col items-end">
-                                    <span class="font-data-mono text-data-mono text-[13px] font-bold text-error">8 pcs</span>
-                                    <span class="font-body-sm text-[11px] text-on-surface-variant">Min: 20</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
+                Your Enterprise. <br class="sm:hidden"/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-400">Perfected in Real-Time.</span>
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed">
+                Welcome to SmartERP—a cloud-based, modern Tally-inspired billing, inventory, and accounting manager. Streamlined workflows and instant reports at your fingertips.
+            </p>
+        </div>
+
+        <!-- Thought of the Day -->
+        <div class="w-full max-w-lg mt-6 glass-card rounded-2xl p-4 shadow-xl shadow-gray-200/10 slide-up delay-1 flex items-start gap-3.5">
+            <span class="material-symbols-outlined text-primary text-[28px]">format_quote</span>
+            <div>
+                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-widest font-semibold">Good Thought</p>
+                <p class="text-sm italic font-medium text-gray-700 dark:text-gray-300 mt-1" id="dailyQuote">
+                    "Precision in books builds absolute trust in business. Effortless billing drives endless opportunities."
+                </p>
             </div>
-            <!-- Bottom Section: Sales Trend Chart (CSS/SVG) -->
-            <div class="bg-surface border border-outline-variant/50 rounded-xl p-5 shadow-sm h-72 flex flex-col">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="font-title-sm text-title-sm text-on-surface">Sales vs Purchase Trend (Last 7 Days)</h2>
-                    <select class="bg-surface-container border-none text-sm rounded-md py-1 pl-3 pr-8 focus:ring-1 focus:ring-primary text-on-surface-variant">
-                        <option>This Week</option>
-                        <option>This Month</option>
-                    </select>
+        </div>
+
+        <!-- Primary Navigation Console -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full mt-10 slide-up delay-2">
+            <!-- Go to active company dashboard -->
+            <button onclick="goToActiveDashboard()" class="glass-card hover:bg-white dark:hover:bg-[#1C2436] rounded-2xl p-6 text-left shadow-lg border border-gray-200 dark:border-gray-800/30 transition-all hover:-translate-y-1 hover:shadow-2xl group flex flex-col justify-between h-48">
+                <div class="w-11 h-11 bg-primary/10 dark:bg-primary/20 text-primary dark:text-indigo-400 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl">dashboard</span>
                 </div>
-                <div class="flex-1 relative w-full mt-4">
-                    <!-- Simple SVG Chart Representation -->
-                    <svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 200">
-                        <!-- Grid lines -->
-                        <line stroke="currentColor" stroke-dasharray="4" stroke-opacity="0.1" x1="0" x2="1000" y1="50" y2="50"></line>
-                        <line stroke="currentColor" stroke-dasharray="4" stroke-opacity="0.1" x1="0" x2="1000" y1="100" y2="100"></line>
-                        <line stroke="currentColor" stroke-dasharray="4" stroke-opacity="0.1" x1="0" x2="1000" y1="150" y2="150"></line>
-                        <line stroke="currentColor" stroke-opacity="0.3" x1="0" x2="1000" y1="200" y2="200"></line>
-                        <!-- Sales Line (Primary) -->
-                        <path class="text-primary" d="M 0,150 C 150,120 250,180 400,100 C 550,20 700,90 850,40 L 1000,60" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4"></path>
-                        <!-- Area under Sales -->
-                        <path d="M 0,150 C 150,120 250,180 400,100 C 550,20 700,90 850,40 L 1000,60 L 1000,200 L 0,200 Z" fill="url(#salesGrad)" opacity="0.2"></path>
-                        <!-- Purchase Line (Secondary/Teal) -->
-                        <path class="text-secondary" d="M 0,180 C 200,160 300,140 500,150 C 700,160 800,120 1000,130" fill="none" stroke="currentColor" stroke-dasharray="8,4" stroke-linecap="round" stroke-width="3"></path>
-                        <defs>
-                            <lineargradient id="salesGrad" x1="0" x2="0" y1="0" y2="1">
-                                <stop offset="0%" stop-color="#3525cd" stop-opacity="1"></stop>
-                                <stop offset="100%" stop-color="#3525cd" stop-opacity="0"></stop>
-                            </lineargradient>
-                        </defs>
-                    </svg>
-                    <!-- X Axis Labels -->
-                    <div class="absolute bottom-[-24px] left-0 w-full flex justify-between text-[11px] text-on-surface-variant font-data-mono">
-                        <span>Mon</span>
-                        <span>Tue</span>
-                        <span>Wed</span>
-                        <span>Thu</span>
-                        <span>Fri</span>
-                        <span>Sat</span>
-                        <span>Sun</span>
-                    </div>
+                <div>
+                    <h3 class="text-base font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors flex items-center gap-1">
+                        Active Dashboard <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Open the gateway dashboard for <span id="dashCompanyName" class="font-semibold text-gray-700 dark:text-gray-300">Vardhaman Distributors</span>.</p>
                 </div>
-            </div>
+            </button>
+
+            <!-- Select / Switch Company -->
+            <a href="company-select.html" class="glass-card hover:bg-white dark:hover:bg-[#1C2436] rounded-2xl p-6 text-left shadow-lg border border-gray-200 dark:border-gray-800/30 transition-all hover:-translate-y-1 hover:shadow-2xl group flex flex-col justify-between h-48">
+                <div class="w-11 h-11 bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-500 dark:text-emerald-400 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl">business</span>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-gray-900 dark:text-white group-hover:text-emerald-500 transition-colors flex items-center gap-1">
+                        Change Company <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Select from listed company profiles, or manage branches and financial years.</p>
+                </div>
+            </a>
+
+            <!-- Create New Company (Redirect to selector with form open) -->
+            <a href="company-select.html?action=create" class="glass-card hover:bg-white dark:hover:bg-[#1C2436] rounded-2xl p-6 text-left shadow-lg border border-gray-200 dark:border-gray-800/30 transition-all hover:-translate-y-1 hover:shadow-2xl group flex flex-col justify-between h-48">
+                <div class="w-11 h-11 bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-500 dark:text-indigo-400 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl">add_business</span>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-gray-900 dark:text-white group-hover:text-indigo-500 transition-colors flex items-center gap-1">
+                        Create Company <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Register a new business branch, input GSTIN details, and set financial period.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Search Bar for Companies -->
+        <div class="w-full max-w-lg mt-8 relative slide-up delay-3">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+            <input id="quickCompanySearch" type="text" placeholder="Quick find active company by name or GSTIN..." class="w-full pl-12 pr-4 py-3 bg-white/60 dark:bg-darkSurface/60 backdrop-blur-md border border-gray-200 dark:border-gray-800/60 rounded-2xl text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-all shadow-inner text-gray-900 dark:text-white" onkeyup="searchCompaniesDirect(event)"/>
+            <div id="searchResultsList" class="hidden absolute left-0 right-0 mt-2 bg-white dark:bg-darkSurface border border-gray-200 dark:border-gray-800 rounded-xl shadow-2xl z-40 max-h-48 overflow-y-auto p-1.5"></div>
         </div>
     </main>
-</div>
-<!-- COMMAND PALETTE MODAL (Hidden by default) -->
-<div class="fixed inset-0 z-[100] hidden items-start justify-center pt-[153px]" id="commandPalette">
-    <!-- Frosted Backdrop -->
-    <div class="absolute inset-0 bg-on-background/20 dark:bg-black/40 backdrop-blur-sm transition-opacity" onclick="toggleCommandPalette()"></div>
-    <!-- Modal Content -->
-    <div class="relative w-full max-w-2xl bg-surface/95 dark:bg-surface-dim/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-outline-variant/50 dark:border-outline overflow-hidden flex flex-col transform transition-all scale-95 opacity-0" id="commandModalInner">
-        <!-- Search Input -->
-        <div class="flex items-center px-4 py-4 border-b border-outline-variant/30">
-            <span class="material-symbols-outlined text-[24px] text-on-surface-variant mr-3">search</span>
-            <input autofocus="" class="flex-1 bg-transparent border-none outline-none font-title-sm text-title-sm text-on-surface placeholder:text-on-surface-variant/50 focus:ring-0 p-0" placeholder="Search Ledgers, Vouchers, or type a command..." type="text"/>
-            <kbd class="font-data-mono text-data-mono text-[10px] px-2 py-1 rounded bg-surface-variant text-on-surface-variant ml-3 border border-outline-variant/30">ESC</kbd>
-        </div>
-        <!-- Results Area -->
-        <div class="max-h-[614px] overflow-y-auto p-2 no-scrollbar">
-            <div class="px-3 py-2">
-                <p class="font-label-caps text-label-caps text-on-surface-variant mb-2 pl-2">SUGGESTED ACTIONS</p>
-                <a href="sales-voucher.html" class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-primary-container hover:text-on-primary-container text-on-surface transition-colors group">
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-on-primary-container">receipt_long</span>
-                        <span class="font-body-md text-body-md">Create Sales Voucher</span>
-                    </div>
-                    <span class="font-data-mono text-[11px] text-on-surface-variant group-hover:text-on-primary-container/70 border border-outline-variant/30 group-hover:border-on-primary-container/30 rounded px-1.5 py-0.5">F8</span>
-                </a>
-                <a href="purchase-voucher.html" class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-surface-variant text-on-surface transition-colors group mt-1">
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-[20px] text-on-surface-variant">shopping_cart</span>
-                        <span class="font-body-md text-body-md">Create Purchase Voucher</span>
-                    </div>
-                    <span class="font-data-mono text-[11px] text-on-surface-variant border border-outline-variant/30 rounded px-1.5 py-0.5">F9</span>
-                </a>
-                <a href="ledger.html" class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-surface-variant text-on-surface transition-colors group mt-1">
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-[20px] text-on-surface-variant">person_add</span>
-                        <span class="font-body-md text-body-md">Create New Ledger</span>
-                    </div>
-                    <span class="font-data-mono text-[11px] text-on-surface-variant border border-outline-variant/30 rounded px-1.5 py-0.5">Alt+C</span>
-                </a>
-            </div>
-            <div class="px-3 py-2 border-t border-outline-variant/20">
-                <p class="font-label-caps text-label-caps text-on-surface-variant mb-2 pl-2">RECENT ENTRIES</p>
-                <button class="w-full flex items-center p-3 rounded-lg hover:bg-surface-variant text-on-surface transition-colors group">
-                    <div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center mr-3">
-                        <span class="material-symbols-outlined text-[16px] text-on-surface-variant">receipt</span>
-                    </div>
-                    <div class="flex flex-col items-start flex-1">
-                        <span class="font-body-sm text-[14px] font-medium text-left">SL-24-1042 : TechCorp Solutions</span>
-                        <span class="font-data-mono text-[11px] text-on-surface-variant">Sales • ₹1,25,000.00</span>
-                    </div>
-                    <span class="material-symbols-outlined text-[18px] text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+
+    <!-- Footer -->
+    <footer class="w-full p-6 text-center text-xs text-gray-400 dark:text-gray-600 border-t border-gray-200/50 dark:border-gray-800/40 relative z-20">
+        <p>© 2026 SmartERP Accounting Systems. All rights reserved.</p>
+    </footer>
+
+    <!-- Settings & Profile Modal -->
+    <div id="settingsModal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-[#0F172A]/30 dark:bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeSettingsModal()"></div>
+        <!-- Modal Content -->
+        <div class="relative w-full max-w-md bg-white dark:bg-darkSurface rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-805 overflow-hidden transform transition-all scale-95 opacity-0 duration-300 flex flex-col">
+            <header class="p-5 border-b border-gray-200 dark:border-gray-800/40 flex justify-between items-center shrink-0">
+                <div>
+                    <h3 class="text-base text-gray-900 dark:text-white font-bold">Profile &amp; Settings</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Update user details and profile picture.</p>
+                </div>
+                <button class="text-gray-400 hover:text-gray-600 dark:hover:text-white p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="closeSettingsModal()">
+                    <span class="material-symbols-outlined">close</span>
                 </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Interactive Scripts -->
-<script>
-    // --- Active Company Check ---
-    document.addEventListener('DOMContentLoaded', () => {
-        const activeComp = localStorage.getItem('activeCompany') || 'Vardhaman Distributors Pvt. Ltd.';
-        const activeCompFY = localStorage.getItem('activeCompanyFY') || 'FY 26-27';
-        const headerEl = document.getElementById('activeCompanyHeader');
-        const avatarEl = document.getElementById('activeCompanyAvatar');
-        if (headerEl) {
-            headerEl.textContent = `${activeComp} (${activeCompFY})`;
-        }
-        if (avatarEl) {
-            const initials = activeComp.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
-            avatarEl.textContent = initials;
-        }
-        loadRecentVouchersFromDb();
-    });
-
-    async function loadRecentVouchersFromDb() {
-        if (supabaseClient) {
-            const dbVouchers = await dbFetchVouchers(1);
-            if (dbVouchers && dbVouchers.length > 0) {
-                const tbody = document.getElementById('recentTransactionsTableBody');
-                if (tbody) {
-                    tbody.innerHTML = '';
-                    dbVouchers.slice(0, 5).forEach(v => {
-                        const tr = document.createElement('tr');
-                        tr.className = "hover:bg-surface-variant/30 transition-colors group cursor-pointer";
-                        
-                        const dateObj = new Date(v.date);
-                        const formattedDate = dateObj.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' });
-                        
-                        let badgeBg = "bg-surface-container text-on-surface-variant";
-                        let statusText = v.status;
-                        if (v.status === 'Paid' || v.status === 'Cleared') {
-                            badgeBg = "bg-[#e6f4ea] text-[#137333] dark:bg-[#137333]/20 dark:text-[#81c995]";
-                        } else if (v.status === 'Pending') {
-                            badgeBg = "bg-[#fef7e0] text-[#b06000] dark:bg-[#b06000]/20 dark:text-[#fde293]";
-                        } else if (v.status === 'Overdue') {
-                            badgeBg = "bg-[#fce8e6] text-[#c5221f] dark:bg-[#c5221f]/20 dark:text-[#f28b82]";
-                        }
-
-                        tr.innerHTML = `
-                            <td class="p-3">
-                                <div class="font-data-mono text-data-mono text-[13px] text-on-surface">${formattedDate}</div>
-                                <div class="text-[12px] text-on-surface-variant mt-0.5">${v.voucher_no}</div>
-                            </td>
-                            <td class="p-3 font-medium text-on-surface">${v.party_name}</td>
-                            <td class="p-3">
-                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant text-[12px]">
-                                    <span class="material-symbols-outlined text-[14px]">${v.type === 'Sales' ? 'receipt_long' : v.type === 'Purchase' ? 'shopping_cart' : 'account_balance_wallet'}</span> ${v.type}
-                                </span>
-                            </td>
-                            <td class="p-3 font-data-mono text-data-mono text-right text-on-surface font-semibold">${v.amount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                            <td class="p-3 text-center">
-                                <span class="inline-flex px-2 py-1 rounded-full text-[11px] font-semibold ${badgeBg}">${statusText}</span>
-                            </td>
-                            <td class="p-3 text-right relative">
-                                <button onclick="toggleTransactionMenu(event, '${v.voucher_no}')" class="opacity-100 lg:opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-primary transition-all"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
-                            </td>
-                        `;
-                        tbody.appendChild(tr);
-                    });
-                }
-            }
-        }
-    }
-
-    // --- Theme Toggle Logic ---
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const htmlEl = document.documentElement;
-
-    themeToggleBtn.addEventListener('click', () => {
-        const isDark = htmlEl.classList.toggle('dark');
-        localStorage.theme = isDark ? 'dark' : 'light';
-    });
-
-    // --- Sidebar Toggle Logic ---
-    const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    let isSidebarCollapsed = false;
-
-    sidebarToggle.addEventListener('click', () => {
-        isSidebarCollapsed = !isSidebarCollapsed;
-        const texts = document.querySelectorAll('.sidebar-text');
-        
-        if (isSidebarCollapsed) {
-            sidebar.classList.replace('w-[280px]', 'w-[80px]');
-            texts.forEach(el => {
-                el.classList.add('opacity-0', 'w-0');
-                setTimeout(() => el.classList.add('hidden'), 300); // hide after fade
-            });
-            sidebarToggle.querySelector('span').textContent = 'menu';
-        } else {
-            sidebar.classList.replace('w-[80px]', 'w-[280px]');
-            texts.forEach(el => {
-                el.classList.remove('hidden');
-                setTimeout(() => el.classList.remove('opacity-0', 'w-0'), 10);
-            });
-            sidebarToggle.querySelector('span').textContent = 'menu_open';
-        }
-    });
-
-    // --- Command Palette Logic ---
-    const commandPalette = document.getElementById('commandPalette');
-
-    function showToast(message) {
-        const toast = document.createElement('div');
-        toast.className = "fixed bottom-6 right-6 z-[100] bg-[#006a69] text-white font-body-sm text-sm px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 transition-all duration-300 transform translate-y-20 opacity-0";
-        toast.innerHTML = `<span class="material-symbols-outlined text-[20px]">info</span><span>${message}</span>`;
-        document.body.appendChild(toast);
-        setTimeout(() => {
-            toast.classList.remove('translate-y-20', 'opacity-0');
-        }, 10);
-        setTimeout(() => {
-            toast.classList.add('translate-y-20', 'opacity-0');
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-            e.preventDefault();
-            toggleCommandPalette();
-        }
-        if (e.key === 'Escape') {
-            const cp = document.getElementById('commandPalette');
-            if (cp && cp.classList.contains('flex')) {
-                toggleCommandPalette();
-            }
-            const setModal = document.getElementById('settingsModal');
-            if (setModal && !setModal.classList.contains('hidden')) {
-                closeSettingsModal();
-            }
-        }
-        if (e.key === 'F2') {
-            e.preventDefault();
-            window.location.href = 'inventory.html';
-        }
-        if (e.key === 'F4') {
-            e.preventDefault();
-            window.location.href = 'ledger.html';
-        }
-        if (e.key === 'F8') {
-            e.preventDefault();
-            window.location.href = 'sales-voucher.html';
-        }
-        if (e.key === 'F9') {
-            e.preventDefault();
-            window.location.href = 'purchase-voucher.html';
-        }
-        if (e.key === 'F10') {
-            e.preventDefault();
-            window.location.href = 'reports.html';
-        }
-        if (e.key === 'F5') {
-            e.preventDefault();
-            window.location.href = 'payment-voucher.html';
-        }
-        if (e.key === 'F6') {
-            e.preventDefault();
-            window.location.href = 'receipt-voucher.html';
-        }
-    });
-
-    // Initialize Profile System on Load
-    document.addEventListener('DOMContentLoaded', () => {
-        initProfileSystem();
-    });
-</script>
-
-<!-- Settings & Profile Modal -->
-<div id="settingsModal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4">
-    <!-- Backdrop -->
-    <div class="absolute inset-0 bg-[#0F172A]/30 dark:bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeSettingsModal()"></div>
-    <!-- Modal Content -->
-    <div class="relative w-full max-w-md bg-white dark:bg-[#131826] rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden transform transition-all scale-95 opacity-0 duration-300 flex flex-col">
-        <header class="p-5 border-b border-gray-200 dark:border-gray-800/40 flex justify-between items-center shrink-0">
-            <div>
-                <h3 class="font-title-sm text-base text-gray-900 dark:text-white font-bold">Profile &amp; Settings</h3>
-                <p class="font-body-sm text-xs text-gray-500 dark:text-gray-400">Update your user details and profile picture.</p>
-            </div>
-            <button class="text-gray-400 hover:text-gray-600 dark:hover:text-white p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="closeSettingsModal()">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-        </header>
-        <div class="p-5 space-y-4">
-            <!-- Profile Photo Upload -->
-            <div class="flex items-center gap-4">
-                <div class="relative w-16 h-16 rounded-full overflow-hidden border border-gray-200 dark:border-gray-800 bg-primary/10 text-primary dark:text-indigo-300 font-bold flex items-center justify-center text-2xl" id="settingsAvatarContainer">
-                    <span id="settingsAvatarText">U</span>
-                    <img id="settingsAvatarImg" class="hidden w-full h-full object-cover" src="" alt="Profile"/>
+            </header>
+            <div class="p-5 space-y-4">
+                <div class="flex items-center gap-4">
+                    <div class="relative w-16 h-16 rounded-full overflow-hidden border border-gray-200 dark:border-gray-800 bg-primary/10 text-primary dark:text-indigo-300 font-bold flex items-center justify-center text-2xl" id="settingsAvatarContainer">
+                        <span id="settingsAvatarText">U</span>
+                        <img id="settingsAvatarImg" class="hidden w-full h-full object-cover" src="" alt="Profile"/>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300">Profile Photo</label>
+                        <div class="flex gap-2">
+                            <label class="px-3 py-1.5 bg-primary/10 hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30 text-primary dark:text-indigo-300 rounded-lg text-xs font-semibold cursor-pointer transition-colors">
+                                <span>Upload New</span>
+                                <input type="file" id="avatarFileInput" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)"/>
+                            </label>
+                            <button class="px-3 py-1.5 border border-gray-200 dark:border-gray-800 hover:bg-red-50 dark:hover:bg-red-900/10 text-red-600 dark:text-red-400 rounded-lg text-xs font-semibold transition-colors" onclick="removeAvatar()">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="space-y-1">
-                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300">Profile Photo</label>
-                    <div class="flex gap-2">
-                        <label class="px-3 py-1.5 bg-primary/10 hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30 text-primary dark:text-indigo-300 rounded-lg text-xs font-semibold cursor-pointer transition-colors">
-                            <span>Upload New</span>
-                            <input type="file" id="avatarFileInput" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)"/>
-                        </label>
-                        <button class="px-3 py-1.5 border border-gray-200 dark:border-gray-800 hover:bg-red-55 dark:hover:bg-red-900/10 text-red-600 dark:text-red-400 rounded-lg text-xs font-semibold transition-colors" onclick="removeAvatar()">
-                            Remove
-                        </button>
+                <hr class="border-gray-200 dark:border-gray-800/40"/>
+                <div class="space-y-3">
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsNameInput">Full Name</label>
+                        <input class="block w-full px-3 py-2 bg-white dark:bg-darkBg border border-gray-305 dark:border-gray-800 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsNameInput" type="text" placeholder="Your Name"/>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsEmailInput">Email Address</label>
+                        <input class="block w-full px-3 py-2 bg-white dark:bg-darkBg border border-gray-305 dark:border-gray-800 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsEmailInput" type="email" placeholder="email@example.com"/>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsPhoneInput">Phone Number</label>
+                        <input class="block w-full px-3 py-2 bg-white dark:bg-darkBg border border-gray-305 dark:border-gray-800 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsPhoneInput" type="text" placeholder="+91 98765 43210"/>
                     </div>
                 </div>
             </div>
-            <hr class="border-gray-250 dark:border-gray-850"/>
-            <!-- Fields -->
-            <div class="space-y-3">
-                <div class="space-y-1">
-                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsNameInput">Full Name</label>
-                    <input class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-gray-300 dark:border-gray-850 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsNameInput" type="text" placeholder="Your Name"/>
-                </div>
-                <div class="space-y-1">
-                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsEmailInput">Email Address</label>
-                    <input class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-gray-300 dark:border-gray-850 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsEmailInput" type="email" placeholder="email@example.com"/>
-                </div>
-                <div class="space-y-1">
-                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300" for="settingsPhoneInput">Phone Number</label>
-                    <input class="block w-full px-3 py-2 bg-white dark:bg-[#0B0F19] border border-gray-300 dark:border-gray-850 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-shadow" id="settingsPhoneInput" type="text" placeholder="+91 98765 43210"/>
-                </div>
-            </div>
+            <footer class="p-5 border-t border-gray-200 dark:border-gray-800/40 bg-gray-50 dark:bg-darkBg/40 flex justify-end gap-3 rounded-b-2xl">
+                <button class="px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg text-gray-600 dark:text-gray-400 text-xs font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="closeSettingsModal()">Cancel</button>
+                <button class="px-4 py-2 bg-primary hover:bg-primary/95 text-on-primary rounded-lg text-xs font-semibold transition-all shadow-md" onclick="saveSettings()">Save Changes</button>
+            </footer>
         </div>
-        <footer class="p-5 border-t border-gray-200 dark:border-gray-850 bg-gray-50 dark:bg-[#0B0F19]/40 flex justify-end gap-3 rounded-b-2xl">
-            <button class="px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg text-gray-600 dark:text-gray-400 text-xs font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="closeSettingsModal()">Cancel</button>
-            <button class="px-4 py-2 bg-primary hover:bg-primary/95 text-on-primary rounded-lg text-xs font-semibold transition-all shadow-md" onclick="saveSettings()">Save Changes</button>
-        </footer>
     </div>
-</div>
 
-<!-- Supabase SDK & Config -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js"></script>
+    <!-- JavaScript logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme initial setup
+            const themeBtn = document.getElementById('theme-toggle');
+            const htmlEl = document.documentElement;
 
-<!-- JavaScript logic for profile, drop down, and settings modal -->
-<script>
-    function initProfileSystem() {
-        if (!localStorage.getItem('userName')) localStorage.setItem('userName', 'User');
-        if (!localStorage.getItem('userEmail')) localStorage.setItem('userEmail', 'user@example.com');
-        if (!localStorage.getItem('userPhone')) localStorage.setItem('userPhone', '');
-        if (!localStorage.getItem('userAvatar')) localStorage.setItem('userAvatar', '');
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlEl.classList.add('dark');
+            } else {
+                htmlEl.classList.remove('dark');
+            }
 
-        syncProfileUI();
+            themeBtn.addEventListener('click', () => {
+                htmlEl.classList.toggle('dark');
+                localStorage.theme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
+            });
 
+            // Company details
+            const activeComp = localStorage.getItem('activeCompany') || 'Vardhaman Distributors Pvt. Ltd.';
+            document.getElementById('activeCompanyBadge').textContent = activeComp;
+            document.getElementById('dashCompanyName').textContent = activeComp;
+
+            initProfileSystem();
+            renderQuotes();
+        });
+
+        // Inspirational thoughts list
+        const quotes = [
+            "Precision in books builds absolute trust in business. Effortless billing drives endless opportunities.",
+            "Accounting is the language of business. Keep it clean, keep it truthful, and success will follow.",
+            "An enterprise built on data-dense clarity is resilient to any financial storm.",
+            "Honest books are the bedrock of strong credit, seamless partnerships, and compound growth.",
+            "Automate the compliance, calibrate the cash flows, and focus on expanding your market reach."
+        ];
+
+        function renderQuotes() {
+            const index = Math.floor(Math.random() * quotes.length);
+            const quoteEl = document.getElementById('dailyQuote');
+            if (quoteEl) quoteEl.textContent = `"${quotes[index]}"`;
+        }
+
+        function goToActiveDashboard() {
+            window.location.href = 'dashboard.html';
+        }
+
+        // Quick search mock logic
+        const mockCompanies = [
+            { name: "Vardhaman Distributors Pvt. Ltd.", gst: "27AADCT1234E1Z5" },
+            { name: "Vardhaman Retail Store", gst: "27AADCT1234E2Z6" },
+            { name: "Vardhaman Logistics", gst: "27AADCT1234E3Z7" }
+        ];
+
+        function searchCompaniesDirect(e) {
+            const query = e.target.value.toLowerCase();
+            const resultsList = document.getElementById('searchResultsList');
+            if (!query) {
+                resultsList.classList.add('hidden');
+                return;
+            }
+
+            const filtered = mockCompanies.filter(c => c.name.toLowerCase().includes(query) || c.gst.toLowerCase().includes(query));
+            if (filtered.length === 0) {
+                resultsList.innerHTML = `<div class="p-2 text-xs text-gray-500">No companies found</div>`;
+            } else {
+                resultsList.innerHTML = filtered.map(c => `
+                    <button onclick="selectQuickCompany('${c.name}')" class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 text-left transition-colors text-xs font-semibold text-gray-700 dark:text-gray-200">
+                        <span>${c.name}</span>
+                        <span class="font-mono text-[10px] text-gray-400">${c.gst}</span>
+                    </button>
+                `).join('');
+            }
+            resultsList.classList.remove('hidden');
+        }
+
+        function selectQuickCompany(compName) {
+            localStorage.setItem('activeCompany', compName);
+            localStorage.setItem('activeCompanyFY', 'FY 26-27');
+            window.location.href = 'dashboard.html';
+        }
+
+        // Close search list on outside click
         document.addEventListener('click', (e) => {
-            const container = document.getElementById('profileDropdownContainer');
-            const dropdown = document.getElementById('profileDropdown');
-            if (container && dropdown && !container.contains(e.target)) {
-                dropdown.classList.add('hidden');
+            const searchInput = document.getElementById('quickCompanySearch');
+            const resultsList = document.getElementById('searchResultsList');
+            if (searchInput && resultsList && !searchInput.contains(e.target) && !resultsList.contains(e.target)) {
+                resultsList.classList.add('hidden');
             }
         });
-    }
 
-    function toggleTransactionMenu(e, voucherNo) {
-        e.stopPropagation();
-        const existing = document.getElementById('transactionContextMenu');
-        if (existing) {
-            existing.remove();
+        // Keyboard navigation bindings
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('settingsModal');
+                if (modal && !modal.classList.contains('hidden')) {
+                    closeSettingsModal();
+                }
+            }
+        });
+
+        // Global Profile System Scripts
+        function initProfileSystem() {
+            if (!localStorage.getItem('userName')) localStorage.setItem('userName', 'User');
+            if (!localStorage.getItem('userEmail')) localStorage.setItem('userEmail', 'user@example.com');
+            if (!localStorage.getItem('userPhone')) localStorage.setItem('userPhone', '');
+            if (!localStorage.getItem('userAvatar')) localStorage.setItem('userAvatar', '');
+
+            syncProfileUI();
+
+            document.addEventListener('click', (e) => {
+                const container = document.getElementById('profileDropdownContainer');
+                const dropdown = document.getElementById('profileDropdown');
+                if (container && dropdown && !container.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
         }
-        
-        const menu = document.createElement('div');
-        menu.id = 'transactionContextMenu';
-        menu.className = 'absolute right-0 mt-2 w-44 rounded-xl border border-outline-variant/60 dark:border-gray-800 bg-white/95 dark:bg-[#1d152f]/95 backdrop-blur-md shadow-2xl p-1.5 z-[150] text-left';
-        menu.innerHTML = `
-            <button onclick="showToast('Loading voucher ${voucherNo}...')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-primary/10 dark:hover:bg-gray-850 text-xs text-on-surface transition-colors flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px]">visibility</span> View / Edit
-            </button>
-            <button onclick="showToast('Generating invoice PDF...')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-primary/10 dark:hover:bg-gray-850 text-xs text-on-surface transition-colors flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px]">print</span> Print Invoice
-            </button>
-            <div class="h-px bg-outline-variant/30 my-1"></div>
-            <button onclick="showToast('Voucher ${voucherNo} cancelled successfully.')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-red-500/10 text-red-600 dark:text-red-400 text-xs transition-colors flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px] text-red-600 dark:text-red-400">cancel</span> Cancel Voucher
-            </button>
-        `;
-        
-        e.currentTarget.parentNode.appendChild(menu);
-        
-        const closeMenu = () => {
-            menu.remove();
-            document.removeEventListener('click', closeMenu);
-        };
-        setTimeout(() => {
-            document.addEventListener('click', closeMenu);
-        }, 10);
-    }
 
-    function syncProfileUI() {
-        const name = localStorage.getItem('userName') || 'User';
-        const email = localStorage.getItem('userEmail') || 'user@example.com';
-        const avatar = localStorage.getItem('userAvatar') || '';
-        const initial = name.charAt(0).toUpperCase();
+        function syncProfileUI() {
+            const name = localStorage.getItem('userName') || 'User';
+            const email = localStorage.getItem('userEmail') || 'user@example.com';
+            const avatar = localStorage.getItem('userAvatar') || '';
+            const initial = name.charAt(0).toUpperCase();
 
-        const avatarText = document.getElementById('profileAvatarText');
-        const avatarImg = document.getElementById('profileAvatarImg');
-        if (avatarText && avatarImg) {
-            if (avatar) {
-                avatarText.classList.add('hidden');
-                avatarImg.src = avatar;
-                avatarImg.classList.remove('hidden');
-            } else {
-                avatarText.textContent = initial;
-                avatarText.classList.remove('hidden');
-                avatarImg.classList.add('hidden');
+            const avatarText = document.getElementById('profileAvatarText');
+            const avatarImg = document.getElementById('profileAvatarImg');
+            if (avatarText && avatarImg) {
+                if (avatar) {
+                    avatarText.classList.add('hidden');
+                    avatarImg.src = avatar;
+                    avatarImg.classList.remove('hidden');
+                } else {
+                    avatarText.textContent = initial;
+                    avatarText.classList.remove('hidden');
+                    avatarImg.classList.add('hidden');
+                }
+            }
+
+            const dropdownName = document.getElementById('dropdownUserName');
+            const dropdownEmail = document.getElementById('dropdownUserEmail');
+            if (dropdownName) dropdownName.textContent = name;
+            if (dropdownEmail) dropdownEmail.textContent = email;
+        }
+
+        function toggleProfileDropdown(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('profileDropdown');
+            if (dropdown) {
+                dropdown.classList.toggle('hidden');
             }
         }
 
-        const dropdownName = document.getElementById('dropdownUserName');
-        const dropdownEmail = document.getElementById('dropdownUserEmail');
-        if (dropdownName) dropdownName.textContent = name;
-        if (dropdownEmail) dropdownEmail.textContent = email;
-    }
+        function openSettingsModal(e) {
+            if (e) {
+                e.stopPropagation();
+                const dropdown = document.getElementById('profileDropdown');
+                if (dropdown) dropdown.classList.add('hidden');
+            }
 
-    function toggleProfileDropdown(e) {
-        e.stopPropagation();
-        const dropdown = document.getElementById('profileDropdown');
-        if (dropdown) {
-            dropdown.classList.toggle('hidden');
-        }
-    }
+            const modal = document.getElementById('settingsModal');
+            document.getElementById('settingsNameInput').value = localStorage.getItem('userName') || 'User';
+            document.getElementById('settingsEmailInput').value = localStorage.getItem('userEmail') || 'user@example.com';
+            document.getElementById('settingsPhoneInput').value = localStorage.getItem('userPhone') || '';
 
-    function openSettingsModal(e) {
-        if (e) {
-            e.stopPropagation();
-            const dropdown = document.getElementById('profileDropdown');
-            if (dropdown) dropdown.classList.add('hidden');
-        }
-
-        const modal = document.getElementById('settingsModal');
-        document.getElementById('settingsNameInput').value = localStorage.getItem('userName') || 'User';
-        document.getElementById('settingsEmailInput').value = localStorage.getItem('userEmail') || 'user@example.com';
-        document.getElementById('settingsPhoneInput').value = localStorage.getItem('userPhone') || '';
-
-        const name = localStorage.getItem('userName') || 'User';
-        const avatar = localStorage.getItem('userAvatar') || '';
-        const initial = name.charAt(0).toUpperCase();
-        const setAvText = document.getElementById('settingsAvatarText');
-        const setAvImg = document.getElementById('settingsAvatarImg');
-        
-        if (avatar) {
-            setAvText.classList.add('hidden');
-            setAvImg.src = avatar;
-            setAvImg.classList.remove('hidden');
-        } else {
-            setAvText.textContent = initial;
-            setAvText.classList.remove('hidden');
-            setAvImg.classList.add('hidden');
-        }
-
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        setTimeout(() => {
-            modal.querySelector('.relative').classList.remove('scale-95', 'opacity-0');
-            modal.querySelector('.relative').classList.add('scale-100', 'opacity-100');
-        }, 10);
-    }
-
-    function closeSettingsModal() {
-        const modal = document.getElementById('settingsModal');
-        const content = modal.querySelector('.relative');
-        content.classList.remove('scale-100', 'opacity-100');
-        content.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }, 300);
-    }
-
-    function handleAvatarUpload(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-            const base64 = evt.target.result;
+            const name = localStorage.getItem('userName') || 'User';
+            const avatar = localStorage.getItem('userAvatar') || '';
+            const initial = name.charAt(0).toUpperCase();
             const setAvText = document.getElementById('settingsAvatarText');
             const setAvImg = document.getElementById('settingsAvatarImg');
-            setAvText.classList.add('hidden');
-            setAvImg.src = base64;
-            setAvImg.classList.remove('hidden');
             
-            window.tempAvatar = base64;
-        };
-        reader.readAsDataURL(file);
-    }
+            if (avatar) {
+                setAvText.classList.add('hidden');
+                setAvImg.src = avatar;
+                setAvImg.classList.remove('hidden');
+            } else {
+                setAvText.textContent = initial;
+                setAvText.classList.remove('hidden');
+                setAvImg.classList.add('hidden');
+            }
 
-    function removeAvatar() {
-        const setAvText = document.getElementById('settingsAvatarText');
-        const setAvImg = document.getElementById('settingsAvatarImg');
-        const nameInput = document.getElementById('settingsNameInput').value || 'User';
-        
-        setAvText.textContent = nameInput.charAt(0).toUpperCase();
-        setAvText.classList.remove('hidden');
-        setAvImg.classList.add('hidden');
-        
-        window.tempAvatar = 'REMOVE';
-    }
-
-    function saveSettings() {
-        const name = document.getElementById('settingsNameInput').value.trim();
-        const email = document.getElementById('settingsEmailInput').value.trim();
-        const phone = document.getElementById('settingsPhoneInput').value.trim();
-
-        if (!name) {
-            alert("Name is required!");
-            return;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.querySelector('.relative').classList.remove('scale-95', 'opacity-0');
+                modal.querySelector('.relative').classList.add('scale-100', 'opacity-100');
+            }, 10);
         }
 
-        localStorage.setItem('userName', name);
-        localStorage.setItem('userEmail', email);
-        localStorage.setItem('userPhone', phone);
-
-        if (window.tempAvatar === 'REMOVE') {
-            localStorage.setItem('userAvatar', '');
-        } else if (window.tempAvatar) {
-            localStorage.setItem('userAvatar', window.tempAvatar);
+        function closeSettingsModal() {
+            const modal = document.getElementById('settingsModal');
+            const content = modal.querySelector('.relative');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
         }
-        window.tempAvatar = null;
 
-        syncProfileUI();
-        closeSettingsModal();
-        
-        if (typeof showToast === 'function') {
-            showToast("Profile settings saved successfully!");
-        } else {
-            alert("Profile settings saved successfully!");
+        function handleAvatarUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const base64 = evt.target.result;
+                const setAvText = document.getElementById('settingsAvatarText');
+                const setAvImg = document.getElementById('settingsAvatarImg');
+                setAvText.classList.add('hidden');
+                setAvImg.src = base64;
+                setAvImg.classList.remove('hidden');
+                
+                window.tempAvatar = base64;
+            };
+            reader.readAsDataURL(file);
         }
-    }
 
-    function toggleThemeGlobal(e) {
-        if (e) e.stopPropagation();
-        const html = document.documentElement;
-        const isDark = html.classList.toggle('dark');
-        localStorage.theme = isDark ? 'dark' : 'light';
-        
-        // Sync index.html custom toggle trigger
-        const localToggle = document.getElementById('themeToggle');
-        if (localToggle) {
+        function removeAvatar() {
+            const setAvText = document.getElementById('settingsAvatarText');
+            const setAvImg = document.getElementById('settingsAvatarImg');
+            const nameInput = document.getElementById('settingsNameInput').value || 'User';
+            
+            setAvText.textContent = nameInput.charAt(0).toUpperCase();
+            setAvText.classList.remove('hidden');
+            setAvImg.classList.add('hidden');
+            
+            window.tempAvatar = 'REMOVE';
+        }
+
+        function saveSettings() {
+            const name = document.getElementById('settingsNameInput').value.trim();
+            const email = document.getElementById('settingsEmailInput').value.trim();
+            const phone = document.getElementById('settingsPhoneInput').value.trim();
+
+            if (!name) {
+                alert("Name is required!");
+                return;
+            }
+
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPhone', phone);
+
+            if (window.tempAvatar === 'REMOVE') {
+                localStorage.setItem('userAvatar', '');
+            } else if (window.tempAvatar) {
+                localStorage.setItem('userAvatar', window.tempAvatar);
+            }
+            window.tempAvatar = null;
+
+            syncProfileUI();
+            closeSettingsModal();
             window.location.reload();
         }
-    }
-</script>
+
+        function toggleThemeGlobal(e) {
+            if (e) e.stopPropagation();
+            const html = document.documentElement;
+            const isDark = html.classList.toggle('dark');
+            localStorage.theme = isDark ? 'dark' : 'light';
+            window.location.reload();
+        }
+    </script>
 </body>
 </html>

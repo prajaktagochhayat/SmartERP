@@ -197,7 +197,7 @@
     <div class="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center">
         <!-- Header -->
         <header class="w-full flex justify-between items-center mb-8 px-2">
-            <a href="home.html" class="flex items-center gap-3 group cursor-pointer">
+            <a href="index.html" class="flex items-center gap-3 group cursor-pointer">
                 <div class="w-10 h-10 bg-gradient-to-br from-primary to-[#6366F1] rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden group-hover:scale-105 transition-transform">
                     <div class="absolute inset-0 bg-white/10 group-hover:scale-110 transition-transform duration-300"></div>
                     <span class="material-symbols-outlined text-white icon-fill relative z-10">database</span>
@@ -228,7 +228,7 @@
                             <p id="dropdownUserName" class="text-sm font-semibold text-gray-900 dark:text-white">User</p>
                             <p id="dropdownUserEmail" class="text-xs text-gray-500 truncate dark:text-gray-400">user@example.com</p>
                         </div>
-                        <a href="index.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors">
+                        <a href="dashboard.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary dark:hover:bg-gray-800 transition-colors">
                             <span class="material-symbols-outlined text-[18px]">home</span>
                             <span>Home (Dashboard)</span>
                         </a>
@@ -499,7 +499,7 @@
             body.classList.add('transition-all', 'duration-500', 'scale-95', 'opacity-0');
             
             setTimeout(() => {
-                window.location.href = 'index.html';
+                window.location.href = 'dashboard.html';
             }, 300);
         }
 
@@ -579,11 +579,7 @@
                 icon.textContent = 'expand_more';
             }
         }
-               let localCompanies = [
-            { id: 1, name: 'Vardhaman Distributors Pvt. Ltd.', fy: 'FY 26-27', gstin: '27AAAAA1111A1Z1', state: 'Maharashtra (MH)', address: 'Mumbai Office', contactInfo: '+91 98765 43210' },
-            { id: 2, name: 'TechCorp Solutions', fy: 'FY 26-27', gstin: '27AADCT1234E2Z9', state: 'Maharashtra (MH)', address: 'Pune Office', contactInfo: 'info@techcorp.com' },
-            { id: 3, name: 'Vardhaman Wholesalers', fy: 'FY 26-27', gstin: '27AADCT1234E3Z7', state: 'Maharashtra (MH)', address: 'Nagpur Office', contactInfo: 'www.vardhaman.com' }
-        ];
+               let localCompanies = [];
         let currentEditingCompanyId = null;
 
         function handleCreateCompany(event) {
