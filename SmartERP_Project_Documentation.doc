@@ -1,0 +1,421 @@
+
+<html xmlns:o='urn:schemas-microsoft-com:office:office' 
+      xmlns:w='urn:schemas-microsoft-com:office:word' 
+      xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+    <title>SmartERP Project Documentation</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>100</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+        @page {
+            size: 8.5in 11.0in; /* Letter */
+            margin: 1.0in 1.0in 1.0in 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+        }
+        body {
+            font-family: "Calibri", "Arial", sans-serif;
+            font-size: 11.0pt;
+            line-height: 1.6;
+            color: #333333;
+        }
+        h1 {
+            font-family: "Calibri Light", "Arial", sans-serif;
+            font-size: 24.0pt;
+            color: #CA3074;
+            margin-top: 24pt;
+            margin-bottom: 12pt;
+            page-break-before: always;
+            font-weight: bold;
+        }
+        .cover-page h1 {
+            page-break-before: avoid;
+        }
+        h2 {
+            font-family: "Calibri", "Arial", sans-serif;
+            font-size: 16.0pt;
+            color: #332851;
+            margin-top: 18pt;
+            margin-bottom: 8pt;
+            border-bottom: 1px solid #CA3074;
+            padding-bottom: 4pt;
+            font-weight: bold;
+        }
+        h3 {
+            font-family: "Calibri", "Arial", sans-serif;
+            font-size: 13.0pt;
+            color: #00504f;
+            margin-top: 14pt;
+            margin-bottom: 6pt;
+            font-weight: bold;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 12pt;
+            text-align: justify;
+        }
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 12pt;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 6pt;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 12pt;
+            margin-bottom: 18pt;
+        }
+        th {
+            background-color: #251c3a;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #777587;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #dae2fd;
+        }
+        tr:nth-child(even) {
+            background-color: #faf8ff;
+        }
+        code, pre {
+            font-family: "Consolas", "Courier New", monospace;
+            background-color: #f2f3ff;
+            border: 1px solid #dae2fd;
+            padding: 2px 4px;
+            font-size: 9.5pt;
+        }
+        pre {
+            display: block;
+            padding: 12px;
+            margin-top: 12pt;
+            margin-bottom: 12pt;
+            white-space: pre-wrap;
+        }
+        .cover-page {
+            text-align: center;
+            padding-top: 1.5in;
+        }
+        .cover-title {
+            font-size: 36.0pt;
+            font-weight: bold;
+            color: #CA3074;
+            margin-bottom: 12pt;
+            font-family: "Calibri Light", "Arial", sans-serif;
+        }
+        .cover-subtitle {
+            font-size: 18.0pt;
+            color: #777587;
+            margin-bottom: 72pt;
+            font-style: italic;
+        }
+        .cover-meta {
+            font-size: 12.0pt;
+            margin-top: 2.0in;
+            line-height: 2.0;
+        }
+        .section-desc {
+            font-size: 12.0pt;
+            font-style: italic;
+            color: #555555;
+            margin-bottom: 18pt;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: COVER PAGE -->
+    <div class="cover-page">
+        <div class="cover-title">SmartERP</div>
+        <div class="cover-subtitle">High-Fidelity Financial Control for Modern Enterprises</div>
+        <p style="text-align: center; font-size: 14pt; margin-top: 20pt;"><strong>Project Submission Documentation</strong></p>
+        
+        <div class="cover-meta">
+            <strong>Author:</strong> Prajakta Gochhayat<br/>
+            <strong>Project Repository:</strong> github.com/prajaktagochhayat/SmartERP<br/>
+            <strong>Platform:</strong> Cloud-Native Web ERP System<br/>
+            <strong>Submitted to:</strong> Project Mentorship Panel<br/>
+            <strong>Submission Date:</strong> July 2026
+        </div>
+    </div>
+
+    <!-- PAGE 2: TABLE OF CONTENTS & EXECUTIVE SUMMARY -->
+    <h1>Table of Contents</h1>
+    <ol style="font-size: 12.0pt; line-height: 2.0;">
+        <li>Executive Summary &amp; Overview</li>
+        <li>System Architecture &amp; Technology Stack</li>
+        <li>Database Schema &amp; PostgreSQL Specifications</li>
+        <li>User Authentication &amp; Onboarding Gateways</li>
+        <li>Company Profile &amp; Entity Workspace</li>
+        <li>Masters Directory: Ledgers &amp; Stock Registry</li>
+        <li>Transaction &amp; Billing Engines</li>
+        <li>Reports Hub, Data Exports &amp; Printing</li>
+        <li>Keyboard Bindings &amp; UI UX Standards</li>
+        <li>Verification Plan, Test Matrices &amp; Deployment Roadmap</li>
+    </ol>
+
+    <h2>Executive Summary</h2>
+    <p>
+        Modern businesses require financial software that matches the raw speed of traditional desktop solutions (like Tally) with the premium aesthetics and visual clarity of modern web-based products (like Stripe). <strong>SmartERP</strong> is designed to bridge this gap. It is a cloud-native, high-fidelity ERP platform that offers lightning-fast ledger entries, real-time GST calculations, dynamic workspace transitions, and detailed statement audits. 
+    </p>
+    <p>
+        This document provides a comprehensive overview of the design, database schema, functional modules, keyboard shortcuts, and deployment readiness of SmartERP. The system has been fully implemented, tested, and synchronized with a live PostgreSQL backend powered by Supabase.
+    </p>
+
+    <!-- PAGE 3: SYSTEM ARCHITECTURE & TECH STACK -->
+    <h1>1. System Architecture &amp; Technology Stack</h1>
+    <p class="section-desc">Analysis of the client-side gateway and database interaction layer.</p>
+    
+    <p>
+        SmartERP employs a client-server architecture designed for high performance, ease of hosting, and reliable data synchronization. The system utilizes static frontend pages optimized to communicate directly with a cloud database instance, eliminating the overhead of intermediary web servers and maximizing request speed.
+    </p>
+
+    <h3>Tech Stack Matrix</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">Layer</th>
+                <th style="width: 35%;">Technology Selected</th>
+                <th style="width: 40%;">Architectural Rationale</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Core UI Layer</strong></td>
+                <td>HTML5, Vanilla JavaScript (ES6+)</td>
+                <td>Guarantees zero framework overhead, instant startup times, and optimal rendering performance.</td>
+            </tr>
+            <tr>
+                <td><strong>Styling &amp; Theme</strong></td>
+                <td>Tailwind CSS v3 (Custom Palette)</td>
+                <td>Allows flexible theme controls (Light and Dark mode synchronization) with premium typography.</td>
+            </tr>
+            <tr>
+                <td><strong>Database / Auth</strong></td>
+                <td>Supabase Client (PostgreSQL)</td>
+                <td>Provides a cloud-hosted relational database with Row Level Security (RLS) policies.</td>
+            </tr>
+            <tr>
+                <td><strong>Excel Engine</strong></td>
+                <td>ExcelJS Library</td>
+                <td>Client-side workbook assembly allowing customized data formatting and Excel downloads.</td>
+            </tr>
+            <tr>
+                <td><strong>PDF Engine</strong></td>
+                <td>jsPDF Library</td>
+                <td>Generates client-side, print-ready document streams formatted to match the system palette.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Theme &amp; Style Token Architecture</h3>
+    <p>
+        The platform features a fully-calibrated color palette designed for visual comfort. Key tokens include:
+    </p>
+    <ul>
+        <li><strong>Primary Color:</strong> <code>#CA3074</code> (Stripe-inspired vibrant magenta/pink for interactive callouts).</li>
+        <li><strong>Secondary Color:</strong> <code>#332851</code> (Deep indigo for layout headers and typography).</li>
+        <li><strong>Light Background:</strong> <code>#faf8ff</code> (Warm lavender-white for reduced eye strain).</li>
+        <li><strong>Dark Background:</strong> <code>#120c1f</code> (Sleek dark violet for modern aesthetics).</li>
+    </ul>
+
+    <!-- PAGE 4: DATABASE SCHEMA DESIGN -->
+    <h1>2. Database Schema &amp; PostgreSQL Specifications</h1>
+    <p class="section-desc">Detailed review of the relational structure and safety constraints.</p>
+    
+    <p>
+        The database schema is structured as a relational hierarchy in PostgreSQL. The system enforces data integrity through foreign keys, domain checks, unique indexes, and Row-Level Security (RLS) policies linked to the Supabase auth schema.
+    </p>
+
+    <h3>Entity-Relationship Mapping</h3>
+    <p>
+        The schema is structured into the following core tables:
+    </p>
+    <ol>
+        <li><strong>profiles:</strong> Extends user authentication metadata, linking the authenticated user's ID to their name, phone number, and custom avatar state.</li>
+        <li><strong>companies:</strong> Holds company workspaces. Enforces a foreign key constraint to the profiles table to ensure each company is owned by a specific registered account.</li>
+        <li><strong>ledgers:</strong> Defines customer, supplier, bank, and tax accounts. Tracks current balances and links back to the active company workspace.</li>
+        <li><strong>inventory_items:</strong> Registers raw materials and goods, containing default units of measure (PCS, KG, LTR, etc.), SKU, and tax rates.</li>
+        <li><strong>vouchers:</strong> Stores the transaction headers (type, date, voucher number, narration).</li>
+        <li><strong>voucher_items:</strong> Maps specific line entries (ledgers, stock items, quantities, prices, taxes) to the parent voucher.</li>
+    </ol>
+
+    <h3>Supabase Integration Details</h3>
+    <p>
+        The platform connects to the backend through a shared configuration script, <code>supabase-config.js</code>. This utility manages connection initialization, error handling, local storage caching, and database queries.
+    </p>
+    <pre>
+// Database initialization snippet
+const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+    </pre>
+
+    <!-- PAGE 5: USER AUTHENTICATION & ONBOARDING -->
+    <h1>3. User Authentication &amp; Onboarding Gateways</h1>
+    <p class="section-desc">Comprehensive walkthrough of registration, credential checks, and guest access.</p>
+    
+    <p>
+        SmartERP handles security via email-and-password validation. The gateway consists of two states: **Sign In** and **Sign Up**, implemented dynamically inside a single unified template.
+    </p>
+
+    <h3>Authentication Workflows</h3>
+    <ul>
+        <li><strong>Account Registration:</strong> When registering, the system prompts for Email, Password, Full Name, and Phone Number. These details are written to the database profiles table.</li>
+        <li><strong>Default Profile Avatar Logic:</strong> To ensure privacy, the profile starts blank. If no avatar image is uploaded, the header automatically displays the first letter of the user's name (e.g., "P" for Prajakta) as a placeholder.</li>
+        <li><strong>Guest Login Bypass:</strong> For demo purposes, the page features a one-click **Login as Guest** button. This bypasses the credentials step, generates a mock session for a user named "Guest", and directs them to the workspace.</li>
+    </ul>
+
+    <h3>Responsive Onboarding Form Layout</h3>
+    <p>
+        The onboarding panel uses a scrollable layout (<code>overflow-y-auto</code>) combined with <code>my-auto</code> vertical margins. This prevents form fields and buttons from getting cut off on short viewports, ensuring the interface is fully usable across mobile screens, tablets, and laptops.
+    </p>
+
+    <!-- PAGE 6: COMPANY MANAGEMENT -->
+    <h1>4. Company Profile &amp; Entity Workspace</h1>
+    <p class="section-desc">Managing isolated financial company environments.</p>
+    
+    <p>
+        Once logged in, the user is directed to the Company Select panel (<code>company-select.html</code>). Financial data is isolated per company; ledgers, inventory, and transactions belong strictly to the selected business entity.
+    </p>
+
+    <h3>Functional Features</h3>
+    <ul>
+        <li><strong>Workspace Switching:</strong> Users can select their active company from the list. The selection is cached in local storage and loaded in the header of all transaction screens.</li>
+        <li><strong>Company Limits:</strong> To optimize database resources, the system enforces a strict maximum limit of **5 companies per user**. If a user tries to create a 6th company, the request is rejected with a warning banner.</li>
+        <li><strong>Financial Year Configuration:</strong> Each company tracks its active Financial Year (e.g., FY 26-27), which automatically formats the voucher prefixes and sets the date filters.</li>
+    </ul>
+
+    <!-- PAGE 7: MASTERS: LEDGERS & INVENTORY -->
+    <h1>5. Masters Directory: Ledgers &amp; Stock Registry</h1>
+    <p class="section-desc">Structuring static data for business accounting.</p>
+    
+    <p>
+        The Masters module allows the setup of accounts and stock items, serving as the foundational directory for all transaction vouchers.
+    </p>
+
+    <h3>Ledger Directory Details</h3>
+    <p>
+        Ledgers correspond to specific accounts (clients, vendors, banks, duties, and expenses).
+    </p>
+    <ul>
+        <li><strong>Categorization:</strong> Ledgers must be assigned to an accounting group (e.g., Sundry Debtors for customers, Sundry Creditors for suppliers, Bank Accounts, or Duties &amp; Taxes).</li>
+        <li><strong>Credit Limits:</strong> Allows setting credit limits to restrict sales invoices for clients with high outstanding balances.</li>
+        <li><strong>GST Settings:</strong> Records GSTIN numbers and state regions to determine if transactions are intra-state (CGST/SGST) or inter-state (IGST).</li>
+    </ul>
+
+    <h3>Inventory Item Registry</h3>
+    <p>
+        Under the Stock Items directory (<code>inventory.html</code>), users define products:
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th>Attribute</th>
+                <th>Type</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>SKU / Part No</strong></td>
+                <td>String</td>
+                <td>Unique code for warehouse stock tracking.</td>
+            </tr>
+            <tr>
+                <td><strong>Stock Group</strong></td>
+                <td>Dropdown</td>
+                <td>Groups items for reporting (e.g., Raw Materials, Finished Goods).</td>
+            </tr>
+            <tr>
+                <td><strong>Unit of Measure</strong></td>
+                <td>Dropdown</td>
+                <td>Selects billing unit (PCS, KG, BOX, LTR).</td>
+            </tr>
+            <tr>
+                <td><strong>GST Rate</strong></td>
+                <td>Percentage</td>
+                <td>Default tax rate (e.g., 5%, 12%, 18%, 28%) applied on invoices.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- PAGE 8: TRANSACTION & BILLING ENGINES -->
+    <h1>6. Transaction &amp; Billing Engines</h1>
+    <p class="section-desc">Processing business operations through billing vouchers.</p>
+    
+    <p>
+        The transaction module supports all major financial vouchers. Every transaction updates ledger balances and inventory levels.
+    </p>
+
+    <h3>Voucher Types supported:</h3>
+    <ol>
+        <li><strong>Sales Voucher:</strong> Registers item sales, deducts stock, and increases customer outstanding balance.</li>
+        <li><strong>Purchase Voucher:</strong> Registers goods purchases, increases stock, and increases supplier outstanding balance.</li>
+        <li><strong>Receipt Voucher:</strong> Records payments received from customers, updating bank/cash ledgers.</li>
+        <li><strong>Payment Voucher:</strong> Records payments made to vendors/expenses.</li>
+        <li><strong>Contra Voucher:</strong> Used for cash-to-bank deposit or bank-to-cash withdrawals.</li>
+        <li><strong>Journal Voucher:</strong> Used for adjustment entries between different ledgers.</li>
+        <li><strong>Credit &amp; Debit Notes:</strong> Used for sales and purchase returns.</li>
+    </ol>
+
+    <h3>Real-Time Tax Calculation Logic</h3>
+    <p>
+        When adding items to a voucher, the engine checks the state of the customer/supplier. If the transaction is within the home state, it splits the tax into **CGST** and **SGST** (each 50% of the item tax rate). If the transaction is inter-state, it calculates **IGST** (100% of the tax rate) and updates the grand totals dynamically.
+    </p>
+
+    <!-- PAGE 9: REPORTS, EXPORTS & PRINTING -->
+    <h1>7. Reports Hub, Data Exports &amp; Printing</h1>
+    <p class="section-desc">Compiling transactional entries into printable accounting statements.</p>
+    
+    <p>
+        The Reports Hub (<code>reports.html</code>) compiles transaction details into balance sheets, profit/loss statements, and ledger audit logs.
+    </p>
+
+    <h3>Excel Generation (ExcelJS)</h3>
+    <p>
+        Users can click "Export to Excel" to download a clean spreadsheet. The file is built on the client-side with specific column widths, font weights, and cell backgrounds to ensure a professional look.
+    </p>
+
+    <h3>PDF Generation &amp; Direct Print</h3>
+    <p>
+        The reports include a custom printing engine powered by jsPDF. Clicking "Print PDF" compiles the ledger statements, places corporate headers with company metadata, and opens a clean print preview dialog.
+    </p>
+
+    <!-- PAGE 10: KEYBOARD SHORTCUTS & CONCLUSION -->
+    <h1>8. Keyboard Bindings &amp; UI UX Standards</h1>
+    <p class="section-desc">Optimizing accounting tasks through hardware controls.</p>
+    
+    <p>
+        To match desktop-level data entry speeds, SmartERP includes comprehensive keyboard shortcuts.
+    </p>
+
+    <h3>Global Hotkeys</h3>
+    <ul>
+        <li><strong>Ctrl+K:</strong> Focuses the search input or opens the command palette.</li>
+        <li><strong>Alt+C:</strong> Opens the Create Ledger or Create Stock Item form.</li>
+        <li><strong>F4:</strong> Navigates to the Ledgers Directory.</li>
+        <li><strong>F5:</strong> Navigates to the Payment Voucher.</li>
+        <li><strong>F6:</strong> Navigates to the Receipt Voucher.</li>
+        <li><strong>F8:</strong> Navigates to the Sales Voucher.</li>
+        <li><strong>F9:</strong> Navigates to the Purchase Voucher.</li>
+        <li><strong>F10:</strong> Navigates to the Reports Hub.</li>
+    </ul>
+
+    <h2>Conclusion &amp; Deployment Readiness</h2>
+    <p>
+        SmartERP is fully ready for production deployment. The static files can be hosted with a single command on platforms like Vercel, Netlify, or AWS Amplify. Because the database is hosted live on Supabase, any deployment will connect instantly and securely to the cloud database, enabling real-time data sync across different user terminals.
+    </p>
+
+</body>
+</html>
