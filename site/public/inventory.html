@@ -834,26 +834,7 @@
         }
     }
 
-    // --- Sidebar Collapse ---
-    const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.getElementById('toggle-sidebar');
-    const sidebarTexts = document.querySelectorAll('.sidebar-text');
-    let isCollapsed = false;
 
-    toggleBtn.addEventListener('click', () => {
-        isCollapsed = !isCollapsed;
-        if (isCollapsed) {
-            sidebar.classList.remove('w-[280px]');
-            sidebar.classList.add('w-[80px]');
-            sidebarTexts.forEach(el => el.classList.add('opacity-0', 'w-0', 'hidden'));
-            toggleBtn.innerHTML = '<span class="material-symbols-outlined">menu</span>';
-        } else {
-            sidebar.classList.remove('w-[80px]');
-            sidebar.classList.add('w-[280px]');
-            sidebarTexts.forEach(el => el.classList.remove('opacity-0', 'w-0', 'hidden'));
-            toggleBtn.innerHTML = '<span class="material-symbols-outlined">menu_open</span>';
-        }
-    });
 
     // --- Theme Switcher ---
     const themeBtn = document.getElementById('theme-toggle');
