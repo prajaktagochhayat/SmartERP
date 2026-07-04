@@ -447,6 +447,14 @@
 <script src="supabase-config.js"></script>
 
 <script>
+    // Clear user session on loading login page (Sign Out action)
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userPhone');
+    localStorage.removeItem('userAvatar');
+    localStorage.removeItem('activeCompany');
+    localStorage.removeItem('activeCompanyFY');
+
     // Theme Toggle Logic
     const themeToggleBtn = document.getElementById('themeToggle');
     const htmlElement = document.documentElement;

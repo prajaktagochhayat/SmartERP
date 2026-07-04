@@ -164,8 +164,17 @@ async function dbCreateVoucher(voucher) {
 // Unified Sidebar Collapse & Active State Synchronization
 // ==========================================================
 document.addEventListener('DOMContentLoaded', () => {
+    const activePath = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Global Authentication Redirect Guard
+    const userEmail = localStorage.getItem('userEmail');
+    const isAuthPage = activePath === 'index.html' || activePath === 'login.html' || activePath === '';
+    if (!userEmail && !isAuthPage) {
+        window.location.href = 'login.html';
+        return;
+    }
+
     // 1. Sidebar Active State Synchronization
-    const activePath = window.location.pathname.split('/').pop() || 'dashboard.html';
     const linkMap = {
         'ledger.html': 'nav-ledgers',
         'inventory.html': 'nav-inventory',
